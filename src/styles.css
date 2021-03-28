@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  box-sizing: border-box;
+  background-image: url("./assets/images/double-bubble-outline.png");
+  font-family: "Poppins", sans-serif;
+}
