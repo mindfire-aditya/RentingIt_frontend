@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyProductsComponent } from './my-products/my-products.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -84,15 +85,50 @@ const routes: Routes = [
     children: [
       {
         path: 'my-products',
-        component: MyProductsComponent,
+        children: [
+          {
+            path: '',
+            component: MyProductsComponent,
+          },
+          {
+            path: 'product-details',
+            component: ProductDetailsComponent,
+          },
+          {
+            path: 'edit',
+            component: ProductDetailsComponent,
+          },
+          {
+            path: 'remove',
+            component: ProductDetailsComponent,
+          },
+        ],
       },
       {
         path: 'my-orders',
-        component: MyOrdersComponent,
+        children: [
+          {
+            path: '',
+            component: MyOrdersComponent,
+          },
+          {
+            path: 'order/order-details',
+            component: OrderDetailsComponent,
+          },
+        ],
       },
       {
         path: 'my-profile',
-        component: ProfilePageComponent,
+        children: [
+          {
+            path: '',
+            component: ProfilePageComponent,
+          },
+          {
+            path: 'edit',
+            component: EditProfileComponent,
+          },
+        ],
       },
       {
         path: 'edit-profile',
