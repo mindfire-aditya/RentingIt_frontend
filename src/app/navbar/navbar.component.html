@@ -8,6 +8,12 @@
     <li><a routerLink="/categories/machines">Machines</a></li>
     <li><a routerLink="/categories/all">Show all</a></li>
   </ul>
+  <ul id="dropdown2" class="dropdown-content">
+    <li><a routerLink="/user/my-orders">My Orders</a></li>
+    <li><a routerLink="/user/my-products">My Products</a></li>
+    <li><a routerLink="/user/my-profile">My Profile</a></li>
+    <li><a routerLink="/user/logout">Logout</a></li>
+  </ul>
   <nav>
     <div class="container">
       <div class="nav-wrapper">
@@ -21,31 +27,15 @@
             >
           </li>
           <li>
-            <a routerLink="login" class="waves-effect btn">Login/Register</a>
+            <a class="dropdown-trigger" data-target="dropdown2"
+              >My Account<i class="material-icons right">arrow_drop_down</i></a
+            >
+          </li>
+          <li>
+            <a routerLink="login" class="waves-effect btn">Login/Signup</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </div>
-
-<!-- <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li>
-        <a class="dropdown-trigger" href="#!" data-target="dropdown1"
-          >Dropdown<i class="material-icons right">arrow_drop_down</i></a
-        >
-      </li>
-    </ul>
-  </div>
-</nav> -->
