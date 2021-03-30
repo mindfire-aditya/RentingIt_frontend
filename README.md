@@ -1,5 +1,7 @@
 # RentingIt
 
+Checkout UI design here - https://www.figma.com/proto/Glq85fvnLQHBtRhHaz3szc/Renting?node-id=84%3A20&viewport=-7115%2C167%2C0.3690834641456604&scaling=scale-down&page-id=0%3A1
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
 
 ## Development server
