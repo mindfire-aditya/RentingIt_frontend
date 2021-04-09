@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -15,6 +15,16 @@ import { CategoryItemComponent } from './product-categories/category-item/catego
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyProductsComponent } from './my-products/my-products.component';
+import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RentComponent } from './rent/rent.component';
+import { OrderItemComponent } from './order-item/order-item.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +40,20 @@ import { RegisterComponent } from './register/register.component';
     CategoryItemComponent,
     AboutComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PageNotFoundComponent,
+    ProfilePageComponent,
+    MyOrdersComponent,
+    MyProductsComponent,
+    AddEditProductComponent,
+    EditProfileComponent,
+    ErrorPageComponent,
+    RentComponent,
+    OrderItemComponent,
+    OrderDetailsComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

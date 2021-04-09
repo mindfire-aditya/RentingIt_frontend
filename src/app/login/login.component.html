@@ -7,17 +7,50 @@
   />
 </div>
 <div class="col m6">
-  <form>
+  <form #loginForm="ngForm" (submit)="onSubmit()">
     <div class="row">
       <div class="input-field col s12">
-        <input id="email" type="email" class="validate" />
+        <input
+          #emailField="ngModel"
+          id="email"
+          type="email"
+          class="validate"
+          name="email"
+          [(ngModel)]="loginModel.email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          [class.invalid]="emailField.invalid && emailField.touched"
+          required
+        />
         <label for="email">Email</label>
+        <small *ngIf="emailField.invalid && emailField.touched"
+          >Email should be like - abcd@xyz.com</small
+        >
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="password" type="password" class="validate" />
+        <input
+          #passwordField="ngModel"
+          id="password"
+          type="password"
+          class="validate"
+          name="password"
+          [(ngModel)]="loginModel.password"
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+          minlength="8"
+          [class.invalid]="passwordField.invalid && passwordField.touched"
+          required
+        />
         <label for="password">Password</label>
+        <small *ngIf="passwordField.invalid && passwordField.touched"
+          >Password should be -
+          <ul>
+            <li>alteat 8 characters long</li>
+            <li>contain atleat one alphabet( a-z, A-Z )</li>
+            <li>contain atleat one digit ( 0-9 )</li>
+            <li>contain atleat one special character ( @,$,!,%,*,#,?,& )</li>
+          </ul>
+        </small>
       </div>
     </div>
 
@@ -26,7 +59,7 @@
         <button
           class="btn waves-effect waves-light"
           type="submit"
-          name="action"
+          [disabled]="!loginForm.valid"
         >
           Login
         </button>
@@ -36,26 +69,22 @@
 
   <div class="row">
     <div class="col m12">
-      <button
+      <a
         class="btn waves-effect waves-light"
-        type="submit"
-        name="action"
         style="background-color: #e45656; font-weight: bold"
       >
         Login with Google
-      </button>
+      </a>
     </div>
   </div>
   <div class="row">
     <div class="col m12">
-      <button
+      <a
         class="btn waves-effect waves-light"
-        type="submit"
-        name="action"
         style="background-color: #3f88df; font-weight: bold"
       >
         Login with Facebook
-      </button>
+      </a>
     </div>
   </div>
   <div class="row">
@@ -63,8 +92,6 @@
       <a
         routerLink="/register"
         class="btn waves-effect waves-light"
-        type="submit"
-        name="action"
         style="background-color: #fff; color: #19bc85; font-weight: bold"
       >
         Create Account

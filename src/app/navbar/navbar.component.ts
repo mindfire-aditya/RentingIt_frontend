@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +6,8 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  @Input() loggedIn: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}
