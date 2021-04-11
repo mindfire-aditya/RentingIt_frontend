@@ -25,6 +25,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { RentComponent } from './rent/rent.component';
 import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     OrderItemComponent,
     OrderDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
