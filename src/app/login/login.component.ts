@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../models/login';
+import { LoginService } from '../services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
   loginModel = new Login('', '');
   isInvalid = false;
 
-  constructor() {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {}
 
@@ -20,13 +21,12 @@ export class LoginComponent implements OnInit {
     return re.test(String(this.loginModel.email).toLowerCase());
   }
 
-  validatePassword() {}
-
   onValidate() {
     this.isInvalid = this.validateEmail();
   }
 
-  onSubmit() {
+  onLogin() {
     console.log(this.loginModel);
+    this.loginService.sendRequest();
   }
 }
