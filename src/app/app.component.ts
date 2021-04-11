@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './services/login/login.service';
 
 @Component({
@@ -6,19 +7,23 @@ import { LoginService } from './services/login/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'RentingIt';
   loggedIn = false;
 
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  isLoggedIn() {
-    this.loginService.loggedIn.subscribe(
-      (data) => (this.loggedIn = data),
-      (error) => console.error(error)
-    );
-
-    if (this.loggedIn === true) {
-    }
+  ngOnInit() {
+    this.loginService.loggedIn.subscribe((data) => {
+      console.log(data);
+      this.loggedIn = data;
+      if (this.loggedIn == true) {
+        this.router.navigate(['/categories/all']);
+      }
+    });
   }
 }
