@@ -1,7 +1,8 @@
 <h5>Add product</h5>
 
 <div class="row outer-container">
-  <form class="col s12">
+  <form class="col s12" #productForm="ngForm">
+    {{ productForm | json }}
     <div class="row">
       <div class="col s12">
         <h6>General details</h6>
@@ -9,7 +10,12 @@
     </div>
     <div class="row">
       <div class="input-field col s6">
-        <input id="product_name" type="text" class="validate" />
+        <input
+          id="product_name"
+          type="text"
+          class="validate"
+          [(ngModel)]="addEditProduct.name"
+        />
         <label for="product_name">Product Name</label>
       </div>
       <div class="input-field col s6">
@@ -26,7 +32,11 @@
     </div>
     <div class="row">
       <div class="input-field col s10">
-        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+        <textarea
+          id="icon_prefix2"
+          class="materialize-textarea"
+          [(ngModel)]="addEditProduct.description"
+        ></textarea>
         <label for="icon_prefix2">Product Description</label>
       </div>
       <div class="input-field col s2">
@@ -36,6 +46,7 @@
           class="validate"
           min="1"
           value="1"
+          [(ngModel)]="addEditProduct.units"
         />
         <label for="product_units">Units Available</label>
       </div>
@@ -47,19 +58,43 @@
     </div>
     <div class="row">
       <div class="input-field col s3">
-        <input id="product_units" type="number" class="validate" min="0" />
+        <input
+          id="product_units"
+          type="number"
+          class="validate"
+          min="0"
+          [(ngModel)]="addEditProduct.price_per_hour"
+        />
         <label for="product_units">Price per hour</label>
       </div>
       <div class="input-field col s3">
-        <input id="product_units" type="number" class="validate" min="0" />
+        <input
+          id="product_units"
+          type="number"
+          class="validate"
+          min="0"
+          [(ngModel)]="addEditProduct.price_per_day"
+        />
         <label for="product_units">Price per day</label>
       </div>
       <div class="input-field col s3">
-        <input id="product_units" type="number" class="validate" min="" />
+        <input
+          id="product_units"
+          type="number"
+          class="validate"
+          min=""
+          [(ngModel)]="addEditProduct.price_per_week"
+        />
         <label for="product_units">Price per week</label>
       </div>
       <div class="input-field col s3">
-        <input id="product_units" type="number" class="validate" min="0" />
+        <input
+          id="product_units"
+          type="number"
+          class="validate"
+          min="0"
+          [(ngModel)]="addEditProduct.price_per_month"
+        />
         <label for="product_units">Price per month</label>
       </div>
     </div>
@@ -70,23 +105,48 @@
     </div>
     <div class="row">
       <div class="input-field col s4">
-        <input id="house_no" type="text" class="validate" />
+        <input
+          id="house_no"
+          type="text"
+          class="validate"
+          [(ngModel)]="addEditProduct.house_no"
+        />
         <label for="house_no">House Number</label>
       </div>
       <div class="input-field col s4">
-        <input id="street" type="text" class="validate" />
+        <input
+          id="street"
+          type="text"
+          class="validate"
+          [(ngModel)]="addEditProduct.street"
+        />
         <label for="street">Street</label>
       </div>
       <div class="input-field col s4">
-        <input id="lane" type="text" class="validate" />
+        <input
+          id="lane"
+          type="text"
+          class="validate"
+          [(ngModel)]="addEditProduct.lane"
+        />
         <label for="lane">Lane</label>
       </div>
       <div class="input-field col s6">
-        <input id="landmark" type="text" class="validate" />
+        <input
+          id="landmark"
+          type="text"
+          class="validate"
+          [(ngModel)]="addEditProduct.landmark"
+        />
         <label for="landmark">Landmark</label>
       </div>
       <div class="input-field col s6">
-        <input id="city_town" type="text" class="validate" />
+        <input
+          id="city_town"
+          type="text"
+          class="validate"
+          [(ngModel)]="addEditProduct.city_town"
+        />
         <label for="city_town">City/Town</label>
       </div>
       <div class="input-field col s4">
@@ -94,8 +154,10 @@
           id="pincode"
           type="number"
           class="validate"
+          min="000001"
           minlength="6"
           maxlength="6"
+          [(ngModel)]="addEditProduct.pincode"
         />
         <label for="pincode">Pincode</label>
       </div>
