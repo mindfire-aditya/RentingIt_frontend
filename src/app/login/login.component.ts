@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       //we have to submit the form
 
       console.log('Here form will be submited');
+
       this.loginService.generateToken(this.credentials).subscribe(
         (response: any) => {
           //success
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
           this.loginService.loginUser(response);
 
           //taking the user to categories page where they can buy or rent the product
-          this.router.navigate(['categories/all']);
+
+          this.router.navigate(['home']);
         },
         (error) => {
           //error
