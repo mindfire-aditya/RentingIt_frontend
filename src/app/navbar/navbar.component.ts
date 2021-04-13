@@ -11,6 +11,7 @@ import { LoginService } from '../services/loginService/login.service';
 export class NavbarComponent implements OnInit {
   //making a property which will tell what should be shown when user is logged in
   public loggedIn = false;
+
   constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
   logoutUser() {
     this.loginService.logout();
-
+    this.loggedIn = false;
     this.router.navigate(['home']);
   }
 }

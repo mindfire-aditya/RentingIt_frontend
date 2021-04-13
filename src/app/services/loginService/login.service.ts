@@ -17,8 +17,9 @@ export class LoginService {
   }
 
   //for login take the token and store it in localstorage
-  loginuser(token: any) {
-    localStorage.setItem('token', token);
+  loginUser(user: any) {
+    localStorage.setItem('user', user);
+    console.log(user);
     return true;
   }
 

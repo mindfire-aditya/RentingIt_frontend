@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -30,11 +31,12 @@ export class LoginComponent implements OnInit {
       this.loginService.generateToken(this.credentials).subscribe(
         (response: any) => {
           //success
-          console.log(response.token);
+
           //settingup the token to local storage for loggin the user
-          this.loginService.loginuser(response.token);
+          this.loginService.loginUser(response);
+
           //taking the user to categories page where they can buy or rent the product
-          window.location.href = '/categories';
+          this.router.navigate(['categories/all']);
         },
         (error) => {
           //error
