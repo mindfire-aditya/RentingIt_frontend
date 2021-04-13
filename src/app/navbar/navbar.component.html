@@ -27,12 +27,18 @@
             >
           </li>
           <li>
-            <a routerLink="login" *ngIf="!loggedIn" class="waves-effect btn">Login/Register</a>
-            <a  routerLink="rentnow" *ngIf="loggedIn" class="waves-effect btn">RentNow</a>
+            <a routerLink="login" *ngIf="!loggedIn" class="waves-effect btn"
+              >Login/Register</a
+            >
+            <a routerLink="rentnow" *ngIf="loggedIn" class="waves-effect btn"
+              >RentNow</a
+            >
           </li>
 
           <li>
-            <a  *ngIf="loggedIn" (click)="logoutUser()" class="waves-effect btn">Logout</a>
+            <a *ngIf="loggedIn" (click)="logoutUser()" class="waves-effect btn"
+              >Logout</a
+            >
           </li>
         </ul>
       </div>
@@ -71,6 +77,11 @@
           <li>
             <a *ngIf="loggedIn" class="dropdown-trigger" data-target="dropdown2"
               >My Account<i class="material-icons right">arrow_drop_down</i></a
+            >
+          </li>
+          <li>
+            <a routerLink="user/add-product" class="btn waves-effect"
+              >Rent a product</a
             >
           </li>
         </ul>

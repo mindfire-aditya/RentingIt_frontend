@@ -1,0 +1,17 @@
+.outer-container {
+  background-color: #eeeeee;
+  padding: 20px;
+}
+
+h5 {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+input {
+  text-align: center;
+}
+
+.outer-container {
+  background-color: #f5f5f5;
+}

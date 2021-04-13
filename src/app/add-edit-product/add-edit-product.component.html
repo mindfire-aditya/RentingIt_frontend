@@ -1,1 +1,91 @@
-<p>add-edit-product works!</p>
+<h5>Add product</h5>
+
+<div class="row outer-container">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="product_name" type="text" class="validate" />
+        <label for="product_name">Product Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Product image</span>
+            <input type="file" />
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s10">
+        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+        <label for="icon_prefix2">Product Description</label>
+      </div>
+      <div class="input-field col s2">
+        <input
+          id="product_units"
+          type="number"
+          class="validate"
+          min="1"
+          value="1"
+        />
+        <label for="product_units">Units Available</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s3">
+        <input id="product_units" type="number" class="validate" min="0" />
+        <label for="product_units">Price per hour</label>
+      </div>
+      <div class="input-field col s3">
+        <input id="product_units" type="number" class="validate" min="0" />
+        <label for="product_units">Price per day</label>
+      </div>
+      <div class="input-field col s3">
+        <input id="product_units" type="number" class="validate" min="" />
+        <label for="product_units">Price per week</label>
+      </div>
+      <div class="input-field col s3">
+        <input id="product_units" type="number" class="validate" min="0" />
+        <label for="product_units">Price per month</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <input id="house_no" type="text" class="validate" />
+        <label for="house_no">House Number</label>
+      </div>
+      <div class="input-field col s4">
+        <input id="street" type="text" class="validate" />
+        <label for="street">Street</label>
+      </div>
+      <div class="input-field col s4">
+        <input id="lane" type="text" class="validate" />
+        <label for="lane">Lane</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="landmark" type="text" class="validate" />
+        <label for="landmark">Landmark</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="city_town" type="text" class="validate" />
+        <label for="city_town">City/Town</label>
+      </div>
+      <div class="input-field col s4">
+        <input
+          id="pincode"
+          type="number"
+          class="validate"
+          minlength="6"
+          maxlength="6"
+        />
+        <label for="pincode">Pincode</label>
+      </div>
+    </div>
+  </form>
+</div>
