@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from '../models/login';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/loginService/login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,26 +8,45 @@ import { Login } from '../models/login';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginModel = new Login('', '');
-  isInvalid = false;
-
-  constructor() {}
+  //creating a object which will have the username and password for making a post call to get token.
+  credentials = {
+    username: '',
+    password: '',
+  };
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  validateEmail() {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(re.test(String(this.loginModel.email).toLowerCase()));
-    return re.test(String(this.loginModel.email).toLowerCase());
-  }
-
-  validatePassword() {}
-
-  onValidate() {
-    this.isInvalid = this.validateEmail();
-  }
-
   onSubmit() {
-    console.log(this.loginModel);
+    //console.log("Form is submited!!");
+    if (
+      this.credentials.username != '' &&
+      this.credentials.password != '' &&
+      this.credentials.username != null &&
+      this.credentials.password != null
+    ) {
+      //we have to submit the form
+
+      console.log('Here form will be submited');
+
+      this.loginService.generateToken(this.credentials).subscribe(
+        (response: any) => {
+          //success
+
+          //settingup the token to local storage for loggin the user
+          this.loginService.loginUser(response);
+
+          //taking the user to categories page where they can buy or rent the product
+
+          this.router.navigate(['home']);
+        },
+        (error) => {
+          //error
+          console.log(error);
+        }
+      );
+    } else {
+      console.log('Fields are empty !!');
+    }
   }
 }

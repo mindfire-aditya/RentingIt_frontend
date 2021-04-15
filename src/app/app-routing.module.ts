@@ -15,6 +15,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegisterComponent } from './register/register.component';
 import { RentComponent } from './rent/rent.component';
+import { AuthGuard } from './services/AuthGuard/auth.guard';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'categories',
+    canActivate:[AuthGuard],
     children: [
       {
         path: 'appliances',

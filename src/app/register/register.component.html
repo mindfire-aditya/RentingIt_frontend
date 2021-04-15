@@ -7,14 +7,29 @@
   />
 </div>
 <div class="col m6">
-  <form>
+  <form (ngSubmit) = "registerUser()" >
+   
+    
     <div class="row">
       <div class="input-field col s12">
-        <input id="email" type="email" class="validate" />
+        <input [(ngModel)]="userDetails.username" id="UserName"  name = "username" type="text" required class="validate" />
+        <label for="UserName">UserName</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input [(ngModel)]="userDetails.email" required  name = "email" id="email" type="email" class="validate" />
         <label for="email">Email</label>
       </div>
     </div>
 
+    <div class="row">
+      <div class="input-field col s12">
+        <input [(ngModel)] = "userDetails.password" required name="passowrd" id="password" type="password" class="validate" />
+        <label for="password">Password</label>
+      </div>
+    </div>
     <div class="row">
       <div class="col m12">
         <button
@@ -66,4 +81,6 @@
     </div>
   </div>
 </div>
+<!--Just for testing purpose-->
+{{userDetails | json}}
 <div class="row"></div>
