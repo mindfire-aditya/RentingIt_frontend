@@ -10,6 +10,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
+  token:any = null;
   //calling the server for getting the token and store it in local sotrage
   generateToken(credentials: any) {
     //generate token
@@ -17,8 +18,11 @@ export class LoginService {
   }
 
   //for login take the token and store it in localstorage
-  loginuser(token: any) {
-    localStorage.setItem('token', token);
+  loginuser(user: any) {
+    localStorage.setItem('user', user);
+    console.log(user);
+    this.token = localStorage.getItem("accessToken");
+    localStorage.setItem('token', this.token);
     return true;
   }
 

@@ -42,7 +42,7 @@
 <div *ngIf="loggedIn" class="navbar-fixed">
   <ul id="dropdown1" class="dropdown-content">
     <li><a routerLink="/categories/appliances">Appliances</a></li>
-    <li><a routerLink="/categories/bikes">Bikes</a></li>
+    <li><a (click)="getBikeProducts()" routerLink="/categories/bikes">Bikes</a></li>
     <li><a routerLink="/categories/cars">Cars</a></li>
     <li><a routerLink="/categories/electronics">Electronics</a></li>
     <li><a routerLink="/categories/furnitures">Furnitures</a></li>
