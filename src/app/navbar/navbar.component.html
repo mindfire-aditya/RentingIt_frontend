@@ -27,7 +27,9 @@
             >
           </li>
           <li>
-            <a routerLink="login" *ngIf="!loggedIn" class="waves-effect btn">Login/Register</a>
+            <a routerLink="login" *ngIf="!loggedIn" class="waves-effect btn"
+              >Login/Register</a
+            >
           </li>
 
           <!-- <li>
@@ -42,7 +44,9 @@
 <div *ngIf="loggedIn" class="navbar-fixed">
   <ul id="dropdown1" class="dropdown-content">
     <li><a routerLink="/categories/appliances">Appliances</a></li>
-    <li><a (click)="getBikeProducts()" routerLink="/categories/bikes">Bikes</a></li>
+    <li>
+      <a (click)="getBikeProducts()" routerLink="/categories/bikes">Bikes</a>
+    </li>
     <li><a routerLink="/categories/cars">Cars</a></li>
     <li><a routerLink="/categories/electronics">Electronics</a></li>
     <li><a routerLink="/categories/furnitures">Furnitures</a></li>
@@ -69,7 +73,8 @@
           </li>
           <li>
             <a *ngIf="loggedIn" class="dropdown-trigger" data-target="dropdown2"
-              >My Account<i class="material-icons right">arrow_drop_down</i></a
+              >{{ username
+              }}<i class="material-icons right">arrow_drop_down</i></a
             >
           </li>
         </ul>

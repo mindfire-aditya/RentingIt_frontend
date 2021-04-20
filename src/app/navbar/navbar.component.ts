@@ -11,7 +11,11 @@ import { ProductService } from '../services/products/product.service';
 export class NavbarComponent implements OnInit {
   //making a property which will tell what should be shown when user is logged in
   public loggedIn = false;
+
   private token: any;
+
+  public username = localStorage.getItem('username');
+
   constructor(
     private loginService: LoginService,
     private productservice: ProductService
@@ -19,6 +23,14 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedIn = this.loginService.isLogged();
+    console.log(this.username);
+
+    if (this.username == '' || this.username == undefined) {
+      console.error('username not stored');
+      this.username = 'My account';
+    } else {
+      this.username = localStorage.getItem('username');
+    }
   }
 
   getBikeProducts() {
