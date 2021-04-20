@@ -9,34 +9,36 @@ import { ProductService } from '../services/products/product.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-   //making a property which will tell what should be shown when user is logged in
-   public loggedIn = false;
-   private token:any;
-   constructor(private loginService:LoginService,private productservice:ProductService) {}
- 
-   ngOnInit(): void {
-     this.loggedIn = this.loginService.isLogged();
-   }
- 
-   getBikeProducts(){
-     this.token = this.loginService.getToken();
-     this.productservice.getProducts(this.token).subscribe(
-      (response:any)=>{
+  //making a property which will tell what should be shown when user is logged in
+  public loggedIn = false;
+  private token: any;
+  constructor(
+    private loginService: LoginService,
+    private productservice: ProductService
+  ) {}
+
+  ngOnInit(): void {
+    this.loggedIn = this.loginService.isLogged();
+  }
+
+  getBikeProducts() {
+    this.token = this.loginService.getToken();
+    this.productservice.getProducts().subscribe(
+      (response: any) => {
         //success
         console.log(response);
-        window.location.href = "/categories/bikes";
+        window.location.href = '/categories/bikes';
       },
-      error=>{
+      (error) => {
         //error
         console.log(error);
       }
-    )  
-     
-   }
+    );
+  }
 
-   logoutUser(){
-     this.loginService.logout()
-     //location.reload()
-     window.location.href="/home";
-   }
+  logoutUser() {
+    this.loginService.logout();
+    //location.reload()
+    window.location.href = '/home';
+  }
 }
