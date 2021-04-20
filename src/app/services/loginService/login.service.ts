@@ -10,7 +10,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-
   //calling the server for getting the token and store it in local sotrage
   generateToken(credentials: any) {
     //generate token
@@ -19,9 +18,7 @@ export class LoginService {
 
   //for login take the token and store it in localstorage
   loginuser(id:any,username:string,email:string,roles:string,accessToken:string,tokenType:string) {
-    //localStorage.setItem('user', user);
-    //console.log(user);
-    //this.token = localStorage.getItem("accessToken");
+
     localStorage.setItem('id',id);
     localStorage.setItem('username',username);
     localStorage.setItem('email',email);
@@ -44,12 +41,22 @@ export class LoginService {
 
   //for logout
   logout() {
+    localStorage.removeItem('id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('roles');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('tokenType');
+
     return true;
   }
 
-  //for getting token
-  getToken() {
-    return localStorage.getItem('accessToken');
-  }
+  //for getting user details
+  getUserId(){ return localStorage.getItem('id');}
+  getUsername(){ return localStorage.getItem('username');}
+  getUserEmail(){ return localStorage.getItem('email');}
+  getRoles(){ return localStorage.getItem('roles');}
+  getToken(){ return localStorage.getItem('accessToken');}
+  getTokenType(){ return localStorage.getItem('tokenType');}
+  
 }
