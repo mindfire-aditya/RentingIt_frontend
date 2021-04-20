@@ -11,8 +11,8 @@ export class ProductService {
   constructor(private http:HttpClient) { }
 
 
- //setting up the user details as a post method to server for adding the data in DB
- 
+ //setting up the user details as a post method to server for adding the data in DB also UI
+
  getProducts(token:any){
   //sending the post request to add user
   return this.http.get(`${this.baseUrl}/product/all`,token);
