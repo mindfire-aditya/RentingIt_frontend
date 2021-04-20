@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
     this.loginService.logout();
     //location.reload()
     // window.location.href = '/home';
+    this.loggedIn = false;
     this.router.navigate(['home']);
   }
 }
