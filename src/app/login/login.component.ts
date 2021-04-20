@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
         this.loginService.generateToken(this.credentials).subscribe(
           (response:any)=>{
             //success
-            console.log(response.token);
+            console.log(response.accessToken);
             //settingup the token to local storage for loggin the user
-            this.loginService.loginuser(response.token)
+            this.loginService.loginuser(response.id,response.username,response.email,response.roles,response.accessToken,response.tokenType)
             //taking the user to categories page where they can buy or rent the product
             window.location.href = "/categories";
           },
