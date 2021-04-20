@@ -8,6 +8,7 @@ export class LoginService {
   // from here we call the server
   baseUrl = 'http://localhost:8080/rentingIt';
 
+ 
   constructor(private http: HttpClient) {}
 
   //calling the server for getting the token and store it in local sotrage
@@ -17,9 +18,12 @@ export class LoginService {
   }
 
   //for login take the token and store it in localstorage
-  loginUser(user: any) {
+  loginUser(user:any,token:any) {
     localStorage.setItem('user', user);
+    localStorage.setItem('token',token);
     console.log(user);
+ 
+
     return true;
   }
 

@@ -31,10 +31,10 @@ export class LoginComponent implements OnInit {
       this.loginService.generateToken(this.credentials).subscribe(
         (response: any) => {
           //success
-
+          console.log(response);
           //settingup the token to local storage for loggin the user
-          this.loginService.loginUser(response);
-
+          this.loginService.loginUser(response,response.accessToken);
+          
           //taking the user to categories page where they can buy or rent the product
           this.router.navigate(['categories/all']);
         },
