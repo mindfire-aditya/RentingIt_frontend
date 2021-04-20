@@ -53,7 +53,7 @@ export class LoginService {
 
   //for getting user details
   getUserId(){ return localStorage.getItem('id');}
-  getUsername(){ return localStorage.getItem('username');}
+  getUserName(){ return localStorage.getItem('username');}
   getUserEmail(){ return localStorage.getItem('email');}
   getRoles(){ return localStorage.getItem('roles');}
   getToken(){ return localStorage.getItem('accessToken');}
