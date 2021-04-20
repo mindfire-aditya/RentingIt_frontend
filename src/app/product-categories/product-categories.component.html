@@ -1,5 +1,14 @@
 <app-search-bar></app-search-bar>
-<app-category-item></app-category-item>
-<app-category-item></app-category-item>
-<app-category-item></app-category-item>
-<app-category-item></app-category-item>
+
+<div *ngFor="let category of allCategories" class="col s6 m4">
+  <div class="card">
+    <div class="card-image">
+      <a>
+        <img src="../../assets/images/Rectangle 9.png" />
+      </a>
+    </div>
+    <div class="card-content">
+      <span class="card-title">{{ category.childCategory }}</span>
+    </div>
+  </div>
+</div>

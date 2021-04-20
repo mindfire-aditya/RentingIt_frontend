@@ -15,4 +15,8 @@ export class ProductService {
     //sending the post request to add user
     return this.http.get(`${this.baseUrl}/product/all`);
   }
+
+  getAllCategories() {
+    return this.http.get(`${this.baseUrl}/product/category/all`);
+  }
 }
