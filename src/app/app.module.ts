@@ -25,7 +25,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { RentComponent } from './rent/rent.component';
 import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './services/interceptor/token-interceptor/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,13 @@ import { HttpClientModule } from '@angular/common/http';
     OrderDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
