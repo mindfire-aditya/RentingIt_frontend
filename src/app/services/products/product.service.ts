@@ -12,6 +12,7 @@ export class ProductService {
 
 
  //setting up the user details as a post method to server for adding the data in DB
+ 
  getProducts(token:any){
   //sending the post request to add user
   return this.http.get(`${this.baseUrl}/product/all`,token);
