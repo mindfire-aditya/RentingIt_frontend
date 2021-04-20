@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -10,7 +10,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-
   //calling the server for getting the token and store it in local sotrage
   generateToken(credentials: any) {
     //generate token
@@ -18,16 +17,23 @@ export class LoginService {
   }
 
   //for login take the token and store it in localstorage
-  loginuser(id:any,username:string,email:string,roles:string,accessToken:string,tokenType:string) {
+  loginuser(
+    id: any,
+    username: string,
+    email: string,
+    roles: string,
+    accessToken: string,
+    tokenType: string
+  ) {
     //localStorage.setItem('user', user);
     //console.log(user);
     //this.token = localStorage.getItem("accessToken");
-    localStorage.setItem('id',id);
-    localStorage.setItem('username',username);
-    localStorage.setItem('email',email);
-    localStorage.setItem('roles',roles);
-    localStorage.setItem('accessToken',accessToken);
-    localStorage.setItem('tokenType',tokenType);
+    localStorage.setItem('id', id);
+    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
+    localStorage.setItem('roles', roles);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('tokenType', tokenType);
     console.log(accessToken);
     return true;
   }
