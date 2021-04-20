@@ -25,9 +25,6 @@ export class LoginService {
     accessToken: string,
     tokenType: string
   ) {
-    //localStorage.setItem('user', user);
-    //console.log(user);
-    //this.token = localStorage.getItem("accessToken");
     localStorage.setItem('id', id);
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
@@ -50,12 +47,33 @@ export class LoginService {
 
   //for logout
   logout() {
+    localStorage.removeItem('id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('roles');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('tokenType');
+
     return true;
   }
 
-  //for getting token
+  //for getting user details
+  getUserId() {
+    return localStorage.getItem('id');
+  }
+  getUserName() {
+    return localStorage.getItem('username');
+  }
+  getUserEmail() {
+    return localStorage.getItem('email');
+  }
+  getRoles() {
+    return localStorage.getItem('roles');
+  }
   getToken() {
     return localStorage.getItem('accessToken');
+  }
+  getTokenType() {
+    return localStorage.getItem('tokenType');
   }
 }
