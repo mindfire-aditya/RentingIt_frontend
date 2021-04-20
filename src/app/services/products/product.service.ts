@@ -19,4 +19,10 @@ export class ProductService {
   getAllCategories() {
     return this.http.get(`${this.baseUrl}/product/category/all`);
   }
+
+  getProductsByOwnerId() {
+    return this.http.get(
+      `${this.baseUrl}/product/ownerId/${localStorage.getItem('id')}`
+    );
+  }
 }

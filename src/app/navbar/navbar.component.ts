@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/loginService/login.service';
 import { ProductService } from '../services/products/product.service';
 
@@ -26,7 +25,7 @@ export class NavbarComponent implements OnInit {
     console.log(this.username);
 
     if (this.username == '' || this.username == undefined) {
-      console.error('username not stored');
+      console.log('username not stored');
       this.username = 'My account';
     } else {
       this.username = localStorage.getItem('username');
