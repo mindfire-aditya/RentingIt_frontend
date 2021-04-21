@@ -1,4 +1,5 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="!loggedIn"></app-navbar>
+<app-navbar-loggedin *ngIf="loggedIn"></app-navbar-loggedin>
 
 <div class="container">
   <div class="row">

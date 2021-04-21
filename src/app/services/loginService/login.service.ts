@@ -16,7 +16,8 @@ export class LoginService {
   userInfo = this.userInfoSource.asObservable();
 
   changeNavbar() {
-    this.loginNavbarSource.next(true);
+    let loggedIn: any = localStorage.getItem('loggedIn');
+    this.loginNavbarSource.next(loggedIn);
   }
 
   constructor(private http: HttpClient) {}

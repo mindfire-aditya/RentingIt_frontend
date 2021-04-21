@@ -12,8 +12,6 @@ export class AppComponent implements OnInit {
 
   userInfo: any;
 
-  userData: any;
-
   loggedIn = localStorage.getItem('accessToken') ? true : false;
 
   constructor(
@@ -22,15 +20,14 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loginService.userInfo.subscribe((data) => {
-      this.userInfo = data;
-      console.log(data);
-    });
-
     this.userInfoStore.userInfo.subscribe((data) => {
-      console.log(data);
+      this.userInfo = data;
     });
 
-    console.log(localStorage.getItem('loggedIn'));
+    this.loginService.loginStatus.subscribe((data) => {
+      this.loggedIn = data;
+    });
+
+    console.log(this.userInfoStore.getUserInfo());
   }
 }

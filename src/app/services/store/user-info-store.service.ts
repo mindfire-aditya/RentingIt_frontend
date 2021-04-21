@@ -8,25 +8,39 @@ export class UserInfoStoreService {
   private subject = new BehaviorSubject<any>({});
 
   private userData: any;
-  storedUser = {
-    id: localStorage.getItem('id'),
-    username: localStorage.getItem('username'),
-    email: localStorage.getItem('email'),
-    accessToken: localStorage.getItem('accessToken'),
-    tokenType: localStorage.getItem('tokenType'),
-  };
 
   userInfo: Observable<any> = this.subject.asObservable();
 
-  saveUserInfo(response: any) {
-    this.userData = response;
-    this.subject.next(response);
-    this.subject.next(this.storedUser);
+  emitUserInfo() {
+    this.subject.next({
+      id: localStorage.getItem('id'),
+      username: localStorage.getItem('username'),
+      email: localStorage.getItem('email'),
+      accessToken: localStorage.getItem('accessToken'),
+      tokenType: localStorage.getItem('tokenType'),
+    });
   }
 
   removeUser() {
     this.userData = {};
     this.subject.next(this.userData);
+  }
+
+  getUserInfo() {
+    this.userData = {
+      id: localStorage.getItem('id'),
+      username: localStorage.getItem('username'),
+      email: localStorage.getItem('email'),
+      accessToken: localStorage.getItem('accessToken'),
+      tokenType: localStorage.getItem('tokenType'),
+    };
+    return {
+      id: localStorage.getItem('id'),
+      username: localStorage.getItem('username'),
+      email: localStorage.getItem('email'),
+      accessToken: localStorage.getItem('accessToken'),
+      tokenType: localStorage.getItem('tokenType'),
+    };
   }
 
   constructor() {}

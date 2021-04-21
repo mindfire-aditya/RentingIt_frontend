@@ -46,22 +46,24 @@ export class LoginComponent implements OnInit {
             response.accessToken,
             response.tokenType
           );
+
           //taking the user to categories page where they can buy or rent the product
-          this.userInfoStore.saveUserInfo(response);
+
+          let loggedIn: any = true;
+          localStorage.setItem('loggedIn', loggedIn);
+
+          this.loginService.changeNavbar();
+          this.userInfoStore.emitUserInfo();
         },
         (error) => {
           //error
           console.log(error);
         }
       );
-
-      let loggedIn: any = true;
-      localStorage.setItem('loggedIn', loggedIn);
-
-      this.loginService.changeNavbar();
     } else {
       console.log('Fields are empty !!');
     }
+
     this.router.navigate(['home']);
   }
 }
