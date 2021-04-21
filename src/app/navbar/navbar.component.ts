@@ -40,7 +40,8 @@ export class NavbarComponent implements OnInit {
       (response: any) => {
         //success
         console.log(response);
-        window.location.href = '/categories/bikes';
+        // window.location.href = '/categories/bikes';
+        this.router.navigate(['categories/bikes']);
       },
       (error) => {
         //error

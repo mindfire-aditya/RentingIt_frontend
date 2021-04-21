@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
         }
       );
 
-      this.router.navigate(['user/my-products']);
+      // this.router.navigate(['user/my-products']);
+      window.location.href = '/user/my-products';
     } else {
       console.log('Fields are empty !!');
     }
