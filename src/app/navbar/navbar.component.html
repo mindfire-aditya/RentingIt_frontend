@@ -27,14 +27,8 @@
             >
           </li>
           <li>
-            <a routerLink="login" *ngIf="!loggedIn" class="waves-effect btn"
-              >Login/Register</a
-            >
+            <a routerLink="login" class="waves-effect btn">Login/Register</a>
           </li>
-
-          <!-- <li>
-            <a  *ngIf="loggedIn" (click)="logoutUser()" class="waves-effect btn">Logout</a>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -45,7 +39,7 @@
   <ul id="dropdown1" class="dropdown-content">
     <li><a routerLink="/categories/appliances">Appliances</a></li>
     <li>
-      <a (click)="getBikeProducts()" routerLink="/categories/bikes">Bikes</a>
+      <a (click)="getBikeProducts()">Bikes</a>
     </li>
     <li><a routerLink="/categories/cars">Cars</a></li>
     <li><a routerLink="/categories/electronics">Electronics</a></li>
@@ -57,7 +51,7 @@
     <li><a routerLink="/user/my-orders">My Orders</a></li>
     <li><a routerLink="/user/my-products">My Products</a></li>
     <li><a routerLink="/user/my-profile">My Profile</a></li>
-    <li><a (click)="logoutUser()" routerLink="/user/logout">Logout</a></li>
+    <li><a (click)="logoutUser()">Logout</a></li>
   </ul>
   <nav>
     <div class="container">

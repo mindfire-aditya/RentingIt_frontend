@@ -5,11 +5,11 @@ import { ProductService } from '../services/products/product.service';
 import { UserInfoStoreService } from '../services/store/user-info-store.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  selector: 'app-navbar-logged-in',
+  templateUrl: './navbar-logged-in.component.html',
+  styleUrls: ['./navbar-logged-in.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarLoggedInComponent implements OnInit {
   //making a property which will tell what should be shown when user is logged in
   public loggedIn = localStorage.getItem('accessToken') ? true : false;
 
@@ -36,10 +36,6 @@ export class NavbarComponent implements OnInit {
     } else {
       this.username = localStorage.getItem('username');
     }
-
-    this.userInfoStore.userInfo.subscribe((data) => {
-      console.log(data);
-    });
   }
 
   getBikeProducts() {
@@ -59,9 +55,8 @@ export class NavbarComponent implements OnInit {
 
   logoutUser() {
     this.loginService.logout();
-    //location.reload()
-    // window.location.href = '/home';
     this.loggedIn = false;
-    this.router.navigate(['login']);
+    this.userInfoStore.removeUser();
+    this.router.navigate(['home']);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
+import { UserInfoStoreService } from '../services/store/user-info-store.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,11 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private userInfoStore: UserInfoStoreService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -27,12 +32,13 @@ export class LoginComponent implements OnInit {
     ) {
       //we have to submit the form
 
-      console.log('Here form will be submited');
       this.loginService.generateToken(this.credentials).subscribe(
         (response: any) => {
           //success
           //settingup the token to local storage for loggin the user
-          this.loginService.loginuser(
+          console.log(response);
+
+          this.loginService.saveUser(
             response.id,
             response.username,
             response.email,
@@ -41,6 +47,7 @@ export class LoginComponent implements OnInit {
             response.tokenType
           );
           //taking the user to categories page where they can buy or rent the product
+          this.userInfoStore.saveUserInfo(response);
         },
         (error) => {
           //error
@@ -48,10 +55,13 @@ export class LoginComponent implements OnInit {
         }
       );
 
-      // this.router.navigate(['user/my-products']);
-      window.location.href = '/user/my-products';
+      let loggedIn: any = true;
+      localStorage.setItem('loggedIn', loggedIn);
+
+      this.loginService.changeNavbar();
     } else {
       console.log('Fields are empty !!');
     }
+    this.router.navigate(['home']);
   }
 }

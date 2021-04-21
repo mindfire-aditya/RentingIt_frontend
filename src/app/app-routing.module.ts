@@ -33,7 +33,6 @@ const routes: Routes = [
   },
   {
     path: 'categories',
-    canActivate:[AuthGuard],
     children: [
       {
         path: 'appliances',
@@ -84,6 +83,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'my-products',

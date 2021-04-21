@@ -27,6 +27,8 @@ import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/interceptor/token-interceptor/token-interceptor.service';
+import { AuthGuard } from './services/AuthGuard/auth.guard';
+import { NavbarLoggedInComponent } from './navbar-logged-in/navbar-logged-in.component';
 
 @NgModule({
   declarations: [
@@ -53,9 +55,11 @@ import { TokenInterceptorService } from './services/interceptor/token-intercepto
     RentComponent,
     OrderItemComponent,
     OrderDetailsComponent,
+    NavbarLoggedInComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

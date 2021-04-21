@@ -9,5 +9,12 @@ import { ProductService } from '../services/products/product.service';
 export class MyProductsComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {}
+  userProducts: any;
+
+  ngOnInit(): void {
+    this.productService.getProductsByOwnerId().subscribe((data) => {
+      this.userProducts = data;
+      console.log(data);
+    });
+  }
 }

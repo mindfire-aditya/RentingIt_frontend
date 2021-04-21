@@ -1,5 +1,6 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,16 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
   // from here we call the server
   baseUrl = 'http://localhost:8080/rentingIt';
+
+  loginNavbarSource = new Subject<boolean>();
+  loginStatus = this.loginNavbarSource.asObservable();
+
+  userInfoSource = new Subject<any>();
+  userInfo = this.userInfoSource.asObservable();
+
+  changeNavbar() {
+    this.loginNavbarSource.next(true);
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +28,7 @@ export class LoginService {
   }
 
   //for login take the token and store it in localstorage
-  loginuser(
+  saveUser(
     id: any,
     username: string,
     email: string,
@@ -31,7 +42,16 @@ export class LoginService {
     localStorage.setItem('roles', roles);
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('tokenType', tokenType);
-    console.log(accessToken);
+
+    this.userInfoSource.next({
+      id,
+      username,
+      email,
+      roles,
+      accessToken,
+      tokenType,
+    });
+
     return true;
   }
 
@@ -53,6 +73,9 @@ export class LoginService {
     localStorage.removeItem('roles');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('tokenType');
+
+    let loggedIn: any = false;
+    localStorage.setItem('loggedIn', loggedIn);
 
     return true;
   }
