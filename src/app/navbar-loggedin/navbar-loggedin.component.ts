@@ -10,7 +10,7 @@ import { UserInfoStoreService } from '../services/store/user-info-store.service'
   styleUrls: ['./navbar-loggedin.component.css'],
 })
 export class NavbarLoggedinComponent implements OnInit {
-  public loggedIn = localStorage.getItem('accessToken') ? true : false;
+  public loggedIn: any = localStorage.getItem('accessToken') ? true : false;
 
   private token: any;
   userData: any;
@@ -56,6 +56,7 @@ export class NavbarLoggedinComponent implements OnInit {
     //location.reload()
     // window.location.href = '/home';
     this.loggedIn = false;
+    localStorage.setItem('loggedIn', this.loggedIn);
     this.router.navigate(['login']);
     window.location.reload();
   }
