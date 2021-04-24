@@ -16,6 +16,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegisterComponent } from './register/register.component';
 import { RentComponent } from './rent/rent.component';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
+import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
 
 const routes: Routes = [
   {
@@ -61,6 +62,7 @@ const routes: Routes = [
       {
         path: 'all',
         component: ProductCategoriesComponent,
+        resolve: { allCategories: AllCategoriesResolver },
       },
     ],
   },
