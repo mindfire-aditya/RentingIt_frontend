@@ -8,10 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-categories.component.css'],
 })
 export class ProductCategoriesComponent implements OnInit {
-  constructor(
-    private productService: ProductService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   public allCategories: any;
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/products/product.service';
 
 @Component({
@@ -7,14 +8,19 @@ import { ProductService } from '../services/products/product.service';
   styleUrls: ['./my-products.component.css'],
 })
 export class MyProductsComponent implements OnInit {
-  constructor(private productService: ProductService) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   userProducts: any;
 
   ngOnInit(): void {
-    this.productService.getProductsByOwnerId().subscribe((data) => {
-      this.userProducts = data;
+    // this.productService.getProductsByOwnerId().subscribe((data) => {
+    //   this.userProducts = data;
+    //   console.log(data);
+    // });
+
+    this.activatedRoute.data.subscribe((data) => {
       console.log(data);
+      this.userProducts = data.products;
     });
   }
 }

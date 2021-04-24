@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { RentComponent } from './rent/rent.component';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
+import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
 
 const routes: Routes = [
   {
@@ -90,6 +91,7 @@ const routes: Routes = [
     children: [
       {
         path: 'my-products',
+        resolve: { products: ProductsResolver },
         children: [
           {
             path: '',
