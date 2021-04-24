@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
           this.loginService.changeNavbar();
           this.userInfoStore.emitUserInfo();
-          this.router.navigate(['home']);
+          // this.router.navigate(['home']);
           window.location.href = '/home';
         },
         (error) => {
