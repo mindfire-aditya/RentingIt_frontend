@@ -18,6 +18,6 @@ export class ProductsResolver implements Resolve<any> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-    return this.productService.getProducts();
+    return this.productService.getProductsByOwnerId();
   }
 }

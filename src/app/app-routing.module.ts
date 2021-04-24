@@ -91,11 +91,11 @@ const routes: Routes = [
     children: [
       {
         path: 'my-products',
-        resolve: { products: ProductsResolver },
         children: [
           {
             path: '',
             component: MyProductsComponent,
+            resolve: { products: ProductsResolver },
           },
           {
             path: 'product-details',
