@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ResponseDataResolver implements Resolve<boolean> {
+export class AllCategoriesResolverResolver implements Resolve<boolean> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return of(true);
   }
