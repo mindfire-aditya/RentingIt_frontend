@@ -30,17 +30,6 @@ export class ProfilePageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    // this.userDetail.getUserDetail().subscribe(
-    //   (data) => {
-    //     this.userInfo = data;
-    //     console.log(data);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //     this.router.navigate(['user/my-profile/edit']);
-    //   }
-    // );
-
     this.activatedRoute.data.subscribe(
       (data) => {
         this.userInfo = data.userDetail;

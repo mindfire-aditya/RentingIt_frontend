@@ -13,11 +13,6 @@ export class MyProductsComponent implements OnInit {
   userProducts: any;
 
   ngOnInit(): void {
-    // this.productService.getProductsByOwnerId().subscribe((data) => {
-    //   this.userProducts = data;
-    //   console.log(data);
-    // });
-
     this.activatedRoute.data.subscribe((data) => {
       console.log(data);
       this.userProducts = data.products;

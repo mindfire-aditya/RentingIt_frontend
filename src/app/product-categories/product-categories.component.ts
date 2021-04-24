@@ -13,11 +13,6 @@ export class ProductCategoriesComponent implements OnInit {
   public allCategories: any;
 
   ngOnInit(): void {
-    // this.productService.getAllCategories().subscribe((data) => {
-    //   this.allCategories = data;
-    //   console.log(data);
-    // });
-
     this.activatedRoute.data.subscribe((data) => {
       console.log(data);
       this.allCategories = data.allCategories;
