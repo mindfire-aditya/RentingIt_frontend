@@ -57,7 +57,6 @@ export class NavbarLoggedinComponent implements OnInit {
     // window.location.href = '/home';
     this.loggedIn = false;
     localStorage.setItem('loggedIn', this.loggedIn);
-    this.router.navigate(['login']);
-    window.location.reload();
+    window.location.href = '/login';
   }
 }
