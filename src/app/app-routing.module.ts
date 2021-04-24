@@ -18,6 +18,7 @@ import { RentComponent } from './rent/rent.component';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
 import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
+import { UserDetailResolver } from './services/resolver/userDetailResolver/user-detail.resolver';
 
 const routes: Routes = [
   {
@@ -130,6 +131,7 @@ const routes: Routes = [
           {
             path: '',
             component: ProfilePageComponent,
+            resolve: { userDetail: UserDetailResolver },
           },
           {
             path: 'edit',

@@ -9,8 +9,12 @@ export class UserDetailService {
 
   constructor(private http: HttpClient) {}
 
-  getUserDetail(id: number) {
-    return this.http.get<UserDetail>(`${this.baseUrl}/view-info/${id}`);
+  userId = localStorage.getItem('id');
+
+  getUserDetail() {
+    return this.http.get<UserDetail>(
+      `${this.baseUrl}/view-info/${this.userId}`
+    );
   }
 
   editUserDetail(id: number, payload: UserDetail) {

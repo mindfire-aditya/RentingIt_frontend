@@ -36,7 +36,7 @@ export class EditProfileComponent implements OnInit {
   name = this.userInfo.firstName + ' ' + this.userInfo.lastName;
 
   ngOnInit(): void {
-    this.userDetailService.getUserDetail(this.id).subscribe(
+    this.userDetailService.getUserDetail().subscribe(
       (data) => {
         this.userInfo = data;
         console.log(data);

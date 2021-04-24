@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDetailService } from '../services/userDetail/user-detail.service';
 import { UserDetail } from '../models/user-detail';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -27,13 +27,23 @@ export class ProfilePageComponent implements OnInit {
 
   username = localStorage.getItem('username');
 
-  constructor(private userDetail: UserDetailService, private router: Router) {}
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    let id: any = localStorage.getItem('id');
-    this.userDetail.getUserDetail(id).subscribe(
+    // this.userDetail.getUserDetail().subscribe(
+    //   (data) => {
+    //     this.userInfo = data;
+    //     console.log(data);
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //     this.router.navigate(['user/my-profile/edit']);
+    //   }
+    // );
+
+    this.activatedRoute.data.subscribe(
       (data) => {
-        this.userInfo = data;
+        this.userInfo = data.userDetail;
         console.log(data);
       },
       (error) => {
