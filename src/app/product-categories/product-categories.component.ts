@@ -14,9 +14,10 @@ export class ProductCategoriesComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   public allCategories: any;
+  private subscription1: any;
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(
+    this.subscription1 = this.activatedRoute.data.subscribe(
       (data) => {
         console.log(data);
         this.allCategories = data.allCategories;
@@ -25,5 +26,9 @@ export class ProductCategoriesComponent implements OnInit {
         alert('Error fetching products');
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
   }
 }

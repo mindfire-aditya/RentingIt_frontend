@@ -2,7 +2,7 @@
  * @author Aditya Sahu
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
 import { ProductService } from '../services/products/product.service';
@@ -13,12 +13,14 @@ import { UserInfoStoreService } from '../services/store/user-info-store.service'
   templateUrl: './navbar-loggedin.component.html',
   styleUrls: ['./navbar-loggedin.component.css'],
 })
-export class NavbarLoggedinComponent implements OnInit {
+export class NavbarLoggedinComponent implements OnInit, OnDestroy {
   public loggedIn: any = localStorage.getItem('accessToken') ? true : false;
 
   private token: any;
   userData: any;
-
+  private subscription1: any;
+  private subscription2: any;
+  private subscription3: any;
   public username = localStorage.getItem('username');
 
   constructor(
@@ -29,7 +31,7 @@ export class NavbarLoggedinComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loginService.loginStatus.subscribe(
+    this.subscription1 = this.loginService.loginStatus.subscribe(
       (data) => {
         this.loggedIn = data;
         console.log(data);
@@ -39,7 +41,7 @@ export class NavbarLoggedinComponent implements OnInit {
       }
     );
 
-    this.userInfoStore.userInfo.subscribe(
+    this.subscription2 = this.userInfoStore.userInfo.subscribe(
       (data) => {
         this.userData = data;
         console.log(data);
@@ -52,7 +54,7 @@ export class NavbarLoggedinComponent implements OnInit {
 
   getBikeProducts() {
     this.token = this.loginService.getToken();
-    this.productservice.getProducts().subscribe(
+    this.subscription3 = this.productservice.getProducts().subscribe(
       (response: any) => {
         //success
         console.log(response);
@@ -72,5 +74,11 @@ export class NavbarLoggedinComponent implements OnInit {
     this.loggedIn = false;
     localStorage.setItem('loggedIn', this.loggedIn);
     window.location.href = '/login';
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
   }
 }

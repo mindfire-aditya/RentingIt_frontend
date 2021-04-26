@@ -29,11 +29,12 @@ export class ProfilePageComponent implements OnInit {
   );
 
   username = localStorage.getItem('username');
+  private subscription1: any;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(
+    this.subscription1 = this.activatedRoute.data.subscribe(
       (data) => {
         this.userInfo = data.userDetail;
         console.log(data);
@@ -42,5 +43,9 @@ export class ProfilePageComponent implements OnInit {
         this.router.navigate(['user/my-profile/edit']);
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
   }
 }

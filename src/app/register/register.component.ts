@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     password: '',
     role: ['user'],
   };
+  private subscription1: any;
 
   constructor(private signup: SignupService) {}
   ngOnInit(): void {}
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
       //we have to submit the form
 
       console.log('Here form will be submited');
-      this.signup.addUser(this.userDetails).subscribe(
+      this.subscription1 = this.signup.addUser(this.userDetails).subscribe(
         (response: any) => {
           //success
           console.log(response);
@@ -49,5 +50,9 @@ export class RegisterComponent implements OnInit {
     } else {
       console.log('Fields are empty !!');
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
   }
 }
