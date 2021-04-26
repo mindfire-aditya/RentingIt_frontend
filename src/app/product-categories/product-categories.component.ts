@@ -16,9 +16,14 @@ export class ProductCategoriesComponent implements OnInit {
   public allCategories: any;
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((data) => {
-      console.log(data);
-      this.allCategories = data.allCategories;
-    });
+    this.activatedRoute.data.subscribe(
+      (data) => {
+        console.log(data);
+        this.allCategories = data.allCategories;
+      },
+      (error) => {
+        alert('Error fetching products');
+      }
+    );
   }
 }

@@ -58,12 +58,11 @@ export class LoginComponent implements OnInit {
 
           this.loginService.changeNavbar();
           this.userInfoStore.emitUserInfo();
-          // this.router.navigate(['home']);
+          this.router.navigate(['home']);
           window.location.href = '/home';
         },
         (error) => {
           //error
-          console.error(error);
 
           alert(
             'Username or Password is incorrect. Please try again with valid credentials'

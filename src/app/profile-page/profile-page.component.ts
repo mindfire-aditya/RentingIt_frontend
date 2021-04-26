@@ -39,7 +39,6 @@ export class ProfilePageComponent implements OnInit {
         console.log(data);
       },
       (error) => {
-        console.error(error);
         this.router.navigate(['user/my-profile/edit']);
       }
     );

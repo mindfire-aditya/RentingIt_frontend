@@ -29,15 +29,25 @@ export class NavbarLoggedinComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loginService.loginStatus.subscribe((data) => {
-      this.loggedIn = data;
-      console.log(data);
-    });
+    this.loginService.loginStatus.subscribe(
+      (data) => {
+        this.loggedIn = data;
+        console.log(data);
+      },
+      (error) => {
+        alert('navbar not changed');
+      }
+    );
 
-    this.userInfoStore.userInfo.subscribe((data) => {
-      this.userData = data;
-      console.log(data);
-    });
+    this.userInfoStore.userInfo.subscribe(
+      (data) => {
+        this.userData = data;
+        console.log(data);
+      },
+      (error) => {
+        alert('user info not retrieved.');
+      }
+    );
   }
 
   getBikeProducts() {
@@ -50,7 +60,7 @@ export class NavbarLoggedinComponent implements OnInit {
       },
       (error) => {
         //error
-        console.log(error);
+        alert('products fetching unsuccessful');
       }
     );
   }

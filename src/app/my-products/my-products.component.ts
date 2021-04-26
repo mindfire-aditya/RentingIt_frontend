@@ -17,9 +17,14 @@ export class MyProductsComponent implements OnInit {
   userProducts: any;
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((data) => {
-      console.log(data);
-      this.userProducts = data.products;
-    });
+    this.activatedRoute.data.subscribe(
+      (data) => {
+        console.log(data);
+        this.userProducts = data.products;
+      },
+      (error) => {
+        alert('Error fetching products');
+      }
+    );
   }
 }

@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
         },
         (error: any) => {
           //error
-          console.log(error);
+          alert('Registration Unsuccessful');
         }
       );
     } else {
