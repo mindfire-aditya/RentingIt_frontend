@@ -1,3 +1,7 @@
+/**
+ * @author Aditya Sahu
+ */
+
 export class UserDetail {
   constructor(
     public firstName: string,

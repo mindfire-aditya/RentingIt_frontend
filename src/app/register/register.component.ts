@@ -1,3 +1,6 @@
+/**
+ * @author Aditya Sahu
+ */
 import { Component, OnInit } from '@angular/core';
 import { SignupService } from '../services/signupService/signup.service';
 

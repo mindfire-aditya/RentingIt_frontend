@@ -1,3 +1,7 @@
+/**
+ * @author Aditya Sahu
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDetail } from '../models/user-detail';

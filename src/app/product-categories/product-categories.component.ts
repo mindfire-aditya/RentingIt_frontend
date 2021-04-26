@@ -1,5 +1,8 @@
+/**
+ * @author Aditya Sahu
+ */
+
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/products/product.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

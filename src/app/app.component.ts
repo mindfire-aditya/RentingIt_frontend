@@ -1,3 +1,6 @@
+/**
+ * @author Aditya Sahu
+ */
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/loginService/login.service';
 import { UserInfoStoreService } from './services/store/user-info-store.service';

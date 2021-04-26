@@ -1,3 +1,7 @@
+/**
+ * @author Aditya Sahu
+ */
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

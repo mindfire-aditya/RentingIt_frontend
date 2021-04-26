@@ -1,3 +1,7 @@
+/**
+ * @author Aditya Sahu
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
