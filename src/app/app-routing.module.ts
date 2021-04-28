@@ -19,6 +19,7 @@ import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
 import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
 import { UserDetailResolver } from './services/resolver/userDetailResolver/user-detail.resolver';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'test',
+    component: TestComponent,
   },
   {
     path: 'categories',

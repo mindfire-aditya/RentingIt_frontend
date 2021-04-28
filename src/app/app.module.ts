@@ -29,6 +29,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/interceptor/token-interceptor/token-interceptor.service';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { NavbarLoggedinComponent } from './navbar-loggedin/navbar-loggedin.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NavbarLoggedinComponent } from './navbar-loggedin/navbar-loggedin.compo
     OrderItemComponent,
     OrderDetailsComponent,
     NavbarLoggedinComponent,
+    TestComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
