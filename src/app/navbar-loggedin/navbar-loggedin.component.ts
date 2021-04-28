@@ -5,6 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
+import { ProductDetailsService } from '../services/productDetails/product-details.service';
 import { ProductService } from '../services/products/product.service';
 import { UserInfoStoreService } from '../services/store/user-info-store.service';
 
@@ -26,6 +27,7 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private productservice: ProductService,
+    private productDetailService: ProductDetailsService,
     private router: Router,
     private userInfoStore: UserInfoStoreService
   ) {}
@@ -54,7 +56,7 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
 
   getBikeProducts() {
     this.token = this.loginService.getToken();
-    this.subscription3 = this.productservice.getProducts().subscribe(
+    this.subscription3 = this.productDetailService.getProductsByName().subscribe(
       (response: any) => {
         //success
         console.log(response);
@@ -66,6 +68,8 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+
 
   logoutUser() {
     this.loginService.logout();
