@@ -1,4 +1,6 @@
 <div class="row" style="padding-bottom: 30px">
+  <h5>Your account info</h5>
+  
   <h4>
     <i class="material-icons small">account_circle</i>
     {{ userInfo.firstName + " " + userInfo.lastName }}
@@ -9,52 +11,57 @@
   <div style="padding-left: 40px">@{{ username }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">local_phone</i></div>
   <div class="col m2">Phone</div>
   <div class="col m3">{{ userInfo.phoneNo }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">house</i></div>
+  <div class="col"> <i class="material-icons prefix">home</i></div>
   <div class="col m2">House no.</div>
   <div class="col m3">{{ userInfo.houseNo }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">streetview</i></div>
   <div class="col m2">Street</div>
   <div class="col m3">{{ userInfo.streetNo }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">streetview</i></div>
   <div class="col m2">Lane</div>
   <div class="col m3">{{ userInfo.lane }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">flag</i></div>
+  <div class="col"><i class="material-icons prefix">add_location</i></div>
   <div class="col m2">Landmark</div>
   <div class="col m3">{{ userInfo.landmark }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">location_city </i></div>
+  <div class="col"><i class="material-icons prefix">location_city</i></div>
   <div class="col m2">City</div>
   <div class="col m3">{{ userInfo.city }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">map</i></div>
   <div class="col m2">State</div>
   <div class="col m3">{{ userInfo.state }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">fiber_pin</i></div>
   <div class="col m2">Pin code</div>
   <div class="col m3">{{ userInfo.pincode }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">verified_user</i></div>
   <div class="col m2">ID Proof Type</div>
   <div class="col m3">{{ userInfo.idProofType }}</div>
 </div>
 <div class="row">
-  <div class="col"><i class="material-icons">call</i></div>
+  <div class="col"><i class="material-icons prefix">verified_user</i></div>
   <div class="col m2">ID Number</div>
   <div class="col m3">{{ userInfo.idNumber }}</div>
+</div>
+<div class="row">
+  <div class="col s6">
+    <button (click)="category()" class="btn waves-effect">Explore Our Exclusive Products</button>
+  </div>
 </div>

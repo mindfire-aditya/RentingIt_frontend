@@ -81,6 +81,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       this.editUserDetail();
     }
     this.router.navigate(['user/my-profile']);
+    window.location.href = '/user/my-profile';
     // this.router.navigate([this.router.url]);
   }
 

@@ -63,8 +63,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
             this.loginService.changeNavbar();
             this.userInfoStore.emitUserInfo();
-            this.router.navigate(['home']);
-            window.location.href = '/home';
+            this.router.navigate(['user/my-profile/edit']);
+            window.location.href = '/user/my-profile/edit';
           },
           (error) => {
             //error
