@@ -30,7 +30,5 @@ export class AppComponent implements OnInit {
     this.loginService.loginStatus.subscribe((data) => {
       this.loggedIn = data;
     });
-
-    console.log(this.userInfoStore.getUserInfo());
   }
 }
