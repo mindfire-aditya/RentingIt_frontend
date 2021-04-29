@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductDetailsService } from '../services/productDetails/product-details.service';
+import { ProductService } from '../services/products/product.service';
+import { UserDetailService } from '../services/userDetail/user-detail.service';
 
 @Component({
   selector: 'app-product-details',
@@ -9,25 +10,45 @@ import { ProductDetailsService } from '../services/productDetails/product-detail
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private userDetailService: UserDetailService
+  ) {}
 
-  item: any;
-  products: any;
-  private subscription1: Subscription = new Subscription();
+  product_item: any;
+  pickup_address: any;
+  ownerId: any;
 
   ngOnInit(): void {
-    this.subscription1 = this.activatedRoute.data.subscribe(
-      (data) => {
-        console.log(data);
-        this.products = data.products;
-      },
-      (error) => {
-        alert('Error fetching products');
-      }
-    );
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (id !== null) {
+      this.productService.getProductById(parseInt(id)).subscribe(
+        (data) => {
+          this.product_item = data;
+          this.ownerId = this.product_item.ownerId;
+          this.getOwnerInfo(this.ownerId);
+        },
+        (error) => console.log(error)
+      );
+    } else {
+      console.log('Id: ', id);
+    }
   }
 
-  ngOnDestroy() {
-    this.subscription1.unsubscribe();
+  getOwnerInfo(ownerId: number) {
+    if (ownerId) {
+      this.userDetailService.getOwnerDetail(this.ownerId).subscribe(
+        (data) => {
+          this.pickup_address = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
+
+  ngOnDestroy() {}
 }

@@ -8,7 +8,7 @@
 </div>
 <div class="col s6 m6 offset-m1 description">
   <div class="row">
-    <h4>Harley Davidson</h4>
+    <h4>{{ product_item?.productName }}</h4>
     <div class="rating">Rating 4/5 (100)</div>
     <a
       class="waves-effect btn"
@@ -22,12 +22,12 @@
     <hr />
     <div class="col m12">
       <div class="row">
-        <div class="col m6">Product Name</div>
-        <div class="col m6">Harley Davidson</div>
+        <div class="col m6">Description</div>
+        <div class="col m6">{{ product_item?.assetDescription }}</div>
       </div>
       <div class="row">
         <div class="col m6">Units Available</div>
-        <div class="col m6">Harley Davidson</div>
+        <div class="col m6">{{ product_item?.units }}</div>
       </div>
     </div>
   </div>
@@ -37,19 +37,19 @@
     <div class="col m12">
       <div class="row">
         <div class="col m6">per hour</div>
-        <div class="col m6">$20/hr</div>
+        <div class="col m6">${{ product_item?.pricePerHour }}</div>
       </div>
       <div class="row">
         <div class="col m6">per day</div>
-        <div class="col m6">$20/day</div>
+        <div class="col m6">${{ product_item?.pricePerDay }}</div>
       </div>
       <div class="row">
         <div class="col m6">per week</div>
-        <div class="col m6">$20 /week</div>
+        <div class="col m6">${{ product_item?.pricePerWeek }}</div>
       </div>
       <div class="row">
         <div class="col m6">per month</div>
-        <div class="col m6">$20/month</div>
+        <div class="col m6">${{ product_item?.pricePerMonth }}</div>
       </div>
     </div>
   </div>
@@ -61,27 +61,27 @@
       <div class="col m6">
         <div class="row">
           <div class="col m6">House no.</div>
-          <div class="col m6">45</div>
+          <div class="col m6">{{ pickup_address?.houseNo }}</div>
         </div>
         <div class="row">
           <div class="col m6">Street</div>
-          <div class="col m6">45</div>
+          <div class="col m6">{{ pickup_address?.streetNo }}</div>
         </div>
         <div class="row">
           <div class="col m6">Lane</div>
-          <div class="col m6">45</div>
+          <div class="col m6">{{ pickup_address?.lane }}</div>
         </div>
         <div class="row">
           <div class="col m6">Landmark</div>
-          <div class="col m6">45</div>
+          <div class="col m6">{{ pickup_address?.landmark }}</div>
         </div>
         <div class="row">
           <div class="col m6">City/Town</div>
-          <div class="col m6">45</div>
+          <div class="col m6">{{ pickup_address?.city }}</div>
         </div>
         <div class="row">
           <div class="col m6">Pincode</div>
-          <div class="col m6">45</div>
+          <div class="col m6">{{ pickup_address?.pincode }}</div>
         </div>
       </div>
     </div>

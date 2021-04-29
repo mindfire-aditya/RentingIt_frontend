@@ -12,6 +12,7 @@ export class PlaceOrderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
   onSubmit() {
     console.log(this.newOrder);
   }

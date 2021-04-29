@@ -30,4 +30,8 @@ export class ProductService {
   getAllProducts() {
     return this.http.get(`${this.baseUrl}/product/all`);
   }
+
+  getProductById(id: number) {
+    return this.http.get(`${this.baseUrl}/product/${id}`);
+  }
 }

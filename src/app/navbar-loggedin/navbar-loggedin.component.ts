@@ -36,7 +36,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     this.subscription1 = this.loginService.loginStatus.subscribe(
       (data) => {
         this.loggedIn = data;
-        console.log(data);
       },
       (error) => {
         alert('navbar not changed');
@@ -46,7 +45,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     this.subscription2 = this.userInfoStore.userInfo.subscribe(
       (data) => {
         this.userData = data;
-        console.log(data);
       },
       (error) => {
         alert('user info not retrieved.');
@@ -56,20 +54,20 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
 
   getBikeProducts() {
     this.token = this.loginService.getToken();
-    this.subscription3 = this.productDetailService.getProductsByName().subscribe(
-      (response: any) => {
-        //success
-        console.log(response);
-        this.router.navigate(['categories/bikes']);
-      },
-      (error) => {
-        //error
-        alert('products fetching unsuccessful');
-      }
-    );
+    this.subscription3 = this.productDetailService
+      .getProductsByName()
+      .subscribe(
+        (response: any) => {
+          //success
+          console.log(response);
+          this.router.navigate(['categories/bikes']);
+        },
+        (error) => {
+          //error
+          alert('products fetching unsuccessful');
+        }
+      );
   }
-
-
 
   logoutUser() {
     this.loginService.logout();

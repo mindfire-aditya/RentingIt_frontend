@@ -20,6 +20,10 @@ export class UserDetailService {
     );
   }
 
+  getOwnerDetail(ownerId: number) {
+    return this.http.get<UserDetail>(`${this.baseUrl}/view-info/${ownerId}`);
+  }
+
   editUserDetail(id: number, payload: UserDetail) {
     return this.http.put<string>(`${this.baseUrl}/update-info/${id}`, payload);
   }

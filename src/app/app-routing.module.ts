@@ -105,7 +105,7 @@ const routes: Routes = [
             resolve: { products: ProductsResolver },
           },
           {
-            path: 'product-details',
+            path: 'product-details/:id',
             component: ProductDetailsComponent,
           },
           {
