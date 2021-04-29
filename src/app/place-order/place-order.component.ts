@@ -7,7 +7,7 @@ import { Order } from '../models/order';
   styleUrls: ['./place-order.component.css'],
 })
 export class PlaceOrderComponent implements OnInit {
-  newOrder = new Order('', 1, new Date(), new Date(), false);
+  newOrder = new Order(0, 0, 0, '', 1, new Date(), new Date(), false, 0);
 
   constructor() {}
 
