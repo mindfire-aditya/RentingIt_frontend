@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { ProductDetailsService } from '../services/productDetails/product-detail
 export class ProductDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {}
 
+  item: any;
   products: any;
-  private subscription1: any;
+  private subscription1: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.subscription1 = this.activatedRoute.data.subscribe(

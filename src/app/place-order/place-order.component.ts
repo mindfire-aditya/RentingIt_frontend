@@ -13,12 +13,6 @@ export class PlaceOrderComponent implements OnInit {
 
   ngOnInit(): void {}
   onSubmit() {
-    let rent_mode = document.getElementById('rent_mode');
-    console.log(rent_mode);
-    console.log('Hello');
-  }
-
-  onSelect() {
-    console.log('REnt mode');
+    console.log(this.newOrder);
   }
 }

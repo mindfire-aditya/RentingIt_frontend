@@ -3,6 +3,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class RentComponent implements OnInit {
     ownerId: 19,
   };
 
-  private subscription1: any;
+  private subscription1: Subscription = new Subscription();
 
   constructor(private registerProductsService: ProductDetailsService) {}
   ngOnInit(): void {}

@@ -38,9 +38,9 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     ''
   );
 
-  private subscription1: any;
-  private subscription2: any;
-  private subscription3: any;
+  private subscription1: Subscription = new Subscription();
+  private subscription2: Subscription = new Subscription();
+  private subscription3: Subscription = new Subscription();
 
   name = this.userInfo.firstName + ' ' + this.userInfo.lastName;
 

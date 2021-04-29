@@ -24,8 +24,10 @@ export class ProductService {
   }
 
   getProductsByOwnerId() {
-    return this.http.get(
-      `${this.baseUrl}/product/currently-loggedin/`
-    );
+    return this.http.get(`${this.baseUrl}/product/currently-loggedin/`);
+  }
+
+  getAllProducts() {
+    return this.http.get(`${this.baseUrl}/product/all`);
   }
 }

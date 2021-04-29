@@ -1,6 +1,19 @@
 <app-search-bar></app-search-bar>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
+<div *ngFor="let product of allProducts" class="col s6 m3">
+  <div class="card">
+    <div class="card-image">
+      <img src="../../assets/images/Rectangle 9.png" />
+    </div>
+    <div class="card-content">
+      <span class="">{{ product.productName }}</span>
+      <p class="price">
+        ${{ product.pricePerHour }}/hr | ${{ product.pricePerDay }}/day | ${{
+          product.pricePerWeek
+        }}/week | ${{ product.pricePerMonth }}/month
+      </p>
+    </div>
+    <div class="card-action" style="text-align: center">
+      <a routerLink="/product/product-details">Buy on RENT / Show Details</a>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,7 @@
       <div class="col m5 offset-m1">
         <a
           class="waves-effect btn"
-          routerLink="/user/rent"
+          routerLink="/user/place-order"
           style="text-align: center"
           >Add to cart</a
         >
@@ -49,7 +49,12 @@
       <div class="col s12">
         <label>Rent mode</label>
 
-        <select class="browser-default" id="rent_mode" ngModel name="rent_mode">
+        <select
+          class="browser-default"
+          id="rent_mode"
+          [(ngModel)]="newOrder.rent_mode"
+          name="rent_mode"
+        >
           <option value="" disabled selected>Choose rent mode</option>
           <option value="per hour">per hour</option>
           <option value="per day">per day</option>
@@ -61,7 +66,12 @@
     <div class="row">
       <div class="col s12">
         <label>Units</label>
-        <select class="browser-default" id="rent_mode" ngModel name="units">
+        <select
+          class="browser-default"
+          id="rent_mode"
+          [(ngModel)]="newOrder.units"
+          name="units"
+        >
           <option value="1" selected>1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -78,7 +88,7 @@
               id="start"
               type="datetime-local"
               class="datepicker"
-              ngModel
+              [(ngModel)]="newOrder.start_datetime"
               name="start"
             />
           </div>
@@ -94,7 +104,7 @@
               id="end"
               type="datetime-local"
               class="datepicker"
-              ngModel
+              [(ngModel)]="newOrder.end_datetime"
               name="end"
             />
           </div>
@@ -109,7 +119,7 @@
               type="checkbox"
               class="filled-in"
               checked="checked"
-              ngModel
+              [(ngModel)]="newOrder.terms_and_conditions"
               name="terms_and_conditions"
             />
 

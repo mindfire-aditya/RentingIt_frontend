@@ -9,6 +9,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -159,6 +160,10 @@ const routes: Routes = [
       {
         path: 'rent',
         component: RentComponent,
+      },
+      {
+        path: 'place-order',
+        component: PlaceOrderComponent,
       },
       {
         path: 'logout',
