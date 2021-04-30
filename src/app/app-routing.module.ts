@@ -162,7 +162,7 @@ const routes: Routes = [
         component: RentComponent,
       },
       {
-        path: 'place-order',
+        path: 'place-order/:productId',
         component: PlaceOrderComponent,
       },
       {

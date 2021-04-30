@@ -1,8 +1,8 @@
 export class Order {
   constructor(
     public ownerId: number,
-    public customerId: number,
     public productId: number,
+    public customerId: number,
     public rent_mode: string,
     public units: number,
     public start_datetime: Date,

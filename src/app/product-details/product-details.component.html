@@ -10,10 +10,7 @@
   <div class="row">
     <h4>{{ product_item?.productName }}</h4>
     <div class="rating">Rating 4/5 (100)</div>
-    <a
-      class="waves-effect btn"
-      routerLink="/user/place-order"
-      style="text-align: center"
+    <a class="waves-effect btn" (click)="onClick()" style="text-align: center"
       >Rent now</a
     >
   </div>
