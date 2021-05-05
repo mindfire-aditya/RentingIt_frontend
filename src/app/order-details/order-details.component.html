@@ -1,0 +1,24 @@
+
+  <p>Order Details Works</p>
+  <div class="row" *ngFor="let item of orderedProducts">
+    <div class="col s5 m2">
+      <div class="card">
+        <div class="card-image">
+          <a routerLink="product/product-details">
+            <img src="../../assets/images/bike-image.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col s7 m10">
+        <p>
+            Rent Starting Date :: {{ item.rentStartDate }} <br />
+            Rent Ending Date :: {{ item.rentEndDate }} <br />
+            Rent Mode :: {{ item.rentMode}}<br/>
+            Units :: {{ item.units }}<br/>
+            Total Amount :: {{ item.totalAmount}}
+        </p>
+
+    </div>
+  </div>
+  <hr />

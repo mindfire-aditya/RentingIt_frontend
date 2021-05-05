@@ -11,13 +11,16 @@ export class OrderItemComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   orderedProducts: any;
+  productdetails : any;
   private subscription1: any;
+  private subscription2: any;
+
 
   ngOnInit(): void {
     this.subscription1 = this.activatedRoute.data.subscribe(
       (data) => {
         console.log(data);
-        this.orderedProducts = data.products;
+        this.orderedProducts = data.orders;
       },
       (error) => {
         alert('Error fetching orders');

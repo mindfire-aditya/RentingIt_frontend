@@ -18,6 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import { RentComponent } from './rent/rent.component';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
+import { OrderDetailsResolver } from './services/resolver/orderDetailsResolver/order-details.resolver';
+import { OrderResolverResolver } from './services/resolver/orderResolver/order-resolver.resolver';
 import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
 import { UserDetailResolver } from './services/resolver/userDetailResolver/user-detail.resolver';
 import { TestComponent } from './test/test.component';
@@ -124,10 +126,12 @@ const routes: Routes = [
           {
             path: '',
             component: MyOrdersComponent,
+            resolve : {orders:OrderResolverResolver }
           },
           {
-            path: 'order/order-details',
+            path: 'order-details',
             component: OrderDetailsComponent,
+            resolve : {productDetails:OrderDetailsResolver}
           },
         ],
       },
