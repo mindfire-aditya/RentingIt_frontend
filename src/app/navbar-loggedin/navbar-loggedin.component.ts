@@ -5,6 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
+import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 import { ProductService } from '../services/products/product.service';
 import { UserInfoStoreService } from '../services/store/user-info-store.service';
@@ -22,6 +23,7 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
   private subscription1: any;
   private subscription2: any;
   private subscription3: any;
+  private subscription4: any;
   public username = localStorage.getItem('username');
 
   constructor(
@@ -29,7 +31,8 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     private productservice: ProductService,
     private productDetailService: ProductDetailsService,
     private router: Router,
-    private userInfoStore: UserInfoStoreService
+    private userInfoStore: UserInfoStoreService,
+    private placeOrderService: PlaceOrderService
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +72,24 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
       );
   }
 
+  getOrders() {
+    this.token = this.loginService.getToken();
+    this.subscription4 = this.placeOrderService
+      .getOrdersByCustomerId()
+      .subscribe(
+        (response: any) => {
+          //success
+          console.log(response);
+          this.router.navigate(['user/my-order']);
+        },
+        (error) => {
+          //error
+          alert('orders fetching unsuccessful');
+        }
+      );
+  }
+
+
   logoutUser() {
     this.loginService.logout();
     //location.reload()
@@ -82,5 +103,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     this.subscription1.unsubscribe();
     this.subscription2.unsubscribe();
     this.subscription3.unsubscribe();
+    this.subscription4.unsubscribe();
   }
 }

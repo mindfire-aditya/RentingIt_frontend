@@ -1,16 +1,31 @@
-/**
- * @author Aditya Sahu
- */
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 
 @Component({
   selector: 'app-order-item',
   templateUrl: './order-item.component.html',
   styleUrls: ['./order-item.component.css'],
 })
-export class OrderItemComponent implements OnInit {
-  constructor() {}
+export class OrderItemComponent implements OnInit, OnDestroy {
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  orderedProducts: any;
+  private subscription1: any;
+
+  ngOnInit(): void {
+    this.subscription1 = this.activatedRoute.data.subscribe(
+      (data) => {
+        console.log(data);
+        this.orderedProducts = data.products;
+      },
+      (error) => {
+        alert('Error fetching orders');
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
+  }
 }

@@ -14,3 +14,37 @@
   </div>
 </div>
 <hr />
+
+<div class="row" *ngFor="let item of orderedProducts">
+  <div class="col s5 m2">
+    <div class="card">
+      <div class="card-image">
+        <a routerLink="product/product-details">
+          <img src="../../assets/images/bike-image.png" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col s7 m10">
+    <h5>{{ item.productName }}</h5>
+    <small>Rating 4/5 (100)</small>
+    <p>{{ item.assetDescription }}</p>
+    <p>
+      Rs.{{ item.pricePerHour }}/hr <br />
+      Rs.{{ item.pricePerDay }}/day <br />
+      Rs.{{ item.pricePerWeek }}/week <br />
+      Rs.{{ item.pricePerWeek }}/month <br />
+    </p>
+    <p>
+      Pincode : {{ item.pinCode }} <br />
+      Status : {{ item.assetStatus | uppercase }} <br />
+      Units: {{ item.units }}
+    </p>
+
+    <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
+    <a routerLink="product/remove" class="waves-effect waves-light btn"
+      >Remove</a
+    >
+  </div>
+</div>
+<hr />

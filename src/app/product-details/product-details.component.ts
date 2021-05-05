@@ -27,6 +27,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
+    
     if (id !== null) {
       this.subscription1 = this.productService
         .getProductById(parseInt(id))
@@ -58,11 +59,20 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  onClick() {
+  onClickGoToPlaceOrder(){
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.router.navigate(['user/place-order/', id]);
+    //this.router.navigateByUrl('user/place-order/'+(id));
+
   }
+
+  // onClick() {
+  //   let id = this.activatedRoute.snapshot.paramMap.get('id');
+
+  //   //this.router.navigate(['user/place-order/', id]);
+  //   this.router.navigateByUrl('user/place-order/'+(id));
+  // }
 
   ngOnDestroy() {
     this.subscription1.unsubscribe();
