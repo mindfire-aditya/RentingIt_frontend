@@ -72,22 +72,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
       );
   }
 
-  getOrders() {
-    this.token = this.loginService.getToken();
-    this.subscription4 = this.placeOrderService
-      .getOrdersByCustomerId()
-      .subscribe(
-        (response: any) => {
-          //success
-          console.log(response);
-          this.router.navigate(['user/my-order']);
-        },
-        (error) => {
-          //error
-          alert('orders fetching unsuccessful');
-        }
-      );
-  }
 
 
   logoutUser() {

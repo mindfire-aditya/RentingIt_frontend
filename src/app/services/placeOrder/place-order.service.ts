@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PlaceOrderService {
   baseUrl = 'http://localhost:8080/rentingIt';
-  userid = 19;
 
   constructor(private http:HttpClient) {}
 
@@ -16,7 +15,7 @@ export class PlaceOrderService {
   return this.http.post(`${this.baseUrl}/order/new-order`,orderDetails);
 }
 
-getOrdersByCustomerId(){
-  return this.http.get(`${this.baseUrl}/order/all/${this.userid}`);
+getOrdersByCustomerId(userId: number){
+  return this.http.get(`${this.baseUrl}/order/all/${userId}`);
 }
 }

@@ -16,6 +16,6 @@ export class OrderResolverResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot,
          state: RouterStateSnapshot): Observable<any> {
-   return this.placeOrderService.getOrdersByCustomerId();
+   return this.placeOrderService.getOrdersByCustomerId(Number(localStorage.getItem("id")));
   }
 }

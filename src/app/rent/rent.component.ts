@@ -26,7 +26,7 @@ export class RentComponent implements OnInit {
     pricePerMonth: 0,
     pincode: 0,
     categoryId: 8, // static will be updated late dynamically
-    ownerId: 19,
+    ownerId: localStorage.getItem("id"),
   };
 
   private subscription1: Subscription = new Subscription();

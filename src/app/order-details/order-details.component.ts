@@ -44,14 +44,7 @@ export class OrderDetailsComponent implements OnInit {
     private subscription2: Subscription = new Subscription();
 
     ngOnInit(): void {
-      this.datatransfer.orderItem.subscribe(
-        (data)=>{
-          this.order_item = data;
-          this.pro_id = this.order_item.productId;
-          this.getDetails(this.pro_id);
-          
-        },(error)=>{console.log(error);}
-      );        
+     
     
   }
   getDetails(id:number){

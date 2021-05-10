@@ -129,7 +129,7 @@ const routes: Routes = [
             resolve : {orders:OrderResolverResolver }
           },
           {
-            path: 'order-details',
+            path: 'order-details/:orderId',
             component: OrderDetailsComponent,
           },
         ],
