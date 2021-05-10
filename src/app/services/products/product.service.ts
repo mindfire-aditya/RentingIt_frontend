@@ -3,6 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,25 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/product/all`);
   }
 
-  getProductById(id: number) {
-    return this.http.get(`${this.baseUrl}/product/${id}`);
+  getProductById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/product/${id}`);
   }
+
+//   imageUrl = this.baseUrl + "/product/resources/download-image/bike.png";
+//   getImage(imageUrl: string): Observable<Blob> {
+//     return this.http.get(imageUrl, { responseType: 'blob' });
+//   }
+
+// getImage():Observable<Blob>{
+//   return this.http.get<Blob>(`${this.baseUrl}/product/resources/download-image/Bike.png`);
+// }
+serviceUrl = "http://localhost:8080/rentingIt/product/resources/get-image/BikesMoto.jpg"
+//serviceUrl = "http://localhost:8080/rentingIt/product/resources/get-image/Bike.png"
+
+getImage(name:string) : Observable<any> { 
+  return this.http.get<any>(`${this.baseUrl}/product/resources/get-image/${name}`);
+      // .map((response : Response) => { 
+      //   return response.json(); }
+ } 
+
 }

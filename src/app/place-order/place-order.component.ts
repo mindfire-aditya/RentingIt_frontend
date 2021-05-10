@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,6 +16,7 @@ export class PlaceOrderComponent implements OnInit {
   newOrder = new Order(19, 3, 19, '', 1, new Date(), new Date(), false, 0);
   product_item: any;
   pickup_address: any;
+  actualName: any;
   ownerId: any;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,12 +24,12 @@ export class PlaceOrderComponent implements OnInit {
     private userDetailService: UserDetailService,
     private placeOrderService: PlaceOrderService
   ) {}
-
+  public image : any; 
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
 
   ngOnInit(): void {
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    let id = this.activatedRoute.snapshot.paramMap.get("id");
 
     if (id !== null) {
       this.subscription1 = this.productService
@@ -35,13 +37,16 @@ export class PlaceOrderComponent implements OnInit {
         .subscribe(
           (data) => {
             this.product_item = data;
+            console.log(this.product_item)
             this.ownerId = this.product_item.ownerId;
+            this.actualName = this.product_item.actualName;
             this.getOwnerInfo(this.ownerId);
+            this.getImage(this.actualName);
           },
           (error) => console.log(error)
         );
     } else {
-      console.log('Id: ', id);
+      console.log('Null Id: ', id);
     }
   }
 
@@ -59,6 +64,16 @@ export class PlaceOrderComponent implements OnInit {
         );
     }
   }
+
+  getImage(name:string){ 
+    this.productService.getImage(name+".jpg") 
+        .subscribe((data :any ) => { 
+         this.image = data;
+         this.image = 'data:image/png;base64,' + this.image.content;
+
+         console.log("image",this.image);
+         //this.image = this.sanitizer.bypassSecurityTrustUrl(this.imageType + data.content); 
+})}
 
   onSubmit() {
     if(this.newOrder.rent_mode!='' &&

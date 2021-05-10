@@ -131,7 +131,6 @@ const routes: Routes = [
           {
             path: 'order-details',
             component: OrderDetailsComponent,
-            resolve : {productDetails:OrderDetailsResolver}
           },
         ],
       },

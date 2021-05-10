@@ -1,10 +1,9 @@
-/**
- * @author Aditya Sahu
- */
-
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PlaceOrderService } from '../services/placeOrder/place-order.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DataTransferService } from '../services/DataTransfer/data-transfer.service';
+import { ProductService } from '../services/products/product.service';
+
 
 @Component({
   selector: 'app-order-details',
@@ -12,21 +11,67 @@ import { PlaceOrderService } from '../services/placeOrder/place-order.service';
   styleUrls: ['./order-details.component.css'],
 })
 export class OrderDetailsComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
+  name12!: string;
+  constructor(private activatedRoute: ActivatedRoute,
+    private datatransfer:DataTransferService,
+    private productService:ProductService,
+    private router: Router) {}
 
-  orderedProducts: any;
-  private subscription1: any;
+  
+    order_item:any;
+    pro_id:any;
+   
+    public product_item = {
+          actualName :"",
+          assetDescription : "",
+          assetStatus:"",
+          categoryId:0,
+          id :0,
+          imageUrl:"",
+          maintainanceTime: "",
+          ownerId: 0,
+          pinCode: 123313,
+          pricePerDay: 2000,
+          pricePerHour: 50,
+          pricePerMonth: 10000,
+          pricePerWeek: 5000,
+          productName: "",
+          units: 2
+        };
+    
 
-  ngOnInit(): void {
-    this.subscription1 = this.activatedRoute.data.subscribe(
-      (data) => {
-        console.log(data.orders);
-        this.orderedProducts = data.orders;
-        
+    private subscription1: Subscription = new Subscription();
+    private subscription2: Subscription = new Subscription();
+
+    ngOnInit(): void {
+      this.datatransfer.orderItem.subscribe(
+        (data)=>{
+          this.order_item = data;
+          this.pro_id = this.order_item.productId;
+          this.getDetails(this.pro_id);
+          
+        },(error)=>{console.log(error);}
+      );        
+    
+  }
+  getDetails(id:number){
+    this.productService.getProductById(id).subscribe(
+      (d_data)=>{
+
+        this.product_item.actualName = d_data.actualName;
+        this.name12 = d_data.actualName;
+        this.product_item.assetDescription = d_data.assetDescription;
+        console.log(this.product_item.actualName);
+        console.log(this.product_item.assetDescription);
       },
-      (error) => {
-        alert('Error fetching orders');
-      }
+      (error)=>{console.log(error);}
     );
   }
-}
+
+    // ngDestroy(){
+    //   this.subscription1.unsubscribe();
+    //   this.subscription2.unsubscribe();
+    // }
+      
+
+  }

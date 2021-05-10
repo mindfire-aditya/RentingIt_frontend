@@ -12,6 +12,8 @@ import { ProductService } from '../../products/product.service';
 })
 export class OrderDetailsResolver implements Resolve<any> {
   constructor(private productService: ProductService) {}
+
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return this.productService.getProductById(2);
   }
