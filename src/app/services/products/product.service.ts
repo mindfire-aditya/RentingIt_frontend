@@ -36,14 +36,6 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}/product/${id}`);
   }
 
-//   imageUrl = this.baseUrl + "/product/resources/download-image/bike.png";
-//   getImage(imageUrl: string): Observable<Blob> {
-//     return this.http.get(imageUrl, { responseType: 'blob' });
-//   }
-
-// getImage():Observable<Blob>{
-//   return this.http.get<Blob>(`${this.baseUrl}/product/resources/download-image/Bike.png`);
-// }
 serviceUrl = "http://localhost:8080/rentingIt/product/resources/get-image/BikesMoto.jpg"
 //serviceUrl = "http://localhost:8080/rentingIt/product/resources/get-image/Bike.png"
 

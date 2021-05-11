@@ -13,13 +13,13 @@ import { UserDetailService } from '../services/userDetail/user-detail.service';
   styleUrls: ['./place-order.component.css'],
 })
 export class PlaceOrderComponent implements OnInit {
-  newOrder: Order = new Order(0, 0, 0 , '', 1, new Date(), new Date(), false, 0);
+  newOrder: Order = new Order(0, 0, 0, '', 1, new Date(), new Date(), false, 0);
   product_item: any;
   pickup_address: any;
   actualName: any;
   ownerId: any;
-  customerId = localStorage.getItem("id");
-  public image : any; 
+  customerId = localStorage.getItem('id');
+  public image: any;
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
 
@@ -31,23 +31,20 @@ export class PlaceOrderComponent implements OnInit {
     private router: Router
   ) {}
 
-
-
   ngOnInit(): void {
-    let id = this.activatedRoute.snapshot.paramMap.get("productId");
+    let id = this.activatedRoute.snapshot.paramMap.get('productId');
 
-    let customerId = Number(localStorage.getItem("id"));
-  
+    let customerId = Number(localStorage.getItem('id'));
+
     this.newOrder.customerId = customerId;
-    
 
     if (id !== null) {
-      this.subscription1 = this.productService
+      this.subscription1 = this.subscription1 = this.productService
         .getProductById(parseInt(id))
         .subscribe(
           (data) => {
             this.product_item = data;
-            console.log(this.product_item)
+            console.log(this.product_item);
             this.ownerId = this.product_item.ownerId;
             this.actualName = this.product_item.actualName;
             this.getOwnerInfo(this.ownerId);
@@ -69,6 +66,7 @@ export class PlaceOrderComponent implements OnInit {
         .subscribe(
           (data) => {
             this.pickup_address = data;
+            console.log(data);
           },
           (error) => {
             console.log(error);
@@ -77,40 +75,44 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  getImage(name:string){ 
-    this.productService.getImage(name+".jpg") 
-        .subscribe((data :any ) => { 
-         this.image = data;
-         this.image = 'data:image/png;base64,' + this.image.content;
-         
-})}
+  getImage(name: string) {
+    this.productService.getImage(name + '.jpg').subscribe((data: any) => {
+      this.image = data;
+      this.image = 'data:image/png;base64,' + this.image.content;
+    });
+  }
+
+  calculateTotalPrice() {}
 
   onSubmit() {
-    if(this.newOrder.rent_mode!='' &&
-       this.newOrder.rent_mode!=null &&
-       this.newOrder.terms_and_conditions!=false)
-      {
-
+    if (
+      this.newOrder.rent_mode != '' &&
+      this.newOrder.rent_mode != null &&
+      this.newOrder.terms_and_conditions != false
+    ) {
       console.log(this.newOrder);
-      console.log('Here form will be submited');
-      this.subscription1 = this.placeOrderService.addOder(this.newOrder).subscribe(
-        (response: any) => {
-          //success
-          console.log(response);
-          this.router.navigate(['/user/my-orders'])          
-        },
-        (error: any) => {
-          //error
-          alert('Order Registration Unsuccessful');
-        }
-        );
-      } else {
+      console.log(this.newOrder.end_datetime.getDate());
+
+      // this.subscription2 = this.placeOrderService
+      //   .addOder(this.newOrder)
+      //   .subscribe(
+      //     (response: any) => {
+      //       //success
+      //       console.log(response);
+      //       this.router.navigate(['/user/my-orders']);
+      //     },
+      //     (error: any) => {
+      //       //error
+      //       alert('Order Registration Unsuccessful');
+      //     }
+      //   );
+    } else {
       console.log('Fields are empty !!');
     }
   }
 
-
   ngOnDestroy() {
     this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
   }
 }

@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-image">
         <!-- <img src="../../assets/images/Rectangle 9.png" /> -->
-        <img [src]="image">
+        <img [src]="image" />
       </div>
     </div>
   </div>
@@ -17,23 +17,13 @@
   <div class="col s6 m8 description">
     <div class="row">
       <div class="col m6">
-        <h5>Harley Davidson</h5>
-        <div class="rating">Rating 4/5 (100)</div>
-      </div>
-      <div class="col m5 offset-m1">
-        <a
-          class="waves-effect btn"
-          routerLink="/user/place-order"
-          style="text-align: center"
-          >Add to cart</a
-        >
+        <h5>{{ product_item?.actualName }}</h5>
       </div>
     </div>
   </div>
 </div>
 <div class="row">
   <form class="col s12 m6" (submit)="onSubmit()" #rentForm="ngForm">
-    {{ newOrder | json }}
     <div class="row">
       <h6><b>Rent Details</b></h6>
       <hr />
@@ -41,8 +31,12 @@
     <div class="row">
       <div class="col s12 m12">
         <div class="row">
-          <div class="col m6">Product Name</div>
-          <div class="col m6">Harley Davidson</div>
+          <div class="col m3">Product Name</div>
+          <div class="col m6">{{ product_item?.actualName }}</div>
+        </div>
+        <div class="row">
+          <div class="col m3">Description</div>
+          <div class="col m6">{{ product_item?.assetDescription }}</div>
         </div>
       </div>
     </div>
@@ -51,7 +45,7 @@
         <label>Rent mode</label>
 
         <select
-          class="browser-default"
+          class="browser-default validate"
           id="rent_mode"
           [(ngModel)]="newOrder.rent_mode"
           name="rent_mode"
@@ -65,19 +59,20 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s12">
-        <label>Units</label>
-        <select
-          class="browser-default"
+      <div class="col s12 input-field">
+        <label for="rent_mode">Units</label>
+        <input
+          type="number"
+          class="browser-default validate"
           id="rent_mode"
+          #units="ngModel"
           [(ngModel)]="newOrder.units"
           name="units"
-        >
-          <option value="1" selected>1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
+          value="1"
+          min="1"
+          [max]="product_item?.units"
+        />
+        <p>Units available : {{ product_item?.units }}</p>
       </div>
     </div>
     <div class="row">
@@ -88,7 +83,7 @@
             <input
               id="start"
               type="datetime-local"
-              class="datepicker"
+              class="datepicker validate"
               [(ngModel)]="newOrder.start_datetime"
               name="start"
             />
@@ -104,7 +99,7 @@
             <input
               id="end"
               type="datetime-local"
-              class="datepicker"
+              class="datepicker validate"
               [(ngModel)]="newOrder.end_datetime"
               name="end"
             />
@@ -118,7 +113,7 @@
           <label>
             <input
               type="checkbox"
-              class="filled-in"
+              class="filled-in validate"
               checked="checked"
               [(ngModel)]="newOrder.terms_and_conditions"
               name="terms_and_conditions"
@@ -135,6 +130,7 @@
           class="waves-effect btn"
           style="text-align: center"
           type="submit"
+          [disabled]="!newOrder.terms_and_conditions"
         >
           Place Order
         </button>
@@ -145,10 +141,46 @@
     <div class="row">
       <h6><b>Pricing</b></h6>
       <hr />
+      <div class="col s12">
+        per hour <b>Rs.{{ product_item?.pricePerHour }}</b>
+      </div>
+      <div class="col s12">
+        per day <b>Rs.{{ product_item?.pricePerDay }}</b>
+      </div>
+      <div class="col s12">
+        per week <b>Rs.{{ product_item?.pricePerWeek }}</b>
+      </div>
+      <div class="col s12">
+        per month <b>Rs.{{ product_item?.pricePerMonth }}</b>
+      </div>
     </div>
     <div class="row">
       <h6><b>Pickup address</b></h6>
       <hr />
+      <div class="col s12">
+        House no. <b>{{ pickup_address?.houseNo }}</b>
+      </div>
+      <div class="col s12">
+        Lane no. <b>{{ pickup_address?.lane }}</b>
+      </div>
+      <div class="col s12">
+        Street no.<b>{{ pickup_address?.streetNo }}</b>
+      </div>
+      <div class="col s12">
+        Landmark <b>{{ pickup_address?.landmark }}</b>
+      </div>
+      <div class="col s12">
+        City <b>{{ pickup_address?.city }}</b>
+      </div>
+      <div class="col s12">
+        District <b>{{ pickup_address?.district }}</b>
+      </div>
+      <div class="col s12">
+        State <b>{{ pickup_address?.state }}</b>
+      </div>
+      <div class="col s12">
+        Pincode <b>{{ pickup_address?.pincode }}</b>
+      </div>
     </div>
   </div>
 </div>
