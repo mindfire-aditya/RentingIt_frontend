@@ -39,10 +39,11 @@ export class ProductDetailsComponent implements OnInit {
         .subscribe(
           (data) => {
             this.product_item = data;
-            console.log(this.product_item);
+            //console.log(this.product_item);
             this.ownerId = this.product_item.ownerId;
             this.getOwnerInfo(this.ownerId);
             this.getImage();
+            console.log("Product Details ",id);
           },
           (error) => console.log(error)
         );
