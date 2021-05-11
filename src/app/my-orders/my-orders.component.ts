@@ -2,12 +2,10 @@
  * @author Aditya Sahu
  */
 
-import { isNgTemplate } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
-import { DataTransferService } from '../services/DataTransfer/data-transfer.service';
-import { PlaceOrderService } from '../services/placeOrder/place-order.service';
+import { ProductDetailsService } from '../services/productDetails/product-details.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -18,9 +16,11 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private productService: ProductDetailsService
   ) {}
 
   orderedProducts: any;
+  productList: Array<Object> = [];
 
   private subscription1: Subscription = new Subscription();
 
@@ -29,12 +29,31 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       (data) => {
         this.orderedProducts = data.orders;
         console.log(data.orders);
-        
       },
       (error) => {
         alert('Error fetching orders');
       }
     );
+
+    this.getProductsFromIds(this.orderedProducts);
+
+  }
+  
+
+  getProductsFromIds(orders: []){
+    const productIds = orders.map(({ productId }) => productId);
+    console.log(productIds);
+    
+    for(let id in productIds){
+      console.log(productIds[id]);
+
+      this.productService.getProductDetailById(Number(productIds[id])).subscribe(data=>{
+        this.productList.push(data);
+      })
+    }
+
+    console.log(this.productList);
+    
 
   }
 

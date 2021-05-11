@@ -31,4 +31,8 @@ export class ProductDetailsService {
     );
   }
 
+  getProductDetailById(productId: number){
+    return this.http.get(`${this.baseUrl}/product/${productId}`);
+  }
+
 }

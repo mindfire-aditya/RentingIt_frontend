@@ -12,10 +12,10 @@ import { ProductService } from '../services/products/product.service';
 })
 export class OrderDetailsComponent implements OnInit {
   name12!: string;
-  constructor(private activatedRoute: ActivatedRoute,
-    private datatransfer:DataTransferService,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private productService:ProductService,
-    private router: Router) {}
+  ) {}
 
   
     order_item:any;
@@ -44,6 +44,8 @@ export class OrderDetailsComponent implements OnInit {
     private subscription2: Subscription = new Subscription();
 
     ngOnInit(): void {
+
+      let orderId = this.activatedRoute.snapshot.paramMap.get("orderId");
      
     
   }
