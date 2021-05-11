@@ -4,6 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CategoryService } from '../services/category/category.service';
 
 @Component({
@@ -13,13 +14,12 @@ import { CategoryService } from '../services/category/category.service';
 })
 export class ProductCategoriesComponent implements OnInit {
   constructor(
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService
   ) {}
 
   public allCategories: any;
-  private subscription1: any;
+  private subscription1: Subscription = new Subscription();
   category: any = '';
 
   ngOnInit(): void {
@@ -58,22 +58,11 @@ export class ProductCategoriesComponent implements OnInit {
         this.category = 'all';
     }
 
-    console.log(this.category);
-
-    this.categoryService.getCategories(this.category).subscribe((data) => {
-      this.allCategories = data;
-      console.log(this.allCategories);
-    });
-
-    // this.subscription1 = this.activatedRoute.data.subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.allCategories = data.allCategories;
-    //   },
-    //   (error) => {
-    //     alert('Error fetching products');
-    //   }
-    // );
+    this.subscription1 = this.categoryService
+      .getCategories(this.category)
+      .subscribe((data) => {
+        this.allCategories = data;
+      });
   }
 
   ngOnDestroy() {

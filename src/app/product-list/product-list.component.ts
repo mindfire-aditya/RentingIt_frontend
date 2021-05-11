@@ -17,17 +17,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data) => {
       this.allProducts = data;
-      // for(let name in this.allProducts){
-
-      // }
-      // this.getImageDetils();
-      console.log(data);
     });
   }
-
-  // getImageDetails(allProducts:any){
-  //   for
-  // }
 
   onClick(id: number) {
     this.router.navigate(['user/my-products/product-details/', id]);
