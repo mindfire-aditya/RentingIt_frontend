@@ -31,6 +31,12 @@ import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { NavbarLoggedinComponent } from './navbar-loggedin/navbar-loggedin.component';
 import { TestComponent } from './test/test.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -61,7 +67,18 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
     TestComponent,
     PlaceOrderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     AuthGuard,
     {
