@@ -41,14 +41,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s12">
-        <label>Rent mode</label>
-
+      <div class="col s12 input-field">
         <select
           class="browser-default validate"
           id="rent_mode"
           [(ngModel)]="newOrder.rent_mode"
           name="rent_mode"
+          required
         >
           <option value="" disabled selected>Choose rent mode</option>
           <option value="per hour">per hour</option>
@@ -60,23 +59,33 @@
     </div>
     <div class="row">
       <div class="col s12 input-field">
-        <label for="rent_mode">Units</label>
+        <label for="units">Units</label>
         <input
           type="number"
-          class="browser-default validate"
-          id="rent_mode"
+          class="validate"
+          id="units"
           #units="ngModel"
           [(ngModel)]="newOrder.units"
           name="units"
           value="1"
           min="1"
           [max]="product_item?.units"
+          required
         />
-        <p>Units available : {{ product_item?.units }}</p>
+        <!-- <p>Units available : {{ product_item?.units }}</p>
+        <small *ngIf="units.errors && units.touched"
+          >No of units not valid</small
+        > -->
+        <span
+          class="helper-text"
+          data-error="check the available units"
+          data-success="valid"
+          ><b>Units available: {{ product_item?.units }}</b></span
+        >
       </div>
     </div>
     <div class="row">
-      <div class="col s12">
+      <div class="col s12 input-field">
         <label for="start">Start Datetime</label>
         <div class="row input-field">
           <div class="col m12">
@@ -86,13 +95,14 @@
               class="datepicker validate"
               [(ngModel)]="newOrder.start_datetime"
               name="start"
+              required
             />
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col s12">
+      <div class="col s12 input-field">
         <label for="end">End Datetime</label>
         <div class="row input-field">
           <div class="col m12">
@@ -102,21 +112,22 @@
               class="datepicker validate"
               [(ngModel)]="newOrder.end_datetime"
               name="end"
+              required
             />
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col m12">
+      <div class="col m12 input-field">
         <p>
           <label>
             <input
               type="checkbox"
               class="filled-in validate"
-              checked="checked"
               [(ngModel)]="newOrder.terms_and_conditions"
               name="terms_and_conditions"
+              required
             />
 
             <span>I have read the terms and conditions and I agree to it.</span>
@@ -130,7 +141,7 @@
           class="waves-effect btn"
           style="text-align: center"
           type="submit"
-          [disabled]="!newOrder.terms_and_conditions"
+          [disabled]="!newOrder.terms_and_conditions && !rentForm.valid"
         >
           Place Order
         </button>

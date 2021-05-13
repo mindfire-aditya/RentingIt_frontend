@@ -33,6 +33,7 @@ export class PlaceOrderComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('productId');
+    this.newOrder = new Order(0, 0, 0, '', 1, new Date(), new Date(), false, 0);
 
     let customerId = Number(localStorage.getItem('id'));
 
@@ -92,20 +93,6 @@ export class PlaceOrderComponent implements OnInit {
     ) {
       console.log(this.newOrder);
       console.log(this.newOrder.end_datetime.getDate());
-
-      // this.subscription2 = this.placeOrderService
-      //   .addOder(this.newOrder)
-      //   .subscribe(
-      //     (response: any) => {
-      //       //success
-      //       console.log(response);
-      //       this.router.navigate(['/user/my-orders']);
-      //     },
-      //     (error: any) => {
-      //       //error
-      //       alert('Order Registration Unsuccessful');
-      //     }
-      //   );
     } else {
       console.log('Fields are empty !!');
     }
