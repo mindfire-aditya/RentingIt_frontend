@@ -1,4 +1,14 @@
+.card-body {
+  background-color: #1974be;
+  padding: 10px;
+  text-align: center;
+}
+
 .card-title {
-  background-color: #be8719;
   font-size: 18px;
+  color: #fff;
+}
+
+.parent-category {
+  font-size: 20px;
 }

@@ -18,6 +18,7 @@ export class ProductCategoriesComponent implements OnInit {
     private categoryService: CategoryService
   ) {}
 
+  parentCategories: any;
   public allCategories: any;
   private subscription1: Subscription = new Subscription();
   category: any = '';
@@ -62,6 +63,16 @@ export class ProductCategoriesComponent implements OnInit {
       .getCategories(this.category)
       .subscribe((data) => {
         this.allCategories = data;
+        console.log(this.allCategories);
+
+        this.parentCategories = [
+          ...new Set(
+            this.allCategories.map(
+              (item: { parentCategory: any }) => item.parentCategory
+            )
+          ),
+        ];
+        console.log(this.parentCategories);
       });
   }
 

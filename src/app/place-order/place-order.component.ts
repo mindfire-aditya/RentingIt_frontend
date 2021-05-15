@@ -19,6 +19,9 @@ export class PlaceOrderComponent implements OnInit {
   actualName: any;
   ownerId: any;
   customerId = localStorage.getItem('id');
+
+  today = new Date().getDate();
+
   public image: any;
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
@@ -83,7 +86,52 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
-  calculateTotalPrice() {}
+  calculateTotalPrice(start: Date, end: Date) {
+    let datedif = end.getDate() - start.getDate();
+    let hourdif = end.getHours() - start.getHours();
+    let minutedif = end.getMinutes() - start.getMinutes();
+
+    let rent_mode = this.newOrder.rent_mode;
+
+    if (rent_mode == 'per hour') {
+      if (hourdif <= 0) {
+        throw new Error('Less than an hour is not allowed');
+      } else {
+        return (
+          this.newOrder.units *
+          (minutedif / 60 + hourdif) *
+          this.product_item.pricePerHour
+        );
+      }
+    } else if (rent_mode == 'per day') {
+      if (datedif <= 0) {
+        throw new Error('Less than a day is not allowed');
+      } else {
+        return (
+          this.newOrder.units *
+          (hourdif / 24 + datedif) *
+          this.product_item.pricePerDay
+        );
+      }
+    } else if (rent_mode == 'per week') {
+      if (datedif / 7 <= 0) {
+        throw new Error('Less than a week is not allowed');
+      } else {
+        return (
+          this.newOrder.units * (datedif / 7) * this.product_item.pricePerWeek
+        );
+      }
+    } else {
+      if (hourdif <= 0) {
+        throw new Error('Less than a month is not allowed');
+      } else {
+        return (
+          ((this.newOrder.units * datedif) / 28) *
+          this.product_item.pricePerMonth
+        );
+      }
+    }
+  }
 
   onSubmit() {
     if (
@@ -92,7 +140,15 @@ export class PlaceOrderComponent implements OnInit {
       this.newOrder.terms_and_conditions != false
     ) {
       console.log(this.newOrder);
-      console.log(this.newOrder.end_datetime.getDate());
+      let startdate = new Date(this.newOrder.start_datetime);
+      let enddate = new Date(this.newOrder.end_datetime);
+
+      try {
+        let result = this.calculateTotalPrice(startdate, enddate);
+        this.newOrder.total_amount = result;
+      } catch (error) {
+        alert(error);
+      }
     } else {
       console.log('Fields are empty !!');
     }
