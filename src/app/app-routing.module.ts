@@ -113,7 +113,6 @@ const routes: Routes = [
   {
     path: 'user',
     canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always',
     children: [
       {
         path: 'my-products',
