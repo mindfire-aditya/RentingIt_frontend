@@ -37,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarLoggedinComponent,
     TestComponent,
     PlaceOrderComponent,
+    ProductSubCategoryComponent,
   ],
   imports: [
     BrowserModule,
