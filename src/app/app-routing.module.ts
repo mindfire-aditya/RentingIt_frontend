@@ -13,6 +13,7 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegisterComponent } from './register/register.component';
 import { RentComponent } from './rent/rent.component';
@@ -48,26 +49,42 @@ const routes: Routes = [
       {
         path: 'appliances',
         component: ProductListComponent,
+        children: [{ path: ':subcategory', component: ProductListComponent }],
       },
       {
         path: 'bikes',
         component: ProductListComponent,
+        children: [
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'cars',
         component: ProductListComponent,
+        children: [
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'electronics',
         component: ProductListComponent,
+        children: [
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'furnitures',
         component: ProductListComponent,
+        children: [
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'machines',
         component: ProductListComponent,
+        children: [
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'all',
@@ -126,7 +143,7 @@ const routes: Routes = [
           {
             path: '',
             component: MyOrdersComponent,
-            resolve : {orders:OrderResolverResolver }
+            resolve: { orders: OrderResolverResolver },
           },
           {
             path: 'order-details/:orderId',
