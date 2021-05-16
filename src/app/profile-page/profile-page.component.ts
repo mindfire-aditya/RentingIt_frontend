@@ -33,17 +33,18 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
-  category(){
+  category() {
     this.router.navigate(['categories/bikes']);
   }
-  
+
   ngOnInit(): void {
     this.subscription1 = this.activatedRoute.data.subscribe(
       (data) => {
         this.userInfo = data.userDetail;
-        console.log(data);
       },
       (error) => {
+        console.log(error);
+
         this.router.navigate(['user/my-profile/edit']);
       }
     );

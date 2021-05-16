@@ -5,3 +5,11 @@
 .price {
   font-weight: bold;
 }
+
+.center-text {
+  text-align: center;
+}
+
+i {
+  font-size: 50px;
+}
