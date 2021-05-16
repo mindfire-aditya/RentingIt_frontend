@@ -20,6 +20,10 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  // filterOwnerProducts(data) {
+
+  // }
+
   onClick(id: number) {
     this.router.navigate(['user/my-products/product-details/', id]);
   }

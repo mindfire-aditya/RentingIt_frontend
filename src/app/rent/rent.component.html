@@ -17,49 +17,61 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.productName"
+          [(ngModel)]="newProduct.productName"
           id="productName"
           name="productName"
           type="text"
           required
           class="validate"
         />
-        <label for="productName">Product Name</label>
+        <label for="productName">Product Brand</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.actualName"
+          [(ngModel)]="newProduct.actualName"
           required
           name="actualName"
           id="actualName"
           type="text"
           class="validate"
         />
-        <label for="actualName">Actual Name</label>
+        <label for="actualName">Model Name/Number</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.assetStatus"
           required
           name="assetStatus"
           id="assetStatus"
           type="text"
           class="validate"
         />
-        <label for="assetStatus">Asset Status</label>
+        <label for="assetStatus">Product Category</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.assetDescription"
+          required
+          name="assetStatus"
+          id="assetStatus"
+          type="text"
+          class="validate"
+        />
+        <label for="assetStatus">Product Sub-category</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input
+          [(ngModel)]="newProduct.assetDescription"
           required
           name="assetDescription"
           id="assetDescription"
@@ -73,7 +85,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.maintainanceTime"
+          [(ngModel)]="newProduct.maintainanceTime"
           required
           name="maintainanceTime"
           id="maintainanceTime"
@@ -87,7 +99,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.pricePerHour"
+          [(ngModel)]="newProduct.pricePerHour"
           required
           name="pricePerHour"
           id="pricePerHour"
@@ -101,7 +113,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.pricePerDay"
+          [(ngModel)]="newProduct.pricePerDay"
           required
           name="pricePerDay"
           id="pricePerDay"
@@ -115,7 +127,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.pricePerWeek"
+          [(ngModel)]="newProduct.pricePerWeek"
           required
           name="pricePerWeek"
           id="pricePerWeek"
@@ -129,7 +141,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.pricePerMonth"
+          [(ngModel)]="newProduct.pricePerMonth"
           required
           name="pricePerMonth"
           id="pricePerMonth"
@@ -143,7 +155,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.pincode"
+          [(ngModel)]="newProduct.pinCode"
           required
           name="pincode"
           id="pincode"
@@ -157,7 +169,7 @@
     <div class="row">
       <div class="input-field col s12">
         <input
-          [(ngModel)]="productDetails.units"
+          [(ngModel)]="newProduct.units"
           required
           name="units"
           id="units"
@@ -167,44 +179,40 @@
         <label for="units">Units</label>
       </div>
     </div>
-    <!-- <div class="row">
-        <div class="input-field col s12">
-          <input
-            [(ngModel)]="productDetails.imageUrl"
-            name="units"
-            id="units"
-            type="file"
-            class="validate"
-          />
-        </div>
-      </div> -->
-
-    <!-- <div class="row">
-        <div class="col m12">
-            <button
-          class="btn waves-effect waves-light"
-          type="file"
-          name="action"
-          >
-            Register Here !!
-          </button>
+    <div class="row">
+      <div class="col m12">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Product Image</span>
+            <input type="file" />
           </div>
-    </div> -->
+          <div class="file-path-wrapper">
+            <input
+              class="file-path validate"
+              type="text"
+              name="imageUrl"
+              id="imageUrl"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col m12">
         <button
-          class="btn waves-effect waves-light"
+          class="btn waves-effect waves-light submit"
           type="submit"
           name="action"
           style="background-color: #3f88df; font-weight: bold"
         >
-          Register Here !!
+          Register Product
         </button>
       </div>
     </div>
   </form>
 
   <!--Just for testing purpose-->
-  {{ productDetails | json }}
+  {{ newProduct | json }}
   <div class="row"></div>
 </div>

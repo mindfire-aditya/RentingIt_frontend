@@ -48,35 +48,41 @@ const routes: Routes = [
     children: [
       {
         path: 'appliances',
-        component: ProductListComponent,
-        children: [{ path: ':subcategory', component: ProductListComponent }],
+        children: [
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductListComponent },
+        ],
       },
       {
         path: 'bikes',
         component: ProductListComponent,
         children: [
-          { path: ':subcategory', component: ProductSubCategoryComponent },
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductListComponent },
         ],
       },
       {
         path: 'cars',
         component: ProductListComponent,
         children: [
-          { path: ':subcategory', component: ProductSubCategoryComponent },
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductListComponent },
         ],
       },
       {
         path: 'electronics',
         component: ProductListComponent,
         children: [
-          { path: ':subcategory', component: ProductSubCategoryComponent },
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductListComponent },
         ],
       },
       {
         path: 'furnitures',
         component: ProductListComponent,
         children: [
-          { path: ':subcategory', component: ProductSubCategoryComponent },
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductListComponent },
         ],
       },
       {

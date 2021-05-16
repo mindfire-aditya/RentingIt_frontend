@@ -149,6 +149,15 @@ export class PlaceOrderComponent implements OnInit {
       } catch (error) {
         alert(error);
       }
+
+      this.placeOrderService.addOder(this.newOrder).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          error(error);
+        }
+      );
     } else {
       console.log('Fields are empty !!');
     }
