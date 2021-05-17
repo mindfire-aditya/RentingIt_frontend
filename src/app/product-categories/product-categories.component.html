@@ -7,13 +7,11 @@
     <div class="col s3 m2" *ngIf="item1 == item2.parentCategory">
       <div class="card">
         <div class="card-image">
-          <a
-            [routerLink]="[
+          <a [routerLink]="[
               '/categories',
               item1.toLowerCase(),
               item2.childCategory.toLowerCase()
-            ]"
-          >
+            ]">
             <img src="../../assets/images/Rectangle 9.png" />
           </a>
         </div>
