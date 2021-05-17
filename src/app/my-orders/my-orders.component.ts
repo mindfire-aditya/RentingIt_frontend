@@ -25,43 +25,49 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   private subscription1: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.subscription1 = this.subscription1 = this.activatedRoute.data.subscribe(
-      (data) => {
-        this.orderedProducts = data.orders;
-        console.log(data.orders);
-      },
-      (error) => {
-        alert('Error fetching orders');
-      }
-    );
+    this.subscription1 = this.subscription1 =
+      this.activatedRoute.data.subscribe(
+        (data) => {
+          this.orderedProducts = data.orders;
+          console.log(data.orders);
+        },
+        (error) => {
+          console.log(error);
+
+          alert('Error fetching orders');
+        }
+      );
 
     this.getProductsFromIds(this.orderedProducts);
-
   }
-  
 
-  getProductsFromIds(orders: []){
+  getProductsFromIds(orders: []) {
     const productIds = orders.map(({ productId }) => productId);
     console.log(productIds);
-    
-    for(let id in productIds){
+
+    for (let id in productIds) {
       console.log(productIds[id]);
 
-      this.productService.getProductDetailById(Number(productIds[id])).subscribe(data=>{
-        this.productList.push(data);
-      })
+      this.productService
+        .getProductDetailById(Number(productIds[id]))
+        .subscribe(
+          (data) => {
+            this.productList.push(data);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
 
     console.log(this.productList);
-    
-
   }
 
   sendDetails(item: any) {
     this.router.navigate(['user/my-orders/order-details', item.productId]);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription1.unsubscribe();
   }
 }

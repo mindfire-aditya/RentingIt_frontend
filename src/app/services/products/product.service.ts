@@ -38,6 +38,12 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}/product/${id}`);
   }
 
+  removeProduct(id: number) {
+    return this.http.delete(
+      `${this.baseUrl}/product/delete-owner-registered-product-by-id/${id}`
+    );
+  }
+
   serviceUrl = 'http://localhost:8080/rentingIt/product/resources/get-image/';
   //serviceUrl = "http://localhost:8080/rentingIt/product/resources/get-image/Bike.png"
 

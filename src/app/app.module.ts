@@ -38,6 +38,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ProductSubCategoryComponent } from './product-sub-category/product-sub-
     TestComponent,
     PlaceOrderComponent,
     ProductSubCategoryComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

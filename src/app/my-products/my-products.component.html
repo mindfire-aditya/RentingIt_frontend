@@ -1,3 +1,5 @@
+<h6><b>My Orders</b></h6>
+<hr />
 <div class="row" *ngFor="let item of userProducts">
   <div class="col s5 m2">
     <div class="card">
@@ -8,26 +10,33 @@
       </div>
     </div>
   </div>
-  <div class="col s7 m10">
+  <div class="col s4 m3">
     <h5>{{ item.productName }}</h5>
-    <small>Rating 4/5 (100)</small>
-    <p>{{ item.assetDescription }}</p>
+
     <p>
       Rs.{{ item.pricePerHour }}/hr <br />
       Rs.{{ item.pricePerDay }}/day <br />
       Rs.{{ item.pricePerWeek }}/week <br />
       Rs.{{ item.pricePerWeek }}/month <br />
     </p>
+    <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
+    <a (click)="onRemove(item.id)" class="waves-effect waves-light btn"
+      >Remove</a
+    >
+  </div>
+  <div class="col s3 m5">
     <p>
       Pincode : {{ item.pinCode }} <br />
       Status : {{ item.assetStatus | uppercase }} <br />
       Units: {{ item.units }}
     </p>
-
-    <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
-    <a routerLink="product/remove" class="waves-effect waves-light btn"
-      >Remove</a
-    >
   </div>
 </div>
 <hr />
+<div class="row">
+  <div class="col s12 m12 center-text" *ngIf="userProducts?.length == 0">
+    <div class="row">
+      <h5>No products available.</h5>
+    </div>
+  </div>
+</div>

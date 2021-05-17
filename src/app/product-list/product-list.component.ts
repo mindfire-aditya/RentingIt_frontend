@@ -14,14 +14,22 @@ import { ProductService } from '../services/products/product.service';
 export class ProductListComponent implements OnInit {
   allProducts: Product[];
   products: Product[];
+  showSpinner: boolean = true;
+
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.products = [];
-    this.productService.getAllProducts().subscribe((data) => {
-      this.allProducts = data;
-      this.removeOwnerProducts(this.allProducts);
-    });
+    this.productService.getAllProducts().subscribe(
+      (data) => {
+        this.allProducts = data;
+        this.showSpinner = false;
+        this.removeOwnerProducts(this.allProducts);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   removeOwnerProducts(data: Product[]) {
