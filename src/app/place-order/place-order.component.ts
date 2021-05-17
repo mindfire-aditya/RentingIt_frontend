@@ -153,6 +153,7 @@ export class PlaceOrderComponent implements OnInit {
       this.placeOrderService.addOder(this.newOrder).subscribe(
         (data) => {
           console.log(data);
+          this.router.navigate(['user/my-orders']);
         },
         (error) => {
           error(error);

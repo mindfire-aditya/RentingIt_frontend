@@ -6,6 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
 import { UserInfoStoreService } from '../services/store/user-info-store.service';
+import { UserDetailService } from '../services/userDetail/user-detail.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private userInfoStore: UserInfoStoreService
+    private userInfoStore: UserInfoStoreService,
+    private userDetailsService: UserDetailService
   ) {}
 
   ngOnInit(): void {}
@@ -43,10 +45,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         .generateToken(this.credentials)
         .subscribe(
           (response: any) => {
-            //success
-            //settingup the token to local storage for loggin the user
-            console.log(response);
-
             this.loginService.saveUser(
               response.id,
               response.username,
@@ -55,16 +53,24 @@ export class LoginComponent implements OnInit, OnDestroy {
               response.accessToken,
               response.tokenType
             );
-
-            //taking the user to categories page where they can buy or rent the product
-
             let loggedIn: any = true;
             localStorage.setItem('loggedIn', loggedIn);
 
             this.loginService.changeNavbar();
             this.userInfoStore.emitUserInfo();
-            this.router.navigate(['user/my-profile/edit']);
-            window.location.href = '/user/my-profile/edit';
+
+            this.userDetailsService.getUserDetailById(response.id).subscribe(
+              (data) => {
+                console.log(data);
+                this.router.navigate(['/categories/all']);
+                window.location.href = '/categories/all';
+              },
+              (error) => {
+                console.log(error);
+                this.router.navigate(['/user/my-profile/edit']);
+                window.location.href = '/user/my-profile/edit';
+              }
+            );
           },
           (error) => {
             //error

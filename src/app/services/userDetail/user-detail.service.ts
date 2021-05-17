@@ -20,6 +20,10 @@ export class UserDetailService {
     );
   }
 
+  getUserDetailById(id: number) {
+    return this.http.get<UserDetail>(`${this.baseUrl}/view-info/${id}`);
+  }
+
   getOwnerDetail(ownerId: number) {
     return this.http.get<UserDetail>(`${this.baseUrl}/view-info/${ownerId}`);
   }
