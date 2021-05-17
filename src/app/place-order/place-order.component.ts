@@ -6,6 +6,7 @@ import { Order } from '../models/order';
 import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 import { ProductService } from '../services/products/product.service';
 import { UserDetailService } from '../services/userDetail/user-detail.service';
+import { render } from 'creditcardpayments/creditCardPayments';
 
 @Component({
   selector: 'app-place-order',
@@ -32,7 +33,18 @@ export class PlaceOrderComponent implements OnInit {
     private userDetailService: UserDetailService,
     private placeOrderService: PlaceOrderService,
     private router: Router
-  ) {}
+  ) {
+    render(
+      {
+        id: "#myPaypalButtons",
+        currency: "USD",
+        value: "1000",
+        onApprove: (details) => {
+          console.log(details);
+          alert("Transection Successfull!!");
+        }
+      });
+  }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('productId');
