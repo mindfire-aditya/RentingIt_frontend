@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
+import { ImageUploadResponse } from 'src/app/models/image-upload-response';
 
 @Injectable({
   providedIn: 'root',
@@ -37,9 +38,11 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}/product/${id}`);
   }
 
-  serviceUrl =
-    'http://localhost:8080/rentingIt/product/resources/get-image/BikesMoto.jpg';
+  serviceUrl = 'http://localhost:8080/rentingIt/product/resources/get-image/';
   //serviceUrl = "http://localhost:8080/rentingIt/product/resources/get-image/Bike.png"
+
+  uploadPath =
+    'http://localhost:8080/rentingIt/product/resources/upload-single-image';
 
   getImage(name: string): Observable<any> {
     return this.http.get<any>(
@@ -47,5 +50,17 @@ export class ProductService {
     );
     // .map((response : Response) => {
     //   return response.json(); }
+  }
+
+  upload(file: any) {
+    // Create form data
+    const formData = new FormData();
+
+    // Store form name as "file" with file data
+    formData.append('file', file, file.name);
+
+    // Make http post request over api
+    // with formData as req
+    return this.http.post<ImageUploadResponse>(this.uploadPath, formData);
   }
 }

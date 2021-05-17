@@ -1,9 +1,4 @@
 <div class="row">
-  <div class="col s12">
-    <h3><b>Rent Component</b></h3>
-  </div>
-</div>
-<div class="row">
   <div class="col m6">
     <img
       src="../../assets/images/Become a member and get access to wide range of products and premium services..png"
@@ -11,7 +6,7 @@
     />
   </div>
   <div class="col m6">
-    <form (ngSubmit)="registerProducts()">
+    <form (ngSubmit)="registerProduct()">
       <div class="row">
         <div class="input-field col s12">
           <input
@@ -182,16 +177,23 @@
           <div class="file-field input-field">
             <div class="btn">
               <span>Product Image</span>
-              <input type="file" />
-            </div>
-            <div class="file-path-wrapper">
               <input
-                class="file-path validate"
-                type="text"
+                type="file"
+                (change)="onChange($event)"
                 name="imageUrl"
                 id="imageUrl"
               />
             </div>
+
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" />
+            </div>
+            <button
+              class="btn waves-effect waves-light submit"
+              style="background-color: #3f88df; font-weight: bold"
+            >
+              Upload
+            </button>
           </div>
         </div>
       </div>
@@ -212,6 +214,7 @@
 
     <!--Just for testing purpose-->
     {{ newProduct | json }}
+    {{ imageFile | json }}
     <div class="row"></div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Category } from 'src/app/models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -11,5 +12,9 @@ export class CategoryService {
 
   getCategories(path: string) {
     return this.http.get(`${this.baseUrl}/product/category/${path}`);
+  }
+
+  getAllCategories() {
+    return this.http.get<Category[]>(`${this.baseUrl}/product/category/all`);
   }
 }
