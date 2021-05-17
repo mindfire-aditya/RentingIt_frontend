@@ -39,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     PlaceOrderComponent,
     ProductSubCategoryComponent,
     LoadingSpinnerComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
