@@ -4,21 +4,15 @@
   <h3 class="parent-category">{{ item1 }}</h3>
   <hr />
   <div *ngFor="let item2 of allCategories">
-    <div class="col s3 m2" *ngIf="item1 == item2.parentCategory">
-      <div class="card">
-        <div class="card-image">
-          <a [routerLink]="[
-              '/categories',
-              item1.toLowerCase(),
-              item2.childCategory.toLowerCase()
-            ]">
-            <img src="../../assets/images/Rectangle 9.png" />
-          </a>
+    <div class="col" *ngIf="item1 == item2.parentCategory">
+      <a
+        *ngIf="item2.childCategory !== null"
+        [routerLink]="['/categories', item1.toLowerCase(), item2.id]"
+      >
+        <div class="card-panel teal">
+          {{ item2.childCategory }}
         </div>
-        <div class="card-body">
-          <span class="card-title">{{ item2.childCategory }}</span>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
