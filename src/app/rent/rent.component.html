@@ -36,28 +36,36 @@
       </div>
 
       <div class="row">
-        <div class="input-field col s12">
-          <input
-            required
-            name="assetStatus"
-            id="assetStatus"
-            type="text"
-            class="validate"
-          />
-          <label for="assetStatus">Product Category</label>
+        <div class="col s12 m12">
+          <label>Category</label>
+          <select
+            #category
+            class="browser-default"
+            (change)="onSelectCategory(category)"
+          >
+            <option value="" disabled selected>Choose product category</option>
+            <option *ngFor="let item of parentCategories">
+              {{ item }}
+            </option>
+          </select>
         </div>
       </div>
 
       <div class="row">
-        <div class="input-field col s12">
-          <input
-            required
-            name="assetStatus"
-            id="assetStatus"
-            type="text"
-            class="validate"
-          />
-          <label for="assetStatus">Product Sub-category</label>
+        <div class="col s12 m12">
+          <label>Sub-category</label>
+          <select
+            #subcategory
+            class="browser-default"
+            (change)="onSelectSubCategory(category, subcategory)"
+          >
+            <option value="" disabled selected>
+              Choose product sub-category
+            </option>
+            <option *ngFor="let item of childCategories">
+              {{ item }}
+            </option>
+          </select>
         </div>
       </div>
 
@@ -72,20 +80,6 @@
             class="validate"
           />
           <label for="assetDescription">Product Description</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12">
-          <input
-            [(ngModel)]="newProduct.maintainanceTime"
-            required
-            name="maintainanceTime"
-            id="maintainanceTime"
-            type="text"
-            class="validate"
-          />
-          <label for="maintainanceTime">Maintainance Time</label>
         </div>
       </div>
 

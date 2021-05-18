@@ -10,7 +10,7 @@ import { NewProduct } from '../models/new-product';
 import { CategoryService } from '../services/category/category.service';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 import { ProductService } from '../services/products/product.service';
-import { switchMap } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validator } from '@angular/forms';
 
 @Component({
   selector: 'app-rent',
@@ -21,7 +21,11 @@ export class RentComponent implements OnInit {
   public newProduct: NewProduct;
   public imageFile: any;
   public allCategories: Category[];
+  public parentCategories: any;
+  public childCategories: string[];
   public imageUploadResponse: ImageUploadResponse;
+
+  myForm: FormGroup;
 
   private subscription1: Subscription;
   private subscription2: Subscription;
@@ -31,17 +35,21 @@ export class RentComponent implements OnInit {
     private registerProductsService: ProductDetailsService,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.myForm = this.fb.group({});
+    this.allCategories = [];
+
     this.subscription2 = new Subscription();
     this.subscription1 = new Subscription();
 
     this.newProduct = new NewProduct(
       '',
       '',
-      '',
+      '1',
       'available',
       '',
       '',
@@ -59,12 +67,21 @@ export class RentComponent implements OnInit {
     this.subscription3 = this.categoryService.getAllCategories().subscribe(
       (data) => {
         this.allCategories = data;
-        console.log(data);
+        this.parentCategories = this.parentCategoriesList(data);
+        console.log(this.parentCategories);
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  parentCategoriesList(data: Category[]) {
+    return [
+      ...new Set(
+        data.map((item: { parentCategory: any }) => item.parentCategory)
+      ),
+    ];
   }
 
   registerProduct() {
@@ -97,6 +114,36 @@ export class RentComponent implements OnInit {
     } else {
       console.log('Fields are empty !!');
     }
+  }
+
+  onSelectCategory(category: any) {
+    console.log(category.value);
+    this.childCategories = [];
+
+    this.allCategories.forEach((item) => {
+      if (item.parentCategory === category.value) {
+        this.childCategories.push(item.childCategory);
+      }
+    });
+  }
+
+  onSelectSubCategory(category: any, subcategory: any) {
+    console.log(category.value, subcategory.value);
+
+    this.allCategories.filter((item) => {
+      if (
+        category.value == item.parentCategory &&
+        subcategory.value == item.childCategory
+      ) {
+        this.newProduct.categoryId = item.id;
+        this.newProduct.parentCategoryId = item.parentCategoryId;
+        console.log(this.newProduct);
+
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   onChange(event: any) {
