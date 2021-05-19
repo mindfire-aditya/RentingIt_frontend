@@ -1,11 +1,19 @@
 .card-action {
   background-color: #219c9f;
+  cursor: pointer;
+}
+a {
   color: #fff;
 }
 .price {
   font-weight: bold;
 }
-
 .center-text {
   text-align: center;
+}
+
+img {
+  height: 200px;
+  width: auto;
+  margin: auto;
 }

@@ -1,6 +1,4 @@
-<app-search-bar></app-search-bar>
-
-<app-loading-spinner *ngIf="products.length == 0"></app-loading-spinner>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
 <div *ngIf="products.length > 0">
   <div *ngFor="let product of products" class="col s6 m3">
@@ -9,12 +7,9 @@
         <img [src]="product.imageUrl" />
       </div>
       <div class="card-content">
-        <span class="">{{ product.productName }}</span>
-        <p class="price">
-          ${{ product.pricePerHour }}/hr | ${{ product.pricePerDay }}/day | ${{
-            product.pricePerWeek
-          }}/week | ${{ product.pricePerMonth }}/month
-        </p>
+        <span
+          ><b>{{ product.productName }} {{ product.actualName }}</b></span
+        >
       </div>
       <div class="card-action" style="text-align: center">
         <a (click)="onClick(product.id)">Buy on RENT / Show Details</a>

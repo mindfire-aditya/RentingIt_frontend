@@ -63,7 +63,6 @@ export class ProductCategoriesComponent implements OnInit {
       .getCategories(this.category)
       .subscribe((data) => {
         this.allCategories = data;
-        console.log(this.allCategories);
 
         this.parentCategories = [
           ...new Set(
@@ -72,7 +71,6 @@ export class ProductCategoriesComponent implements OnInit {
             )
           ),
         ];
-        console.log(this.parentCategories);
       });
   }
 

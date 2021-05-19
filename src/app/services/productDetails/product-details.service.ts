@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Product } from 'src/app/models/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductDetailsService {
-
   // from here we call the server
   baseUrl = 'http://localhost:8080/rentingIt';
-  bike = "Bike";
+  bike = 'Bike';
   constructor(private http: HttpClient) {}
 
   getProductsByName() {
@@ -17,8 +17,11 @@ export class ProductDetailsService {
   }
 
   //for adding products for renting purpose
-  addProducts(productDetails:any){
-    return this.http.post(`${this.baseUrl}/product/register-products-for-rent/`,productDetails);
+  addProducts(productDetails: any) {
+    return this.http.post(
+      `${this.baseUrl}/product/register-products-for-rent/`,
+      productDetails
+    );
   }
 
   getAllCategories() {
@@ -26,13 +29,10 @@ export class ProductDetailsService {
   }
 
   getProductsByOwnerId() {
-    return this.http.get(
-      `${this.baseUrl}/product/currently-loggedin/`
-    );
+    return this.http.get(`${this.baseUrl}/product/currently-loggedin/`);
   }
 
-  getProductDetailById(productId: number){
-    return this.http.get(`${this.baseUrl}/product/${productId}`);
+  getProductDetailById(productId: number) {
+    return this.http.get<Product>(`${this.baseUrl}/product/${productId}`);
   }
-
 }

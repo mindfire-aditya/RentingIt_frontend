@@ -27,18 +27,29 @@ export class ProductListComponent implements OnInit {
     this.products = [];
     this.allCategories = [];
 
+    let category = String(this.router.url.split('/').pop());
+    category = category.charAt(0).toUpperCase() + category.slice(1);
+    let parentCategoryId: any;
+
     this.productService.getAllCategories().subscribe((data) => {
       this.allCategories = data;
-    });
+      this.showSpinner = false;
 
-    let category = String(this.router.url.split('/').pop());
+      let res = this.allCategories.find(
+        (item) => item.parentCategory == category
+      );
 
-    this.productService.getAllProducts().subscribe((data) => {
-      this.allProducts = data;
-      this.removeOwnerProducts(data);
-      this.products.forEach((item) => {
-        item.imageUrl = this.imageBaseUrl + item.imageUrl;
-      });
+      parentCategoryId = res?.parentCategoryId;
+
+      this.productService
+        .getProductsByParentCategoryId(parentCategoryId)
+        .subscribe((data) => {
+          this.allProducts = data;
+          this.removeOwnerProducts(this.allProducts);
+          this.products.forEach((item) => {
+            item.imageUrl = this.imageBaseUrl + item.imageUrl;
+          });
+        });
     });
   }
 

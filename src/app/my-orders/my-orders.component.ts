@@ -5,6 +5,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
+import { Order } from '../models/order';
+import { Product } from '../models/product';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 
 @Component({
@@ -19,8 +21,9 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     private productService: ProductDetailsService
   ) {}
 
-  orderedProducts: any;
-  productList: Array<Object> = [];
+  orderedProducts: Order[];
+  productList: Product[];
+  showSpinner: boolean = true;
 
   private subscription1: Subscription = new Subscription();
 
@@ -29,6 +32,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       this.activatedRoute.data.subscribe(
         (data) => {
           this.orderedProducts = data.orders;
+          this.showSpinner = false;
         },
         (error) => {
           alert('Error fetching orders');
@@ -38,7 +42,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     this.getProductsFromIds(this.orderedProducts);
   }
 
-  getProductsFromIds(orders: []) {
+  getProductsFromIds(orders: Order[]) {
     const productIds = orders.map(({ productId }) => productId);
 
     for (let id in productIds) {
