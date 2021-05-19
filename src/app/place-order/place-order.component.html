@@ -7,7 +7,7 @@
   <div class="col s6 m8">
     <div class="card">
       <div class="card-image">
-        <!-- <img src="../../assets/images/Rectangle 9.png" /> -->
+        <img [src]="product_item?.imageUrl" />
         <img [src]="image" />
       </div>
     </div>
@@ -42,8 +42,13 @@
     </div>
     <div class="row">
       <div class="col s12 input-field">
-        <select class="browser-default validate" id="rent_mode" [(ngModel)]="newOrder.rent_mode" name="rent_mode"
-          required>
+        <select
+          class="browser-default validate"
+          id="rent_mode"
+          [(ngModel)]="newOrder.rent_mode"
+          name="rent_mode"
+          required
+        >
           <option value="" disabled selected>Choose rent mode</option>
           <option value="per hour">per hour</option>
           <option value="per day">per day</option>
@@ -55,10 +60,24 @@
     <div class="row">
       <div class="col s12 input-field">
         <label for="units">Units</label>
-        <input type="number" class="validate" id="units" #units="ngModel" [(ngModel)]="newOrder.units" name="units"
-          value="1" min="1" [max]="product_item?.units" required />
-        <span class="helper-text" data-error="check the available units" data-success="valid"><b>Units available: {{
-            product_item?.units }}</b></span>
+        <input
+          type="number"
+          class="validate"
+          id="units"
+          #units="ngModel"
+          [(ngModel)]="newOrder.units"
+          name="units"
+          value="1"
+          min="1"
+          [max]="product_item?.units"
+          required
+        />
+        <span
+          class="helper-text"
+          data-error="check the available units"
+          data-success="valid"
+          ><b>Units available: {{ product_item?.units }}</b></span
+        >
       </div>
     </div>
     <div class="row">
@@ -66,9 +85,18 @@
         <label for="start">Start Datetime</label>
         <div class="row">
           <div class="col m12 input-field">
-            <input id="start" type="datetime-local" class="validate" [(ngModel)]="newOrder.start_datetime" name="start"
-              minDate="new Date()" required />
-            <span class="helper-text" data-error="invalid" data-success="valid">Required</span>
+            <input
+              id="start"
+              type="datetime-local"
+              class="validate"
+              [(ngModel)]="newOrder.start_datetime"
+              name="start"
+              minDate="new Date()"
+              required
+            />
+            <span class="helper-text" data-error="invalid" data-success="valid"
+              >Required</span
+            >
           </div>
         </div>
       </div>
@@ -78,8 +106,15 @@
         <label for="end">End Datetime</label>
         <div class="row input-field">
           <div class="col m12">
-            <input id="end" type="datetime-local" class="validate" [(ngModel)]="newOrder.end_datetime" name="end"
-              [min]="newOrder.start_datetime" required />
+            <input
+              id="end"
+              type="datetime-local"
+              class="validate"
+              [(ngModel)]="newOrder.end_datetime"
+              name="end"
+              [min]="newOrder.start_datetime"
+              required
+            />
             <span class="helper-text" data-success="valid">Required</span>
           </div>
         </div>
@@ -96,21 +131,28 @@
       <div class="col m12 input-field">
         <p>
           <label>
-            <input type="checkbox" class="filled-in validate" [(ngModel)]="newOrder.terms_and_conditions"
-              name="terms_and_conditions" required />
+            <input
+              type="checkbox"
+              class="filled-in validate"
+              [(ngModel)]="newOrder.terms_and_conditions"
+              name="terms_and_conditions"
+              required
+            />
 
             <span>I have read the terms and conditions and I agree to it.</span>
           </label>
         </p>
       </div>
     </div>
-    <div class="row" id="myPaypalButtons">
-
-    </div>
+    <div class="row" id="myPaypalButtons"></div>
     <div class="row">
       <div class="col m6 offset-m3">
-        <button class="waves-effect btn" style="text-align: center" type="submit"
-          [disabled]="!newOrder.terms_and_conditions && !rentForm.valid">
+        <button
+          class="waves-effect btn"
+          style="text-align: center"
+          type="submit"
+          [disabled]="!newOrder.terms_and_conditions && !rentForm.valid"
+        >
           Place Order
         </button>
       </div>

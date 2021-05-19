@@ -51,39 +51,39 @@ const routes: Routes = [
         path: 'appliances',
         children: [
           { path: '', component: ProductListComponent },
-          { path: ':subcategory', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
         ],
       },
       {
         path: 'bikes',
-        component: ProductListComponent,
+
         children: [
           { path: '', component: ProductListComponent },
-          { path: ':subcategory', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
         ],
       },
       {
         path: 'cars',
-        component: ProductListComponent,
+
         children: [
           { path: '', component: ProductListComponent },
-          { path: ':subcategory', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
         ],
       },
       {
         path: 'electronics',
-        component: ProductListComponent,
+
         children: [
           { path: '', component: ProductListComponent },
-          { path: ':subcategory', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
         ],
       },
       {
         path: 'furnitures',
-        component: ProductListComponent,
+
         children: [
           { path: '', component: ProductListComponent },
-          { path: ':subcategory', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
         ],
       },
       {
@@ -92,6 +92,11 @@ const routes: Routes = [
         children: [
           { path: ':subcategory', component: ProductSubCategoryComponent },
         ],
+      },
+      {
+        path: 'others',
+        component: ProductListComponent,
+        children: [{ path: ':subcategory', component: ProductListComponent }],
       },
       {
         path: 'all',

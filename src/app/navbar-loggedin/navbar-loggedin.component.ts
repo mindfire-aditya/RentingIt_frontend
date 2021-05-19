@@ -4,6 +4,9 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Category } from '../models/category';
+import { CategoryService } from '../services/category/category.service';
 import { LoginService } from '../services/loginService/login.service';
 import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
@@ -20,10 +23,13 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
 
   private token: any;
   userData: any;
-  private subscription1: any;
-  private subscription2: any;
-  private subscription3: any;
-  private subscription4: any;
+  private subscription1: Subscription;
+  private subscription2: Subscription;
+  private subscription3: Subscription;
+  private subscription4: Subscription;
+  private subscription5: Subscription;
+  public allCategories: Category[];
+  public parentCategories: any;
   public username = localStorage.getItem('username');
 
   constructor(
@@ -32,10 +38,17 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     private productDetailService: ProductDetailsService,
     private router: Router,
     private userInfoStore: UserInfoStoreService,
-    private placeOrderService: PlaceOrderService
+    private placeOrderService: PlaceOrderService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
+    this.subscription1 = new Subscription();
+    this.subscription2 = new Subscription();
+    this.subscription3 = new Subscription();
+    this.subscription4 = new Subscription();
+    this.subscription5 = new Subscription();
+
     this.subscription1 = this.loginService.loginStatus.subscribe(
       (data) => {
         this.loggedIn = data;
@@ -53,6 +66,24 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
         alert('user info not retrieved.');
       }
     );
+
+    this.subscription5 = this.categoryService.getAllCategories().subscribe(
+      (data) => {
+        this.allCategories = data;
+        this.parentCategories = this.parentCategoriesList(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  parentCategoriesList(data: Category[]) {
+    return [
+      ...new Set(
+        data.map((item: { parentCategory: any }) => item.parentCategory)
+      ),
+    ];
   }
 
   getBikeProducts() {
@@ -62,7 +93,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
       .subscribe(
         (response: any) => {
           //success
-          console.log(response);
           this.router.navigate(['categories/bikes']);
         },
         (error) => {
@@ -71,8 +101,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
         }
       );
   }
-
-
 
   logoutUser() {
     this.loginService.logout();
@@ -88,5 +116,6 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     this.subscription2.unsubscribe();
     this.subscription3.unsubscribe();
     this.subscription4.unsubscribe();
+    this.subscription5.unsubscribe();
   }
 }

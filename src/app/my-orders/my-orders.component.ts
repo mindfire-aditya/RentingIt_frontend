@@ -29,11 +29,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       this.activatedRoute.data.subscribe(
         (data) => {
           this.orderedProducts = data.orders;
-          console.log(data.orders);
         },
         (error) => {
-          console.log(error);
-
           alert('Error fetching orders');
         }
       );
@@ -43,11 +40,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   getProductsFromIds(orders: []) {
     const productIds = orders.map(({ productId }) => productId);
-    console.log(productIds);
 
     for (let id in productIds) {
-      console.log(productIds[id]);
-
       this.productService
         .getProductDetailById(Number(productIds[id]))
         .subscribe(
@@ -59,8 +53,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
           }
         );
     }
-
-    console.log(this.productList);
   }
 
   sendDetails(item: any) {

@@ -4,6 +4,7 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginService } from '../services/loginService/login.service';
 import { UserInfoStoreService } from '../services/store/user-info-store.service';
 import { UserDetailService } from '../services/userDetail/user-detail.service';
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     password: '',
   };
 
-  private subscription1: any;
+  private subscription1: Subscription;
 
   constructor(
     private loginService: LoginService,
@@ -29,7 +30,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private userDetailsService: UserDetailService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription1 = new Subscription();
+  }
 
   onSubmit() {
     //console.log("Form is submited!!");

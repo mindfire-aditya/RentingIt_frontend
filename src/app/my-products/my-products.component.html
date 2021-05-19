@@ -1,11 +1,11 @@
-<h6><b>My Orders</b></h6>
+<h6><b>My Products</b></h6>
 <hr />
 <div class="row" *ngFor="let item of userProducts">
   <div class="col s5 m2">
     <div class="card">
       <div class="card-image">
         <a routerLink="product/product-details">
-          <img src="../../assets/images/bike-image.png" />
+          <img [src]="item.imageUrl" />
         </a>
       </div>
     </div>

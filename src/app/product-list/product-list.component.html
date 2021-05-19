@@ -1,12 +1,12 @@
 <app-search-bar></app-search-bar>
 
-<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<app-loading-spinner *ngIf="products.length == 0"></app-loading-spinner>
 
 <div *ngIf="products.length > 0">
   <div *ngFor="let product of products" class="col s6 m3">
     <div class="card">
       <div class="card-image">
-        <img src="../../assets/images/Rectangle 9.png" />
+        <img [src]="product.imageUrl" />
       </div>
       <div class="card-content">
         <span class="">{{ product.productName }}</span>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DomSanitizer} from '@angular/platform-browser'; 
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../services/products/product.service';
 import { UserDetailService } from '../services/userDetail/user-detail.service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-product-details',
@@ -18,32 +19,33 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router
   ) {}
 
-  product_item: any;
+  product_item: Product;
   pickup_address: any;
   ownerId: any;
- 
+
+  imageBaseUrl =
+    'http://localhost:8080/rentingIt/product/resources/download-image/';
+
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
-  private sanitizer!: DomSanitizer; 
-  public image : any; 
-  private readonly imageType : string = 'data:image/PNG;base64,'; 
-
+  private sanitizer!: DomSanitizer;
+  public image: any;
+  private readonly imageType: string = 'data:image/PNG;base64,';
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    
     if (id !== null) {
       this.subscription1 = this.productService
         .getProductById(parseInt(id))
         .subscribe(
           (data) => {
             this.product_item = data;
-            //console.log(this.product_item);
             this.ownerId = this.product_item.ownerId;
             this.getOwnerInfo(this.ownerId);
-            this.getImage();
-            console.log("Product Details ",id);
+            this.product_item.imageUrl =
+              this.imageBaseUrl + this.product_item.imageUrl;
+            console.log('Product Details ', id);
           },
           (error) => console.log(error)
         );
@@ -67,32 +69,11 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  onClickGoToPlaceOrder(){
+  onClickGoToPlaceOrder() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.router.navigate(['user/place-order/', id]);
-    //this.router.navigateByUrl('user/place-order/'+(id));
-
   }
-
-   
-  
-  getImage(){ 
-         this.productService.getImage(this.product_item.actualName+".jpg") 
-             .subscribe((data :any ) => { 
-              this.image = data;
-              this.image = 'data:image/png;base64,' + this.image.content;
-
-              //console.log("image",this.image);
-              //this.image = this.sanitizer.bypassSecurityTrustUrl(this.imageType + data.content); 
-  })} 
-  
-  // onClick() {
-  //   let id = this.activatedRoute.snapshot.paramMap.get('id');
-
-  //   //this.router.navigate(['user/place-order/', id]);
-  //   this.router.navigateByUrl('user/place-order/'+(id));
-  // }
 
   ngOnDestroy() {
     this.subscription1.unsubscribe();

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ImageUploadResponse } from 'src/app/models/image-upload-response';
+import { Category } from 'src/app/models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -23,19 +24,21 @@ export class ProductService {
   }
 
   getAllCategories() {
-    return this.http.get(`${this.baseUrl}/product/category/all`);
+    return this.http.get<Category[]>(`${this.baseUrl}/product/category/all`);
   }
 
   getProductsByOwnerId() {
-    return this.http.get(`${this.baseUrl}/product/currently-loggedin/`);
+    return this.http.get<Product[]>(
+      `${this.baseUrl}/product/currently-loggedin/`
+    );
   }
 
   getAllProducts() {
     return this.http.get<Product[]>(`${this.baseUrl}/product/all`);
   }
 
-  getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/product/${id}`);
+  getProductById(id: number) {
+    return this.http.get<Product>(`${this.baseUrl}/product/${id}`);
   }
 
   removeProduct(id: number) {
@@ -58,6 +61,12 @@ export class ProductService {
     //   return response.json(); }
   }
 
+  downloadImage(name: string) {
+    return this.http.get<Blob[]>(
+      `${this.baseUrl}/product/resources/download-image/${name}`
+    );
+  }
+
   upload(file: any) {
     // Create form data
     const formData = new FormData();
@@ -68,5 +77,17 @@ export class ProductService {
     // Make http post request over api
     // with formData as req
     return this.http.post<ImageUploadResponse>(this.uploadPath, formData);
+  }
+
+  getProductsByCategoryId(id: number) {
+    return this.http.get<Product[]>(
+      `${this.baseUrl}/product/category/id/${id}`
+    );
+  }
+
+  getProductsByParentCategoryId(id: number) {
+    return this.http.get<Product[]>(
+      `${this.baseUrl}/product/category/parentId/${id}`
+    );
   }
 }

@@ -2,8 +2,7 @@
   <div class="card">
     <div class="card-image">
       <!--img src="../../assets/images/Rectangle 9.png" /-->
-      <img [src]="image" alt="bike"> 
-
+      <img [src]="product_item?.imageUrl" alt="bike" />
     </div>
   </div>
 </div>
@@ -11,7 +10,10 @@
   <div class="row">
     <h4>{{ product_item?.productName }}</h4>
     <div class="rating">Rating 4/5 (100)</div>
-    <a class="waves-effect btn" (click)="onClickGoToPlaceOrder()"  style="text-align: center"
+    <a
+      class="waves-effect btn"
+      (click)="onClickGoToPlaceOrder()"
+      style="text-align: center"
       >Rent now</a
     >
   </div>

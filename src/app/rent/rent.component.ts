@@ -68,7 +68,6 @@ export class RentComponent implements OnInit {
       (data) => {
         this.allCategories = data;
         this.parentCategories = this.parentCategoriesList(data);
-        console.log(this.parentCategories);
       },
       (error) => {
         console.log(error);
@@ -91,14 +90,13 @@ export class RentComponent implements OnInit {
       this.subscription1 = this.productService.upload(this.imageFile).subscribe(
         (res) => {
           this.imageUploadResponse = res;
-          console.log(this.imageUploadResponse.fileName);
+
           this.newProduct.imageUrl = this.imageUploadResponse.fileName;
 
           this.subscription2 = this.registerProductsService
             .addProducts(this.newProduct)
             .subscribe(
               (res) => {
-                console.log(res);
                 this.router.navigate(['/user/my-products']);
               },
               (error) => {
@@ -117,7 +115,6 @@ export class RentComponent implements OnInit {
   }
 
   onSelectCategory(category: any) {
-    console.log(category.value);
     this.childCategories = [];
 
     this.allCategories.forEach((item) => {
@@ -128,8 +125,6 @@ export class RentComponent implements OnInit {
   }
 
   onSelectSubCategory(category: any, subcategory: any) {
-    console.log(category.value, subcategory.value);
-
     this.allCategories.filter((item) => {
       if (
         category.value == item.parentCategory &&
@@ -137,7 +132,6 @@ export class RentComponent implements OnInit {
       ) {
         this.newProduct.categoryId = item.id;
         this.newProduct.parentCategoryId = item.parentCategoryId;
-        console.log(this.newProduct);
 
         return true;
       } else {

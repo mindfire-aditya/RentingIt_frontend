@@ -9,18 +9,19 @@ import {
   ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { Product } from 'src/app/models/product';
 import { ProductService } from '../../products/product.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsResolver implements Resolve<any> {
+export class ProductsResolver implements Resolve<Product[]> {
   constructor(private productService: ProductService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<any> {
+  ): Observable<Product[]> {
     return this.productService.getProductsByOwnerId();
   }
 }

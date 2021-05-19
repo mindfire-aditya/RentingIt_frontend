@@ -2,7 +2,8 @@
  * @author Aditya Sahu
  */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../models/category';
 import { Product } from '../models/product';
 import { ProductService } from '../services/products/product.service';
 
@@ -14,30 +15,37 @@ import { ProductService } from '../services/products/product.service';
 export class ProductListComponent implements OnInit {
   allProducts: Product[];
   products: Product[];
+  allCategories: Category[];
   showSpinner: boolean = true;
+
+  imageBaseUrl =
+    'http://localhost:8080/rentingIt/product/resources/download-image/';
 
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.products = [];
-    this.productService.getAllProducts().subscribe(
-      (data) => {
-        this.allProducts = data;
-        this.showSpinner = false;
-        this.removeOwnerProducts(this.allProducts);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.allCategories = [];
+
+    this.productService.getAllCategories().subscribe((data) => {
+      this.allCategories = data;
+    });
+
+    let category = String(this.router.url.split('/').pop());
+
+    this.productService.getAllProducts().subscribe((data) => {
+      this.allProducts = data;
+      this.removeOwnerProducts(data);
+      this.products.forEach((item) => {
+        item.imageUrl = this.imageBaseUrl + item.imageUrl;
+      });
+    });
   }
 
   removeOwnerProducts(data: Product[]) {
     let userId = Number(localStorage.getItem('id'));
     let result = data.filter((item) => item.ownerId !== userId);
     this.products = result;
-
-    console.log(result);
   }
 
   onClick(id: number) {

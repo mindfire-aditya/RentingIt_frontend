@@ -7,6 +7,7 @@ import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 import { ProductService } from '../services/products/product.service';
 import { UserDetailService } from '../services/userDetail/user-detail.service';
 import { render } from 'creditcardpayments/creditCardPayments';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-place-order',
@@ -15,11 +16,13 @@ import { render } from 'creditcardpayments/creditCardPayments';
 })
 export class PlaceOrderComponent implements OnInit {
   newOrder: Order = new Order(0, 0, 0, '', 1, new Date(), new Date(), false, 0);
-  product_item: any;
+  product_item: Product;
   pickup_address: any;
   actualName: any;
   ownerId: any;
   customerId = localStorage.getItem('id');
+  imageBaseUrl =
+    'http://localhost:8080/rentingIt/product/resources/download-image/';
 
   today = new Date().getDate();
 
@@ -33,18 +36,7 @@ export class PlaceOrderComponent implements OnInit {
     private userDetailService: UserDetailService,
     private placeOrderService: PlaceOrderService,
     private router: Router
-  ) {
-    render(
-      {
-        id: "#myPaypalButtons",
-        currency: "USD",
-        value: "1000",
-        onApprove: (details) => {
-          console.log(details);
-          alert("Transection Successfull!!");
-        }
-      });
-  }
+  ) {}
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('productId');
@@ -60,11 +52,12 @@ export class PlaceOrderComponent implements OnInit {
         .subscribe(
           (data) => {
             this.product_item = data;
-            console.log(this.product_item);
+
             this.ownerId = this.product_item.ownerId;
             this.actualName = this.product_item.actualName;
             this.getOwnerInfo(this.ownerId);
-            this.getImage(this.actualName);
+            this.product_item.imageUrl =
+              this.imageBaseUrl + this.product_item.imageUrl;
             this.newOrder.ownerId = this.ownerId;
             this.newOrder.productId = this.product_item.id;
           },
@@ -73,6 +66,15 @@ export class PlaceOrderComponent implements OnInit {
     } else {
       console.log('Null Id: ', id);
     }
+
+    render({
+      id: '#myPaypalButtons',
+      currency: 'INR',
+      value: this.newOrder.total_amount.toString(),
+      onApprove: (details) => {
+        alert('Transection Successfull!!');
+      },
+    });
   }
 
   getOwnerInfo(ownerId: number) {
@@ -82,7 +84,6 @@ export class PlaceOrderComponent implements OnInit {
         .subscribe(
           (data) => {
             this.pickup_address = data;
-            console.log(data);
           },
           (error) => {
             console.log(error);
@@ -91,17 +92,11 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  getImage(name: string) {
-    this.productService.getImage(name + '.jpg').subscribe((data: any) => {
-      this.image = data;
-      this.image = 'data:image/png;base64,' + this.image.content;
-    });
-  }
-
   calculateTotalPrice(start: Date, end: Date) {
     let datedif = end.getDate() - start.getDate();
     let hourdif = end.getHours() - start.getHours();
     let minutedif = end.getMinutes() - start.getMinutes();
+    let monthdif = end.getMonth() - start.getMonth();
 
     let rent_mode = this.newOrder.rent_mode;
 
@@ -134,11 +129,11 @@ export class PlaceOrderComponent implements OnInit {
         );
       }
     } else {
-      if (hourdif <= 0) {
+      if (monthdif <= 0) {
         throw new Error('Less than a month is not allowed');
       } else {
         return (
-          ((this.newOrder.units * datedif) / 28) *
+          ((this.newOrder.units * monthdif) / 28) *
           this.product_item.pricePerMonth
         );
       }
