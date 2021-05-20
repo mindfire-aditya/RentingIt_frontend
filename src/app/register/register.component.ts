@@ -19,12 +19,12 @@ export class RegisterComponent implements OnInit {
   };
   private subscription1: any;
 
-  constructor(private signup: SignupService) {}
-  ngOnInit(): void {}
+  constructor(private signup: SignupService) { }
+  ngOnInit(): void { }
 
   //function for registering the user
   registerUser() {
-    //console.log("Form is submited!!");
+
     if (
       this.userDetails.username != '' &&
       this.userDetails.email != '' &&
