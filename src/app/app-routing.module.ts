@@ -7,6 +7,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-rent.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -145,6 +146,10 @@ const routes: Routes = [
           {
             path: 'remove',
             component: ProductDetailsComponent,
+          },
+          {
+            path: 'on-rent',
+            component: MyProductsOnRentComponent,
           },
         ],
       },

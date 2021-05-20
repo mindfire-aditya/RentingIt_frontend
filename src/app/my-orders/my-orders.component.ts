@@ -35,6 +35,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
         (data) => {
           this.orderedProducts = data.orders;
           this.showSpinner = false;
+          console.log(data);
         },
         (error) => {
           alert('Error fetching orders');

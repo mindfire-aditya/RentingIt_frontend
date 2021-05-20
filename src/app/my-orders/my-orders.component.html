@@ -7,17 +7,17 @@
     <div class="card">
       <div class="card-image">
         <a routerLink="product/product-details">
-          <img src="../../assets/images/bike-image.png" />
+          <img [src]="" />
         </a>
       </div>
     </div>
   </div>
   <div class="col s7 m10">
     <p>
-      Rent Starting Date :: {{ item.start_datetime | date }} <br />
-      Rent Ending Date :: {{ item.start_datetime | date }} <br />
-      Rent Mode :: {{ item.rent_mode }}<br />
-      Units :: {{ item.units }}<br />
+      Rent Starting Date - {{ item.start_datetime | date }} <br />
+      Rent Ending Date - {{ item.start_datetime | date }} <br />
+      Rent Mode - {{ item.rent_mode }}<br />
+      Units - {{ item.units }}<br />
       Total Amount :: {{ item.total_amount }}
     </p>
 
