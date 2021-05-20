@@ -28,6 +28,7 @@ export class PlaceOrderComponent implements OnInit {
   public image: any;
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
+  public showForm: boolean = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -70,15 +71,6 @@ export class PlaceOrderComponent implements OnInit {
     } else {
       console.log('Null Id: ', id);
     }
-
-    render({
-      id: '#myPaypalButtons',
-      currency: 'INR',
-      value: this.newOrder.total_amount.toString(),
-      onApprove: (details) => {
-        alert('Transection Successfull!!');
-      },
-    });
   }
 
   getOwnerInfo(ownerId: number) {
@@ -102,7 +94,48 @@ export class PlaceOrderComponent implements OnInit {
     let rent_mode = this.newOrder.rent_mode;
     this.newOrder.total_amount = 0;
 
-    console.log(diff, rent_mode);
+    switch (rent_mode) {
+      case 'per hour':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+        break;
+      case 'per day':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.days * this.product_item.pricePerDay;
+        break;
+      case 'per week':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.weeks * this.product_item.pricePerWeek;
+        break;
+      case 'per month':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.months * this.product_item.pricePerMonth;
+        break;
+      default:
+    }
+  }
+
+  onConfirm() {
+    this.showForm = false;
+    if (this.newOrder.total_amount) {
+      render({
+        id: '#myPaypalButtons',
+        currency: 'INR',
+        value: this.newOrder.total_amount.toString(),
+        onApprove: (details) => {
+          alert('Transaction Successfull!!');
+          this.placeOrderService.addOder(this.newOrder).subscribe(
+            (data) => {
+              console.log(data);
+              this.router.navigate(['user/my-orders']);
+            },
+            (error) => {
+              error(error);
+            }
+          );
+        },
+      });
+    }
   }
 
   dateTimeDifference(start: Date, end: Date) {
@@ -113,10 +146,10 @@ export class PlaceOrderComponent implements OnInit {
 
     let timeDiff = end.getTime() - start.getTime();
 
-    let days = Math.ceil(timeDiff / msInDay);
+    let days = Math.floor(timeDiff / msInDay);
     let hours = Math.ceil(timeDiff / (1000 * 3600));
-    let weeks = Math.floor(days / 7);
-    let months = Math.floor(days / 30);
+    let weeks = Math.ceil(days / 7);
+    let months = Math.ceil(days / 30);
 
     return {
       days: days,
@@ -127,25 +160,24 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   onSubmit() {
-    if (
-      this.newOrder.rent_mode != '' &&
-      this.newOrder.rent_mode != null &&
-      this.newOrder.terms_and_conditions != false
-    ) {
-      console.log(this.newOrder);
-
-      this.placeOrderService.addOder(this.newOrder).subscribe(
-        (data) => {
-          console.log(data);
-          this.router.navigate(['user/my-orders']);
-        },
-        (error) => {
-          error(error);
-        }
-      );
-    } else {
-      console.log('Fields are empty !!');
-    }
+    // if (
+    //   this.newOrder.rent_mode != '' &&
+    //   this.newOrder.rent_mode != null &&
+    //   this.newOrder.terms_and_conditions != false
+    // ) {
+    //   console.log(this.newOrder);
+    //   this.placeOrderService.addOder(this.newOrder).subscribe(
+    //     (data) => {
+    //       console.log(data);
+    //       this.router.navigate(['user/my-orders']);
+    //     },
+    //     (error) => {
+    //       error(error);
+    //     }
+    //   );
+    // } else {
+    //   console.log('Fields are empty !!');
+    // }
   }
 
   ngOnDestroy() {
