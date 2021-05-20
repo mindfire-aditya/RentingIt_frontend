@@ -5,7 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
-import { Order } from '../models/order';
+import { MyOrder } from '../models/my-order';
 import { Product } from '../models/product';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 
@@ -21,44 +21,40 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     private productService: ProductDetailsService
   ) {}
 
-  orderedProducts: Order[];
-  productList: Product[];
+  orderedProducts: MyOrder[] = [];
+  productList: Product[] = [];
   showSpinner: boolean = true;
+
+  imageBaseUrl =
+    'http://localhost:8080/rentingIt/product/resources/download-image/';
 
   private subscription1: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.orderedProducts = [];
-    this.productList = [];
     this.subscription1 = this.subscription1 =
       this.activatedRoute.data.subscribe(
         (data) => {
           this.orderedProducts = data.orders;
           this.showSpinner = false;
+          this.getProductDetailsFromOrder(this.orderedProducts);
         },
         (error) => {
           alert('Error fetching orders');
         }
       );
-
-    this.getProductsFromIds(this.orderedProducts);
   }
 
-  getProductsFromIds(orders: Order[]) {
-    const productIds = orders.map(({ productId }) => productId);
-
-    for (let id in productIds) {
-      this.productService
-        .getProductDetailById(Number(productIds[id]))
-        .subscribe(
-          (data) => {
-            this.productList.push(data);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    }
+  getProductDetailsFromOrder(orders: MyOrder[]) {
+    orders.forEach((item) => {
+      this.productService.getProductDetailById(item.productId).subscribe(
+        (data) => {
+          this.productList.push(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    });
   }
 
   sendDetails(item: any) {

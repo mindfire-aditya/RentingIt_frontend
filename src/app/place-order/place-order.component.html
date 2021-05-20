@@ -3,6 +3,7 @@
     <h6><b> Rent Now </b></h6>
   </div>
 </div>
+
 <div class="row">
   <div class="col s12 m4">
     <div class="card">
@@ -10,21 +11,41 @@
         <img [src]="product_item?.imageUrl" />
       </div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col s6 m8 description">
     <div class="row">
-      <div class="col m6">
-        <h5>{{ product_item?.productName }} {{ product_item?.actualName }}</h5>
+      <div class="col s12">
+        <h6><b>Pricing</b></h6>
+        <hr />
+      </div>
+      <div class="col s12">
+        per hour - <b>Rs.{{ product_item?.pricePerHour }}</b>
+      </div>
+      <div class="col s12">
+        per day - <b>Rs.{{ product_item?.pricePerDay }}</b>
+      </div>
+      <div class="col s12">
+        per week - <b>Rs.{{ product_item?.pricePerWeek }}</b>
+      </div>
+      <div class="col s12">
+        per month - <b>Rs.{{ product_item?.pricePerMonth }}</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <h6><b>Pickup address</b></h6>
+        <hr />
+      </div>
+      <div class="col s12">
+        <address>
+          House no.{{ pickup_address?.houseNo }}, {{ pickup_address?.lane }} ,
+          Street no.{{ pickup_address?.streetNo }}, near
+          {{ pickup_address?.landmark }} , {{ pickup_address?.city }},
+          {{ pickup_address?.district }} , {{ pickup_address?.state }}, PO -
+          {{ pickup_address?.pincode }}
+        </address>
       </div>
     </div>
   </div>
-</div>
-
-<!--Place order form-->
-<div class="row">
-  <form class="col s12 m6" (submit)="onSubmit()" #rentForm="ngForm">
+  <form class="col s12 m5 offset-m1" (submit)="onSubmit()" #rentForm="ngForm">
     <div class="row">
       <h6><b>Rent Details</b></h6>
       <hr />
@@ -174,35 +195,4 @@
     </div>
     <div class="row" id="myPaypalButtons"></div>
   </form>
-  <div class="col m3 offset-m2">
-    <div class="row">
-      <h6><b>Pricing</b></h6>
-      <hr />
-      <div class="col s12">
-        per hour - <b>Rs.{{ product_item?.pricePerHour }}</b>
-      </div>
-      <div class="col s12">
-        per day - <b>Rs.{{ product_item?.pricePerDay }}</b>
-      </div>
-      <div class="col s12">
-        per week - <b>Rs.{{ product_item?.pricePerWeek }}</b>
-      </div>
-      <div class="col s12">
-        per month - <b>Rs.{{ product_item?.pricePerMonth }}</b>
-      </div>
-    </div>
-    <div class="row">
-      <h6><b>Pickup address</b></h6>
-      <hr />
-      <div class="col s12">
-        <address>
-          House no.{{ pickup_address?.houseNo }}, {{ pickup_address?.lane }} ,
-          Street no.{{ pickup_address?.streetNo }}, near
-          {{ pickup_address?.landmark }} , {{ pickup_address?.city }},
-          {{ pickup_address?.district }} , {{ pickup_address?.state }}, PO -
-          {{ pickup_address?.pincode }}
-        </address>
-      </div>
-    </div>
-  </div>
 </div>

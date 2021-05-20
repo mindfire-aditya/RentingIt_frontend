@@ -40,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-rent.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProductSubCategoryComponent,
     LoadingSpinnerComponent,
     CheckoutComponent,
+    MyProductsOnRentComponent,
   ],
   imports: [
     BrowserModule,
