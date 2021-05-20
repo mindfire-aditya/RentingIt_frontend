@@ -1,11 +1,14 @@
 <div class="navbar-fixed">
   <ul id="dropdown1" class="dropdown-content">
-    <li *ngFor="let item of parentCategories">
-      <a [routerLink]="['/categories/', item.toLowerCase()]">{{ item }}</a>
-    </li>
+    <li><a routerLink="/categories/appliances">Appliances</a></li>
+    <li><a (click) = "getBikeProducts()" routerLink="/categories/bikes">Bikes</a></li>
+    <li><a routerLink="/categories/cars">Cars</a></li>
+    <li><a routerLink="/categories/electronics">Electronics</a></li>
+    <li><a routerLink="/categories/furnitures">Furnitures</a></li>
+    <li><a routerLink="/categories/machines">Machines</a></li>
     <li><a routerLink="/categories/all">Show all</a></li>
   </ul>
-  <ul id="dropdown2" class="dropdown-content">
+  <ul id="dropdown2" class="dropdown-content" >
     <li><a routerLink="/user/my-orders">My Orders</a></li>
     <li><a routerLink="/user/my-products">My Products</a></li>
     <li><a routerLink="/user/my-profile">My Profile</a></li>
