@@ -47,17 +47,17 @@
       <div class="col s12 input-field">
         <select
           #rent_mode="ngModel"
-          class="validate"
+          class="validate browser-default"
           id="rent_mode"
           [(ngModel)]="newOrder.rent_mode"
           name="rent_mode"
           required
         >
           <option value="" disabled selected>Choose rent mode</option>
-          <option value="per hour">per hour</option>
-          <option value="per day">per day</option>
-          <option value="per week">per week</option>
-          <option value="per month">per month</option>
+          <option value="per hour">Hourly</option>
+          <option value="per day">Daily</option>
+          <option value="per week">Weekly</option>
+          <option value="per month">Monthly</option>
         </select>
         <small *ngIf="rent_mode.invalid" style="color: red"
           >Please select a rent mode</small
