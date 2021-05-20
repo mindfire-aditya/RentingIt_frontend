@@ -1,20 +1,15 @@
 <div class="col s6 m5">
   <div class="card">
     <div class="card-image">
-      <img [src]="product_item?.imageUrl" alt="bike" />
+      <img [src]="product_item?.imageUrl" alt="productImage" />
     </div>
   </div>
 </div>
 <div class="col s6 m6 offset-m1 description">
   <div class="row">
-    <h4>{{ product_item?.productName }} {{ product_item?.actualName }}</h4>
+    <h4>{{ product_item?.actualName }}{{" "}}{{product_item?.productName}}</h4>
     <div class="rating">Rating 4/5 (100)</div>
-    <a
-      class="waves-effect btn"
-      (click)="onClickGoToPlaceOrder()"
-      style="text-align: center"
-      >Get on rent</a
-    >
+    <a class="waves-effect btn" (click)="onClickGoToPlaceOrder()" style="text-align: center">Buy On Rent</a>
   </div>
   <div class="row details">
     <h6>General Details</h6>
