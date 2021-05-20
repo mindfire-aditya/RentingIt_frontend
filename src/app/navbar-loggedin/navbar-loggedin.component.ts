@@ -40,7 +40,7 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     private userInfoStore: UserInfoStoreService,
     private placeOrderService: PlaceOrderService,
     private categoryService: CategoryService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.subscription1 = new Subscription();
@@ -104,6 +104,8 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
 
   logoutUser() {
     this.loginService.logout();
+    //location.reload()
+    // window.location.href = '/home';
     this.loggedIn = false;
     localStorage.setItem('loggedIn', this.loggedIn);
     window.location.href = '/login';
