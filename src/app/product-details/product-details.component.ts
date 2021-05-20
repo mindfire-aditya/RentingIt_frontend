@@ -17,7 +17,7 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private userDetailService: UserDetailService,
     private router: Router
-  ) {}
+  ) { }
 
   product_item: Product;
   pickup_address: any;
