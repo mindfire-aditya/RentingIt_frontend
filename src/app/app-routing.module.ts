@@ -148,7 +148,7 @@ const routes: Routes = [
             component: ProductDetailsComponent,
           },
           {
-            path: 'on-rent',
+            path: 'rent-history/:productId',
             component: MyProductsOnRentComponent,
           },
         ],

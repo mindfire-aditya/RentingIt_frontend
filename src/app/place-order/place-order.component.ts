@@ -8,6 +8,8 @@ import { ProductService } from '../services/products/product.service';
 import { UserDetailService } from '../services/userDetail/user-detail.service';
 import { render } from 'creditcardpayments/creditCardPayments';
 import { Product } from '../models/product';
+import { MyOrder } from '../models/my-order';
+import { MyOrdersService } from '../services/my-orders/my-orders.service';
 
 @Component({
   selector: 'app-place-order',
@@ -15,6 +17,16 @@ import { Product } from '../models/product';
   styleUrls: ['./place-order.component.css'],
 })
 export class PlaceOrderComponent implements OnInit {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private userDetailService: UserDetailService,
+    private placeOrderService: PlaceOrderService,
+    private myOrdersService: MyOrdersService,
+    private router: Router
+  ) {}
+
+  ordersListByProductId: MyOrder[] = [];
   newOrder: Order;
   product_item: Product;
   pickup_address: any;
@@ -29,30 +41,22 @@ export class PlaceOrderComponent implements OnInit {
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private productService: ProductService,
-    private userDetailService: UserDetailService,
-    private placeOrderService: PlaceOrderService,
-    private router: Router
-  ) {}
-
   ngOnInit(): void {
     this.today = new Date().toISOString();
     let rem = this.today.split(':');
     rem.pop();
     this.today = rem.join(':');
 
-    let id = this.activatedRoute.snapshot.paramMap.get('productId');
+    let productId = this.activatedRoute.snapshot.paramMap.get('productId');
     this.newOrder = new Order(0, 0, 0, '', 1, new Date(), new Date(), true, 0);
 
     let customerId = Number(localStorage.getItem('id'));
 
     this.newOrder.customerId = customerId;
 
-    if (id !== null) {
+    if (productId !== null) {
       this.subscription1 = this.subscription1 = this.productService
-        .getProductById(parseInt(id))
+        .getProductById(parseInt(productId))
         .subscribe(
           (data) => {
             this.product_item = data;
@@ -68,9 +72,17 @@ export class PlaceOrderComponent implements OnInit {
           (error) => console.log(error)
         );
     } else {
-      console.log('Null Id: ', id);
+      console.log('Null Id: ', productId);
     }
 
+    //placed orders of the product to check availibilty
+    this.myOrdersService
+      .getOrdersByProductId(Number(productId))
+      .subscribe((data) => {
+        console.log('orders of product:', data);
+      });
+
+    //paypal render method
     render({
       id: '#myPaypalButtons',
       currency: 'INR',
@@ -150,20 +162,57 @@ export class PlaceOrderComponent implements OnInit {
       this.newOrder.rent_mode != null &&
       this.newOrder.terms_and_conditions != false
     ) {
-      console.log(this.newOrder);
-
-      this.placeOrderService.addOder(this.newOrder).subscribe(
-        (data) => {
-          console.log(data);
-          this.router.navigate(['user/my-orders']);
-        },
-        (error) => {
-          error(error);
-        }
+      this.newOrder.terms_and_conditions = this.checkProductAvailibilty(
+        this.newOrder.start_datetime,
+        this.newOrder.end_datetime
       );
+
+      console.log(this.newOrder.terms_and_conditions);
+
+      // this.placeOrderService.addOder(this.newOrder).subscribe(
+      //   (data) => {
+      //     console.log(data);
+      //     this.router.navigate(['user/my-orders']);
+      //   },
+      //   (error) => {
+      //     error(error);
+      //   }
+      // );
     } else {
       console.log('Fields are empty !!');
     }
+  }
+
+  checkProductAvailibilty(start: Date, end: Date): boolean {
+    console.log(start);
+    console.log(end);
+
+    start = new Date(start);
+    end = new Date(end);
+
+    let startTimeInMs = start.getTime();
+    let endTimeInMs = end.getTime();
+
+    let startAvailibilty = true;
+    let endAvailibilty = true;
+
+    for (let i in this.ordersListByProductId) {
+      if (
+        this.ordersListByProductId[i].rentEndDate.getTime() <= startTimeInMs
+      ) {
+        startAvailibilty = false;
+        break;
+      }
+
+      if (
+        this.ordersListByProductId[i].rentStartDate.getTime() >= endTimeInMs
+      ) {
+        endAvailibilty = false;
+        break;
+      }
+    }
+
+    return startAvailibilty && endAvailibilty;
   }
 
   ngOnDestroy() {

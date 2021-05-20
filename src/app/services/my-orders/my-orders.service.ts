@@ -13,4 +13,16 @@ export class MyOrdersService {
   getOrderById(id: number) {
     return this.http.get<MyOrder>(`${this.baseUrl}/order/${id}`);
   }
+
+  getMyProductsOnRent(userId: number) {
+    return this.http.get<MyOrder[]>(
+      `${this.baseUrl}/order/my-products-on-rent/${userId}`
+    );
+  }
+
+  getOrdersByProductId(productId: number) {
+    return this.http.get<MyOrder[]>(
+      `${this.baseUrl}/order/orders-by-product-id/${productId}`
+    );
+  }
 }

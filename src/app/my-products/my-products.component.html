@@ -1,7 +1,7 @@
 <h6><b>My Products</b></h6>
 <hr />
 <div class="row" *ngFor="let item of userProducts">
-  <div class="col s5 m2">
+  <div class="col s5 m3">
     <div class="card">
       <div class="card-image">
         <a routerLink="product/product-details">
@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="col s4 m3">
+  <div class="col s4 m4">
     <h5>{{ item.productName }}</h5>
 
     <p>
@@ -19,17 +19,17 @@
       Rs.{{ item.pricePerWeek }}/week <br />
       Rs.{{ item.pricePerWeek }}/month <br />
     </p>
-    <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
-    <a (click)="onRemove(item.id)" class="waves-effect waves-light btn"
-      >Remove</a
-    >
-  </div>
-  <div class="col s3 m5">
-    <p>
-      Pincode : {{ item.pinCode }} <br />
-      Status : {{ item.assetStatus | uppercase }} <br />
-      Units: {{ item.units }}
-    </p>
+    <div class="row">
+      <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
+      <a (click)="onRemove(item.id)" class="waves-effect waves-light btn"
+        >Remove</a
+      >
+      <a
+        [routerLink]="['rent-history', item.id]"
+        class="waves-effect waves-light btn"
+        >Rent history</a
+      >
+    </div>
   </div>
 </div>
 <hr />
