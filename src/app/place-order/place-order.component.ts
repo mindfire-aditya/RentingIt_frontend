@@ -102,50 +102,27 @@ export class PlaceOrderComponent implements OnInit {
     let rent_mode = this.newOrder.rent_mode;
     this.newOrder.total_amount = 0;
 
-    if (rent_mode == 'per hour') {
-      if (diff.hourdif <= 0 && diff.datedif <= 0) {
-        alert('Please select atleast an hour within the month');
-      } else {
-        this.newOrder.total_amount =
-          (diff.hourdif + diff.datedif * 24) *
-          this.product_item.pricePerHour *
-          this.newOrder.units;
-      }
-    } else if (rent_mode == 'per day') {
-      if (diff.datedif <= 0 && diff.monthdif <= 0) {
-        alert('Please select atleast a day');
-      } else {
-        this.newOrder.total_amount =
-          (diff.datedif + diff.monthdif * 28) *
-          this.product_item.pricePerDay *
-          this.newOrder.units;
-      }
-    } else if (rent_mode == 'per week') {
-      if (diff.datedif / 7 <= 0 && diff.monthdif <= 0) {
-        throw new Error('Less than a week is not allowed');
-      } else {
-      }
-    } else {
-      if (diff.monthdif <= 0) {
-        throw new Error('Less than a month is not allowed');
-      } else {
-      }
-    }
+    console.log(diff, rent_mode);
   }
 
   dateTimeDifference(start: Date, end: Date) {
     start = new Date(start);
     end = new Date(end);
 
-    let datedif = end.getDate() - start.getDate();
-    let hourdif = end.getHours() - start.getHours();
-    let minutedif = end.getMinutes() - start.getMinutes();
-    let monthdif = end.getMonth() + 1 - start.getMonth() + 1;
+    let msInDay = 1000 * 3600 * 24;
+
+    let timeDiff = end.getTime() - start.getTime();
+
+    let days = Math.ceil(timeDiff / msInDay);
+    let hours = Math.ceil(timeDiff / (1000 * 3600));
+    let weeks = Math.floor(days / 7);
+    let months = Math.floor(days / 30);
 
     return {
-      datedif: datedif,
-      monthdif: monthdif,
-      hourdif: hourdif,
+      days: days,
+      months: months,
+      hours: hours,
+      weeks: weeks,
     };
   }
 
