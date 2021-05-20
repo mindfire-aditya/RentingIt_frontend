@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MyOrder } from '../models/my-order';
+import { Product } from '../models/product';
 import { DataTransferService } from '../services/DataTransfer/data-transfer.service';
+import { MyOrdersService } from '../services/my-orders/my-orders.service';
+import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 import { ProductService } from '../services/products/product.service';
 
 @Component({
@@ -13,31 +17,17 @@ export class OrderDetailsComponent implements OnInit {
   name12!: string;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private myOrdersService: MyOrdersService
   ) {}
 
-  order_item: any;
-  pro_id: any;
+  order_item: MyOrder;
+  orderedProduct: Product;
+
   imageBaseUrl =
     'http://localhost:8080/rentingIt/product/resources/download-image/';
 
-  public product_item = {
-    actualName: '',
-    assetDescription: '',
-    assetStatus: '',
-    categoryId: 0,
-    id: 0,
-    imageUrl: '',
-    maintainanceTime: '',
-    ownerId: 0,
-    pinCode: 123313,
-    pricePerDay: 2000,
-    pricePerHour: 50,
-    pricePerMonth: 10000,
-    pricePerWeek: 5000,
-    productName: '',
-    units: 2,
-  };
+  public product_item: Product;
 
   private subscription1: Subscription;
   private subscription2: Subscription;
@@ -46,21 +36,17 @@ export class OrderDetailsComponent implements OnInit {
     this.subscription1 = new Subscription();
     this.subscription2 = new Subscription();
 
-    let orderId = this.activatedRoute.snapshot.paramMap.get('orderId');
-  }
-  getDetails(id: number) {
-    this.subscription1 = this.productService.getProductById(id).subscribe(
-      (d_data) => {
-        this.product_item.actualName = d_data.actualName;
-        this.name12 = d_data.actualName;
-        this.product_item.assetDescription = d_data.assetDescription;
-        this.product_item.imageUrl =
-          this.imageBaseUrl + this.product_item.imageUrl;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    let orderId = Number(this.activatedRoute.snapshot.paramMap.get('orderId'));
+
+    this.myOrdersService.getOrderById(orderId).subscribe((data) => {
+      this.order_item = data;
+
+      this.productService.getProductById(data.productId).subscribe((data) => {
+        this.orderedProduct = data;
+        this.orderedProduct.imageUrl =
+          this.imageBaseUrl + this.orderedProduct.imageUrl;
+      });
+    });
   }
 
   ngDestroy() {

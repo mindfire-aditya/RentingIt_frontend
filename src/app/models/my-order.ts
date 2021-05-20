@@ -1,5 +1,6 @@
 export class MyOrder {
   constructor(
+    public id: number,
     public ownerId: number,
     public productId: number,
     public customerId: number,

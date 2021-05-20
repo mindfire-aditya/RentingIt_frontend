@@ -57,8 +57,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendDetails(item: any) {
-    this.router.navigate(['user/my-orders/order-details', item.productId]);
+  sendDetails(item: MyOrder) {
+    this.router.navigate(['user/my-orders/order-details', item.id]);
   }
 
   ngOnDestroy() {
