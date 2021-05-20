@@ -35,7 +35,7 @@ export class PlaceOrderComponent implements OnInit {
     private userDetailService: UserDetailService,
     private placeOrderService: PlaceOrderService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.today = new Date().toISOString();
@@ -74,7 +74,7 @@ export class PlaceOrderComponent implements OnInit {
     render({
       id: '#myPaypalButtons',
       currency: 'INR',
-      value: this.newOrder.total_amount.toString(),
+      value: '100',
       onApprove: (details) => {
         alert('Transection Successfull!!');
       },
