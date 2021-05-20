@@ -102,7 +102,25 @@ export class PlaceOrderComponent implements OnInit {
     let rent_mode = this.newOrder.rent_mode;
     this.newOrder.total_amount = 0;
 
-    console.log(diff, rent_mode);
+    switch (rent_mode) {
+      case 'per hour':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+        break;
+      case 'per day':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.days * this.product_item.pricePerDay;
+        break;
+      case 'per week':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.weeks * this.product_item.pricePerWeek;
+        break;
+      case 'per month':
+        this.newOrder.total_amount =
+          this.newOrder.units * diff.months * this.product_item.pricePerMonth;
+        break;
+      default:
+    }
   }
 
   dateTimeDifference(start: Date, end: Date) {

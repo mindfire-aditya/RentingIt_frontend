@@ -28,6 +28,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   private subscription1: Subscription = new Subscription();
 
   ngOnInit(): void {
+    this.orderedProducts = [];
+    this.productList = [];
     this.subscription1 = this.subscription1 =
       this.activatedRoute.data.subscribe(
         (data) => {
