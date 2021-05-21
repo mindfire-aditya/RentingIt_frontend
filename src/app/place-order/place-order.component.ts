@@ -24,7 +24,7 @@ export class PlaceOrderComponent implements OnInit {
     private placeOrderService: PlaceOrderService,
     private myOrdersService: MyOrdersService,
     private router: Router
-  ) {}
+  ) { }
 
   ordersListByProductId: MyOrder[] = [];
   newOrder: Order;
@@ -89,7 +89,7 @@ export class PlaceOrderComponent implements OnInit {
       value: this.newOrder.total_amount.toString(),
       onApprove: (details) => {
         alert('Transection Successfull!!');
-      },
+      }
     });
   }
 
