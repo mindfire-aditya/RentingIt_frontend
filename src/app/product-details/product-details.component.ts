@@ -22,6 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   product_item: Product;
   pickup_address: any;
   ownerId: any;
+  userId: number = Number(localStorage.getItem('id'));
 
   imageBaseUrl =
     'http://localhost:8080/rentingIt/product/resources/download-image/';

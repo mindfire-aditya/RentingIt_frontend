@@ -10,12 +10,20 @@
     <h4>
       {{ product_item?.actualName }}{{ " " }}{{ product_item?.productName }}
     </h4>
-    <div class="rating">Rating 4/5 (100)</div>
+
     <a
+      *ngIf="product_item?.ownerId !== userId"
       class="waves-effect btn"
       (click)="onClickGoToPlaceOrder()"
       style="text-align: center"
       >Buy On Rent</a
+    >
+    <a
+      *ngIf="product_item?.ownerId === userId"
+      class="waves-effect btn"
+      [routerLink]="['/user/my-products/rent-history', product_item?.id]"
+      style="text-align: center"
+      >Rent history</a
     >
   </div>
   <div class="row details">

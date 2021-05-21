@@ -38,6 +38,8 @@ export class PlaceOrderComponent implements OnInit {
 
   today: string;
   public image: any;
+  isAvailable: boolean = true;
+  showText: boolean = false;
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
 
@@ -79,7 +81,7 @@ export class PlaceOrderComponent implements OnInit {
     this.myOrdersService
       .getOrdersByProductId(Number(productId))
       .subscribe((data) => {
-        console.log('orders of product:', data);
+        this.ordersListByProductId = data;
       });
 
     //paypal render method
@@ -89,6 +91,7 @@ export class PlaceOrderComponent implements OnInit {
       value: this.newOrder.total_amount.toString(),
       onApprove: (details) => {
         alert('Transection Successfull!!');
+        this.onSubmit();
       },
     });
   }
@@ -109,29 +112,77 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   calculateTotalPrice(start: Date, end: Date) {
-    let diff = this.dateTimeDifference(start, end);
+    if (
+      this.checkProductAvailibilty(
+        this.newOrder.start_datetime,
+        this.newOrder.end_datetime
+      )
+    ) {
+      this.showText = true;
+      this.isAvailable = true;
+      let diff = this.dateTimeDifference(start, end);
 
-    let rent_mode = this.newOrder.rent_mode;
-    this.newOrder.total_amount = 0;
+      let rent_mode = this.newOrder.rent_mode;
+      this.newOrder.total_amount = 0;
+      let price = 0;
+      switch (rent_mode) {
+        case 'per hour':
+          price =
+            this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+          if (price <= 0) {
+            alert('Please select appropriate Start and End datetime.');
+            this.newOrder.total_amount = 0;
+          } else {
+            this.newOrder.total_amount =
+              this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+          }
 
-    switch (rent_mode) {
-      case 'per hour':
-        this.newOrder.total_amount =
-          this.newOrder.units * diff.hours * this.product_item.pricePerHour;
-        break;
-      case 'per day':
-        this.newOrder.total_amount =
-          this.newOrder.units * diff.days * this.product_item.pricePerDay;
-        break;
-      case 'per week':
-        this.newOrder.total_amount =
-          this.newOrder.units * diff.weeks * this.product_item.pricePerWeek;
-        break;
-      case 'per month':
-        this.newOrder.total_amount =
-          this.newOrder.units * diff.months * this.product_item.pricePerMonth;
-        break;
-      default:
+          break;
+
+        case 'per day':
+          price =
+            this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+          if (price <= 0) {
+            alert('Please select appropriate Start and End datetime.');
+            this.newOrder.total_amount = 0;
+          } else {
+            this.newOrder.total_amount =
+              this.newOrder.units * diff.days * this.product_item.pricePerDay;
+          }
+
+          break;
+
+        case 'per week':
+          price =
+            this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+          if (price <= 0) {
+            alert('Please select appropriate Start and End datetime.');
+            this.newOrder.total_amount = 0;
+          } else {
+            this.newOrder.total_amount =
+              this.newOrder.units * diff.weeks * this.product_item.pricePerWeek;
+          }
+
+          break;
+
+        case 'per month':
+          price =
+            this.newOrder.units * diff.hours * this.product_item.pricePerHour;
+          if (price <= 0) {
+            alert('Please select appropriate Start and End datetime.');
+            this.newOrder.total_amount = 0;
+          } else {
+            this.newOrder.total_amount =
+              this.newOrder.units *
+              diff.months *
+              this.product_item.pricePerMonth;
+          }
+          break;
+        default:
+      }
+    } else {
+      this.showText = true;
+      this.isAvailable = false;
     }
   }
 
@@ -162,57 +213,48 @@ export class PlaceOrderComponent implements OnInit {
       this.newOrder.rent_mode != null &&
       this.newOrder.terms_and_conditions != false
     ) {
-      this.newOrder.terms_and_conditions = this.checkProductAvailibilty(
-        this.newOrder.start_datetime,
-        this.newOrder.end_datetime
-      );
-
-      console.log(this.newOrder.terms_and_conditions);
-
-      // this.placeOrderService.addOder(this.newOrder).subscribe(
-      //   (data) => {
-      //     console.log(data);
-      //     this.router.navigate(['user/my-orders']);
-      //   },
-      //   (error) => {
-      //     error(error);
-      //   }
-      // );
+      if (this.isAvailable) {
+        this.placeOrderService.addOder(this.newOrder).subscribe(
+          (data) => {
+            console.log(data);
+            this.router.navigate(['user/my-orders']);
+          },
+          (error) => {
+            error(error);
+          }
+        );
+      } else {
+        this.isAvailable = false;
+      }
     } else {
-      console.log('Fields are empty !!');
+      alert('Please fill all the fields');
     }
   }
 
   checkProductAvailibilty(start: Date, end: Date): boolean {
-    console.log(start);
-    console.log(end);
-
     start = new Date(start);
     end = new Date(end);
-
     let startTimeInMs = start.getTime();
     let endTimeInMs = end.getTime();
 
-    let startAvailibilty = true;
-    let endAvailibilty = true;
-
     for (let i in this.ordersListByProductId) {
       if (
-        this.ordersListByProductId[i].rentEndDate.getTime() <= startTimeInMs
+        new Date(this.ordersListByProductId[i].rentEndDate).getTime() -
+          startTimeInMs >=
+        0
       ) {
-        startAvailibilty = false;
-        break;
+        return false;
       }
-
       if (
-        this.ordersListByProductId[i].rentStartDate.getTime() >= endTimeInMs
+        endTimeInMs -
+          new Date(this.ordersListByProductId[i].rentStartDate).getTime() <=
+        0
       ) {
-        endAvailibilty = false;
-        break;
+        return false;
       }
     }
 
-    return startAvailibilty && endAvailibilty;
+    return true;
   }
 
   ngOnDestroy() {
