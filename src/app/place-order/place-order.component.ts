@@ -83,17 +83,6 @@ export class PlaceOrderComponent implements OnInit {
       .subscribe((data) => {
         this.ordersListByProductId = data;
       });
-
-    //paypal render method
-    render({
-      id: '#myPaypalButtons',
-      currency: 'INR',
-      value: this.newOrder.total_amount.toString(),
-      onApprove: (details) => {
-        alert('Transection Successfull!!');
-        this.onSubmit();
-      },
-    });
   }
 
   getOwnerInfo(ownerId: number) {
@@ -180,6 +169,16 @@ export class PlaceOrderComponent implements OnInit {
           break;
         default:
       }
+
+      render({
+        id: '#myPaypalButtons',
+        currency: 'INR',
+        value: this.newOrder.total_amount.toString(),
+        onApprove: (details) => {
+          alert('Transection Successfull!!');
+          this.onSubmit();
+        },
+      });
     } else {
       this.showText = true;
       this.isAvailable = false;
