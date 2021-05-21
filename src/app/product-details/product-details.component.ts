@@ -45,7 +45,6 @@ export class ProductDetailsComponent implements OnInit {
             this.getOwnerInfo(this.ownerId);
             this.product_item.imageUrl =
               this.imageBaseUrl + this.product_item.imageUrl;
-            console.log('Product Details ', id);
           },
           (error) => console.log(error)
         );

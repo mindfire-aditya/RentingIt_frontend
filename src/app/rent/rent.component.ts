@@ -10,7 +10,8 @@ import { NewProduct } from '../models/new-product';
 import { CategoryService } from '../services/category/category.service';
 import { ProductDetailsService } from '../services/productDetails/product-details.service';
 import { ProductService } from '../services/products/product.service';
-import { FormGroup, FormBuilder, Validator } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-rent',
@@ -18,33 +19,35 @@ import { FormGroup, FormBuilder, Validator } from '@angular/forms';
   styleUrls: ['./rent.component.css'],
 })
 export class RentComponent implements OnInit {
+  constructor(
+    private registerProductsService: ProductDetailsService,
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
   public newProduct: NewProduct;
   public imageFile: any;
   public allCategories: Category[];
   public parentCategories: any;
   public childCategories: string[];
   public imageUploadResponse: ImageUploadResponse;
-
-  myForm: FormGroup;
-
+  public myProduct: Product;
   private subscription1: Subscription;
   private subscription2: Subscription;
   private subscription3: Subscription;
-
-  constructor(
-    private registerProductsService: ProductDetailsService,
-    private productService: ProductService,
-    private categoryService: CategoryService,
-    private router: Router,
-    private fb: FormBuilder
-  ) {}
+  public productId: number;
 
   ngOnInit(): void {
-    this.myForm = this.fb.group({});
     this.allCategories = [];
 
     this.subscription2 = new Subscription();
     this.subscription1 = new Subscription();
+
+    this.productId = Number(
+      this.activatedRoute.snapshot.paramMap.get('productId')
+    );
 
     this.newProduct = new NewProduct(
       '',
@@ -63,6 +66,12 @@ export class RentComponent implements OnInit {
       1,
       Number(localStorage.getItem('id'))
     );
+
+    if (this.productId) {
+      this.productService.getProductById(this.productId).subscribe((data) => {
+        this.newProduct = data;
+      });
+    }
 
     this.subscription3 = this.categoryService.getAllCategories().subscribe(
       (data) => {
@@ -87,31 +96,83 @@ export class RentComponent implements OnInit {
     if (this.newProduct.productName != '' && this.newProduct.actualName != '') {
       //image upload
 
-      this.subscription1 = this.productService.upload(this.imageFile).subscribe(
-        (res) => {
-          this.imageUploadResponse = res;
+      if (this.productId) {
+        this.updateProduct(this.productId, this.newProduct);
+        return;
+      } else {
+        this.subscription1 = this.productService
+          .upload(this.imageFile)
+          .subscribe(
+            (res) => {
+              this.imageUploadResponse = res;
 
-          this.newProduct.imageUrl = this.imageUploadResponse.fileName;
+              this.newProduct.imageUrl = this.imageUploadResponse.fileName;
 
-          this.subscription2 = this.registerProductsService
-            .addProducts(this.newProduct)
-            .subscribe(
-              (res) => {
-                this.router.navigate(['/user/my-products']);
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-        },
-        (error) => {
-          console.log(error);
-          alert('Product registration unsuccessfull. Please try again');
-        }
-      );
+              this.subscription2 = this.registerProductsService
+                .addProducts(this.newProduct)
+                .subscribe(
+                  (res) => {
+                    this.router.navigate(['/user/my-products']);
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+            },
+            (error) => {
+              console.log(error);
+              alert('Product registration unsuccessfull. Please try again');
+            }
+          );
+      }
     } else {
       console.log('Fields are empty !!');
     }
+
+    console.log(this.newProduct);
+  }
+
+  updateProduct(id: number, payload: NewProduct) {
+    if (this.imageFile?.name) {
+      this.productService.upload(this.imageFile).subscribe((res) => {
+        this.imageUploadResponse = res;
+
+        this.newProduct.imageUrl = this.imageUploadResponse.fileName;
+
+        this.productService
+          .updateProduct(this.productId, this.newProduct)
+          .subscribe(
+            (data) => {
+              this.router.navigate(['/user/my-products']);
+            },
+            (err) => {
+              alert('Product update failed, please try again.');
+            }
+          );
+      });
+    } else {
+      this.productService
+        .updateProduct(this.productId, this.newProduct)
+        .subscribe(
+          (data) => {
+            this.router.navigate(['/user/my-products']);
+          },
+          (err) => {
+            alert('Product update failed, please try again.');
+          }
+        );
+    }
+
+    this.productService
+      .updateProduct(this.productId, this.newProduct)
+      .subscribe(
+        (data) => {
+          alert('Product Updated');
+        },
+        (err) => {
+          alert('Product update failed, please try again.');
+        }
+      );
   }
 
   onSelectCategory(category: any) {
@@ -140,7 +201,7 @@ export class RentComponent implements OnInit {
     });
   }
 
-  onChange(event: any) {
+  onChange(event: any, file: any) {
     this.imageFile = event.target.files[0];
   }
 

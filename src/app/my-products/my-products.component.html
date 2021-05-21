@@ -4,7 +4,7 @@
   <div class="col s5 m3">
     <div class="card">
       <div class="card-image">
-        <a routerLink="product/product-details">
+        <a [routerLink]="['product-details', item.id]">
           <img [src]="item.imageUrl" />
         </a>
       </div>
@@ -20,7 +20,9 @@
       Rs.{{ item.pricePerWeek }}/month <br />
     </p>
     <div class="row">
-      <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
+      <a [routerLink]="['edit', item.id]" class="waves-effect waves-light btn"
+        >Edit</a
+      >
       <a (click)="onRemove(item.id)" class="waves-effect waves-light btn"
         >Remove</a
       >

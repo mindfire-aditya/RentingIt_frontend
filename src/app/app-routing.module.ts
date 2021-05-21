@@ -140,8 +140,8 @@ const routes: Routes = [
             component: ProductDetailsComponent,
           },
           {
-            path: 'edit',
-            component: ProductDetailsComponent,
+            path: 'edit/:productId',
+            component: RentComponent,
           },
           {
             path: 'remove',

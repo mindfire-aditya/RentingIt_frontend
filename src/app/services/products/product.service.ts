@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ImageUploadResponse } from 'src/app/models/image-upload-response';
 import { Category } from 'src/app/models/category';
+import { NewProduct } from 'src/app/models/new-product';
 
 @Injectable({
   providedIn: 'root',
@@ -88,6 +89,13 @@ export class ProductService {
   getProductsByParentCategoryId(id: number) {
     return this.http.get<Product[]>(
       `${this.baseUrl}/product/category/parentId/${id}`
+    );
+  }
+
+  updateProduct(id: number, payload: NewProduct) {
+    return this.http.put(
+      `${this.baseUrl}/product/update-registered-products/${id}`,
+      payload
     );
   }
 }

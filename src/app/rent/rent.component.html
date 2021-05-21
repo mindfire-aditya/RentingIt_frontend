@@ -172,8 +172,9 @@
             <div class="btn">
               <span>Product Image</span>
               <input
+                #file
                 type="file"
-                (change)="onChange($event)"
+                (change)="onChange($event, file)"
                 name="imageUrl"
                 id="imageUrl"
               />
@@ -194,7 +195,8 @@
             name="action"
             style="background-color: #3f88df; font-weight: bold"
           >
-            Register Product
+            <span *ngIf="!productId">Register Product</span>
+            <span *ngIf="productId">Update Product</span>
           </button>
         </div>
       </div>
