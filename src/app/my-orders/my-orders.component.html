@@ -6,7 +6,7 @@
   <div class="col s5 m2">
     <div class="card">
       <div class="card-image">
-        <a routerLink="product/product-details">
+        <a [routerLink]="['order-details']">
           <img [src]="imageBaseUrl + productList[i]?.imageUrl" />
         </a>
       </div>

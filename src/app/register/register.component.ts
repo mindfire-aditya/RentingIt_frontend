@@ -2,6 +2,8 @@
  * @author Aditya Sahu
  */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SignupService } from '../services/signupService/signup.service';
 
 @Component({
@@ -17,14 +19,13 @@ export class RegisterComponent implements OnInit {
     password: '',
     role: ['user'],
   };
-  private subscription1: any;
+  private subscription1: Subscription = new Subscription();
 
-  constructor(private signup: SignupService) { }
-  ngOnInit(): void { }
+  constructor(private signup: SignupService, private router: Router) {}
+  ngOnInit(): void {}
 
   //function for registering the user
   registerUser() {
-
     if (
       this.userDetails.username != '' &&
       this.userDetails.email != '' &&
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
         (response: any) => {
           //success
           console.log(response);
-          window.location.href = '/login';
+          this.router.navigate(['/login']);
         },
         (error: any) => {
           //error

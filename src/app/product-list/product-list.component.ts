@@ -46,6 +46,7 @@ export class ProductListComponent implements OnInit {
         .subscribe((data) => {
           this.allProducts = data;
           this.removeOwnerProducts(this.allProducts);
+          this.removeProductsWithZeroUnits(this.products);
           this.products.forEach((item) => {
             item.imageUrl = this.imageBaseUrl + item.imageUrl;
           });
@@ -56,6 +57,11 @@ export class ProductListComponent implements OnInit {
   removeOwnerProducts(data: Product[]) {
     let userId = Number(localStorage.getItem('id'));
     let result = data.filter((item) => item.ownerId !== userId);
+    this.products = result;
+  }
+
+  removeProductsWithZeroUnits(data: Product[]) {
+    let result = data.filter((item) => item.units > 0);
     this.products = result;
   }
 
