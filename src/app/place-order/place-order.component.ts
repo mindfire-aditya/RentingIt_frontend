@@ -172,7 +172,7 @@ export class PlaceOrderComponent implements OnInit {
 
       render({
         id: '#myPaypalButtons',
-        currency: 'INR',
+        currency: 'IN',
         value: this.newOrder.total_amount.toString(),
         onApprove: (details) => {
           alert('Transection Successfull!!');
