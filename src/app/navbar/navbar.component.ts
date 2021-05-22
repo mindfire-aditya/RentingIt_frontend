@@ -1,26 +1,45 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import * as $ from 'jquery';
-import { LoginService } from '../services/loginService/login.service';
+/**
+ * @author Aditya Sahu
+ */
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Category } from '../models/category';
+import { CategoryService } from '../services/category/category.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
-  //making a property which will tell what should be shown when user is logged in
-  public loggedIn = false;
+export class NavbarComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  public allCategories: Category[];
+  public parentCategories: any;
+  constructor(private categoryService: CategoryService) {}
 
-  constructor(private loginService: LoginService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.loggedIn = this.loginService.isLogged();
+  ngOnInit() {
+    this.subscription = new Subscription();
+    this.subscription = this.categoryService.getAllCategories().subscribe(
+      (data) => {
+        this.allCategories = data;
+        this.parentCategories = this.parentCategoriesList(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  logoutUser() {
-    this.loginService.logout();
-    this.loggedIn = false;
-    this.router.navigate(['home']);
+  parentCategoriesList(data: Category[]) {
+    return [
+      ...new Set(
+        data.map((item: { parentCategory: any }) => item.parentCategory)
+      ),
+    ];
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

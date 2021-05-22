@@ -1,6 +1,24 @@
-<app-search-bar></app-search-bar>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
-<app-product-item></app-product-item>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+<div *ngIf="products.length > 0">
+  <div *ngFor="let product of products" class="col s6 m3">
+    <div class="card">
+      <div class="card-image">
+        <img [src]="product.imageUrl" />
+      </div>
+      <div class="card-content">
+        <span
+          ><b>{{ product.productName }} {{ product.actualName }}</b></span
+        >
+      </div>
+      <div class="card-action" style="text-align: center">
+        <a (click)="onClick(product.id)">Buy on RENT / Show Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col s12 m12 center-text" *ngIf="products?.length == 0">
+  <div class="row">
+    <h5>No products available.</h5>
+  </div>
+</div>

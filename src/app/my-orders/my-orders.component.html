@@ -1,1 +1,35 @@
-<app-order-item></app-order-item>
+<h6><b>My Orders</b></h6>
+
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+<div class="row" *ngFor="let item of orderedProducts; let i = index">
+  <div class="col s5 m2">
+    <div class="card">
+      <div class="card-image">
+        <a [routerLink]="['order-details']">
+          <img [src]="imageBaseUrl + productList[i]?.imageUrl" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col s7 m10">
+    <p>
+      From - {{ item.rentStartDate | date }} <br />
+      To - {{ item?.rentEndDate | date }} <br />
+      Rent Mode - {{ item?.rentMode }}<br />
+      Units - {{ item?.units }}<br />
+      Total Amount - {{ item?.totalAmount }}
+    </p>
+
+    <a (click)="sendDetails(item)" class="waves-effect waves-light btn"
+      >View Details</a
+    >
+  </div>
+</div>
+
+<hr />
+<div class="col s12 m12 center-text" *ngIf="orderedProducts.length == 0">
+  <div class="row">
+    <h5>No orders available.</h5>
+  </div>
+</div>

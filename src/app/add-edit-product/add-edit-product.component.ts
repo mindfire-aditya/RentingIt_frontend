@@ -1,3 +1,7 @@
+/**
+ * @author Aditya Sahu
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { AddEditProduct } from '../models/add-edit-product';
 
@@ -7,24 +11,6 @@ import { AddEditProduct } from '../models/add-edit-product';
   styleUrls: ['./add-edit-product.component.css'],
 })
 export class AddEditProductComponent implements OnInit {
-  addEditProduct = new AddEditProduct(
-    '',
-    '',
-    1,
-    1,
-    1,
-    1,
-    1,
-    '',
-    '',
-    '',
-    '',
-    '',
-    1
-  );
-
-  addProduct() {}
-
   constructor() {}
 
   ngOnInit(): void {}

@@ -7,39 +7,61 @@
   />
 </div>
 <div class="col m6">
-  <form (ngSubmit) = "registerUser()" >
-   
-    
+  <form (ngSubmit)="registerUser()">
     <div class="row">
       <div class="input-field col s12">
-        <input [(ngModel)]="userDetails.username" id="UserName"  name = "username" type="text" required class="validate" />
+        <input
+          [(ngModel)]="userDetails.username"
+          id="UserName"
+          name="username"
+          type="text"
+          required
+          class="validate"
+        />
         <label for="UserName">UserName</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
-        <input [(ngModel)]="userDetails.email" required  name = "email" id="email" type="email" class="validate" />
+        <input
+          [(ngModel)]="userDetails.email"
+          required
+          name="email"
+          id="email"
+          type="email"
+          class="validate"
+        />
         <label for="email">Email</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
-        <input [(ngModel)] = "userDetails.password" required name="passowrd" id="password" type="password" class="validate" />
+        <input
+          #x
+          [(ngModel)]="userDetails.password"
+          required
+          name="passowrd"
+          id="password"
+          type="password"
+          class="validate"
+        />
         <label for="password">Password</label>
+        <a (click)="x.type = x.type == 'password' ? 'text' : 'password'"
+          >Show Password</a
+        >
       </div>
     </div>
-    <div class="row" align="center">
-      <div class="g-recaptcha" data-sitekey="6LcApqYaAAAAAB4AjQndQq_aUbDjz_j6JJU2rCzU"></div>
+    <div class="row">
+      <div
+        class="g-recaptcha"
+        data-sitekey="6LcApqYaAAAAAB4AjQndQq_aUbDjz_j6JJU2rCzU"
+      ></div>
     </div>
     <div class="row">
       <div class="col m12">
-        <button
-          class="btn waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
+        <button class="btn waves-effect waves-light" type="submit">
           Register
         </button>
       </div>
@@ -50,8 +72,6 @@
     <div class="col m12">
       <button
         class="btn waves-effect waves-light"
-        type="submit"
-        name="action"
         style="background-color: #e45656; font-weight: bold"
       >
         Signup with Google
@@ -62,28 +82,11 @@
     <div class="col m12">
       <button
         class="btn waves-effect waves-light"
-        type="submit"
-        name="action"
         style="background-color: #3f88df; font-weight: bold"
       >
         Signup with Facebook
       </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col m12">
-      <a
-        routerLink="/login"
-        class="btn waves-effect waves-light"
-        type="submit"
-        name="action"
-        style="background-color: #fff; color: #19bc85; font-weight: bold"
-      >
-        Login
-      </a>
-    </div>
-  </div>
 </div>
 <!--Just for testing purpose-->
-{{userDetails | json}}
-<div class="row"></div>

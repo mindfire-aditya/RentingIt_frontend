@@ -1,3 +1,13 @@
-.card-image {
-  color: #000;
+.parent-category {
+  font-size: 20px;
+}
+
+a {
+  font-size: 1.4rem;
+  background-color: #0d3632;
+  color: #eee;
+}
+
+.btn:hover {
+  background-color: #13554e;
 }

@@ -2,20 +2,30 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-rent.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegisterComponent } from './register/register.component';
 import { RentComponent } from './rent/rent.component';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
+import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
+import { OrderDetailsResolver } from './services/resolver/orderDetailsResolver/order-details.resolver';
+import { OrderResolverResolver } from './services/resolver/orderResolver/order-resolver.resolver';
+import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
+import { UserDetailResolver } from './services/resolver/userDetailResolver/user-detail.resolver';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {
@@ -32,36 +42,67 @@ const routes: Routes = [
     component: AboutComponent,
   },
   {
+    path: 'test',
+    component: TestComponent,
+  },
+  {
     path: 'categories',
-    canActivate:[AuthGuard],
     children: [
       {
         path: 'appliances',
-        component: ProductListComponent,
+        children: [
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'bikes',
-        component: ProductListComponent,
+
+        children: [
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'cars',
-        component: ProductListComponent,
+
+        children: [
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'electronics',
-        component: ProductListComponent,
+
+        children: [
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'furnitures',
-        component: ProductListComponent,
+
+        children: [
+          { path: '', component: ProductListComponent },
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
       },
       {
         path: 'machines',
         component: ProductListComponent,
+        children: [
+          { path: ':subcategory', component: ProductSubCategoryComponent },
+        ],
+      },
+      {
+        path: 'others',
+        component: ProductListComponent,
+        children: [{ path: ':subcategory', component: ProductListComponent }],
       },
       {
         path: 'all',
         component: ProductCategoriesComponent,
+        resolve: { allCategories: AllCategoriesResolver },
       },
     ],
   },
@@ -84,6 +125,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'my-products',
@@ -91,18 +133,23 @@ const routes: Routes = [
           {
             path: '',
             component: MyProductsComponent,
+            resolve: { products: ProductsResolver },
           },
           {
-            path: 'product-details',
+            path: 'product-details/:id',
             component: ProductDetailsComponent,
           },
           {
-            path: 'edit',
-            component: ProductDetailsComponent,
+            path: 'edit/:productId',
+            component: RentComponent,
           },
           {
             path: 'remove',
             component: ProductDetailsComponent,
+          },
+          {
+            path: 'rent-history/:productId',
+            component: MyProductsOnRentComponent,
           },
         ],
       },
@@ -112,9 +159,10 @@ const routes: Routes = [
           {
             path: '',
             component: MyOrdersComponent,
+            resolve: { orders: OrderResolverResolver },
           },
           {
-            path: 'order/order-details',
+            path: 'order-details/:orderId',
             component: OrderDetailsComponent,
           },
         ],
@@ -125,6 +173,7 @@ const routes: Routes = [
           {
             path: '',
             component: ProfilePageComponent,
+            resolve: { userDetail: UserDetailResolver },
           },
           {
             path: 'edit',
@@ -149,6 +198,11 @@ const routes: Routes = [
         component: RentComponent,
       },
       {
+        path: 'place-order/:productId',
+        component: PlaceOrderComponent,
+        children: [{ path: 'checkout', component: CheckoutComponent }],
+      },
+      {
         path: 'logout',
         redirectTo: '/home',
       },
@@ -161,7 +215,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,5 +1,16 @@
-<app-search-bar></app-search-bar>
-<app-category-item></app-category-item>
-<app-category-item></app-category-item>
-<app-category-item></app-category-item>
-<app-category-item></app-category-item>
+<div *ngFor="let item1 of parentCategories" class="row">
+  <h3 class="parent-category">{{ item1 }}</h3>
+  <hr />
+  <div *ngFor="let item2 of allCategories">
+    <div class="col" *ngIf="item1 == item2.parentCategory">
+      <a
+        *ngIf="item2.childCategory !== null"
+        [routerLink]="['/categories', item1.toLowerCase(), item2.id]"
+      >
+        <div class="card-panel teal">
+          {{ item2.childCategory }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,20 +1,44 @@
-<div class="row">
-  <div class="col s5 m2">
+<h6><b>My Products</b></h6>
+<hr />
+<div class="row" *ngFor="let item of userProducts">
+  <div class="col s5 m3">
     <div class="card">
       <div class="card-image">
-        <a routerLink="product/product-details">
-          <img src="../../assets/images/bike-image.png" />
+        <a [routerLink]="['product-details', item.id]">
+          <img [src]="item.imageUrl" />
         </a>
       </div>
     </div>
   </div>
-  <div class="col s7 m10">
-    <h4>Harley Davidson</h4>
-    <div>Rating 4/5 (100)</div>
-    <a routerLink="product/edit" class="waves-effect waves-light btn">Edit</a>
-    <a routerLink="product/remove" class="waves-effect waves-light btn"
-      >Remove</a
-    >
+  <div class="col s4 m4">
+    <h5>{{ item.productName }}</h5>
+
+    <p>
+      Rs.{{ item.pricePerHour }}/hr <br />
+      Rs.{{ item.pricePerDay }}/day <br />
+      Rs.{{ item.pricePerWeek }}/week <br />
+      Rs.{{ item.pricePerWeek }}/month <br />
+    </p>
+    <div class="row">
+      <a [routerLink]="['edit', item.id]" class="waves-effect waves-light btn"
+        >Edit</a
+      >
+      <a (click)="onRemove(item.id)" class="waves-effect waves-light btn"
+        >Remove</a
+      >
+      <a
+        [routerLink]="['rent-history', item.id]"
+        class="waves-effect waves-light btn"
+        >Rent history</a
+      >
+    </div>
   </div>
 </div>
 <hr />
+<div class="row">
+  <div class="col s12 m12 center-text" *ngIf="userProducts?.length == 0">
+    <div class="row">
+      <h5>No products available.</h5>
+    </div>
+  </div>
+</div>

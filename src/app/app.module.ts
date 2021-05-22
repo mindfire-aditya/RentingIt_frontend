@@ -25,7 +25,22 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { RentComponent } from './rent/rent.component';
 import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './services/interceptor/token-interceptor/token-interceptor.service';
+import { AuthGuard } from './services/AuthGuard/auth.guard';
+import { NavbarLoggedinComponent } from './navbar-loggedin/navbar-loggedin.component';
+import { TestComponent } from './test/test.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-rent.component';
 
 @NgModule({
   declarations: [
@@ -52,9 +67,34 @@ import { HttpClientModule } from '@angular/common/http';
     RentComponent,
     OrderItemComponent,
     OrderDetailsComponent,
+    NavbarLoggedinComponent,
+    TestComponent,
+    PlaceOrderComponent,
+    ProductSubCategoryComponent,
+    LoadingSpinnerComponent,
+    CheckoutComponent,
+    MyProductsOnRentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

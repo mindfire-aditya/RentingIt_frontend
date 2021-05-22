@@ -1,94 +1,80 @@
-<div class="row">
-  <div class="col s6 m5">
-    <div class="card">
-      <div class="card-image">
-        <img src="../../assets/images/Rectangle 9.png" />
+<div class="col s6 m5">
+  <div class="card">
+    <div class="card-image">
+      <img [src]="product_item?.imageUrl" alt="productImage" />
+    </div>
+  </div>
+</div>
+<div class="col s6 m6 offset-m1 description">
+  <div class="row">
+    <h4>
+      {{ product_item?.actualName }}{{ " " }}{{ product_item?.productName }}
+    </h4>
+
+    <a
+      *ngIf="product_item?.ownerId !== userId"
+      class="waves-effect btn"
+      (click)="onClickGoToPlaceOrder()"
+      style="text-align: center"
+      >Buy On Rent</a
+    >
+    <a
+      *ngIf="product_item?.ownerId === userId"
+      class="waves-effect btn"
+      [routerLink]="['/user/my-products/rent-history', product_item?.id]"
+      style="text-align: center"
+      >Rent history</a
+    >
+  </div>
+  <div class="row details">
+    <h6>General Details</h6>
+    <hr />
+    <div class="col m12">
+      <div class="row">
+        <div class="col m6">Description</div>
+        <div class="col m6">{{ product_item?.assetDescription }}</div>
+      </div>
+      <div class="row">
+        <div class="col m6">Units Available</div>
+        <div class="col m6">{{ product_item?.units }}</div>
       </div>
     </div>
   </div>
-  <div class="col s6 m6 offset-m1 description">
-    <div class="row">
-      <h4>Harley Davidson</h4>
-      <div class="rating">Rating 4/5 (100)</div>
-      <a
-        class="waves-effect btn"
-        routerLink="product/rent"
-        style="text-align: center"
-        >Rent now</a
-      >
-    </div>
-    <div class="row details">
-      <h6>General Details</h6>
-      <hr />
-      <div class="col m12">
-        <div class="row">
-          <div class="col m6">Product Name</div>
-          <div class="col m6">Harley Davidson</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Category</div>
-          <div class="col m6">Harley Davidson</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Subcategory</div>
-          <div class="col m6">Harley Davidson</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Units Available</div>
-          <div class="col m6">Harley Davidson</div>
-        </div>
+  <div class="row details">
+    <h6>Pricing</h6>
+    <hr />
+    <div class="col m12">
+      <div class="row">
+        <div class="col m6">per hour</div>
+        <div class="col m6">Rs.{{ product_item?.pricePerHour }}</div>
+      </div>
+      <div class="row">
+        <div class="col m6">per day</div>
+        <div class="col m6">Rs.{{ product_item?.pricePerDay }}</div>
+      </div>
+      <div class="row">
+        <div class="col m6">per week</div>
+        <div class="col m6">Rs.{{ product_item?.pricePerWeek }}</div>
+      </div>
+      <div class="row">
+        <div class="col m6">per month</div>
+        <div class="col m6">Rs.{{ product_item?.pricePerMonth }}</div>
       </div>
     </div>
-    <div class="row details">
-      <h6>Pricing</h6>
-      <hr />
-      <div class="col m12">
-        <div class="row">
-          <div class="col m6">Rent per hour</div>
-          <div class="col m6">$20</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Rent per day</div>
-          <div class="col m6">$20</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Rent per week</div>
-          <div class="col m6">$20</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Rent per month</div>
-          <div class="col m6">$20</div>
-        </div>
-      </div>
-    </div>
-    <div class="row details">
+  </div>
+
+  <div class="row details">
+    <div class="col m12">
       <h6>Pickup Address</h6>
       <hr />
-      <div class="col m12">
-        <div class="row">
-          <div class="col m6">House no.</div>
-          <div class="col m6">45</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Street</div>
-          <div class="col m6">45</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Lane</div>
-          <div class="col m6">45</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Landmark</div>
-          <div class="col m6">45</div>
-        </div>
-        <div class="row">
-          <div class="col m6">City/Town</div>
-          <div class="col m6">45</div>
-        </div>
-        <div class="row">
-          <div class="col m6">Pincode</div>
-          <div class="col m6">45</div>
-        </div>
+      <div class="col m6">
+        <address>
+          House no.{{ pickup_address?.houseNo }}, {{ pickup_address?.lane }} ,
+          Street no.{{ pickup_address?.streetNo }}, near
+          {{ pickup_address?.landmark }} , {{ pickup_address?.city }},
+          {{ pickup_address?.district }} , {{ pickup_address?.state }}, PO -
+          {{ pickup_address?.pincode }}
+        </address>
       </div>
     </div>
   </div>

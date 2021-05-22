@@ -1,1 +1,205 @@
-<p>rent works!</p>
+<div class="row">
+  <div class="col m6">
+    <img
+      src="../../assets/images/Become a member and get access to wide range of products and premium services..png"
+      alt="Register your product and grant access to wide range of customer and give your product on rent !!"
+    />
+  </div>
+  <div class="col m6">
+    <form (ngSubmit)="registerProduct()">
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.productName"
+            id="productName"
+            name="productName"
+            type="text"
+            required
+            class="validate"
+          />
+          <label for="productName">Product Brand</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.actualName"
+            required
+            name="actualName"
+            id="actualName"
+            type="text"
+            class="validate"
+          />
+          <label for="actualName">Model Name/Number</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12 m12">
+          <label>Category</label>
+          <select
+            #category
+            class="browser-default"
+            (change)="onSelectCategory(category)"
+          >
+            <option value="" disabled selected>Choose product category</option>
+            <option *ngFor="let item of parentCategories">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12 m12">
+          <label>Sub-category</label>
+          <select
+            #subcategory
+            class="browser-default"
+            (change)="onSelectSubCategory(category, subcategory)"
+          >
+            <option value="" disabled selected>
+              Choose product sub-category
+            </option>
+            <option *ngFor="let item of childCategories">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.assetDescription"
+            required
+            name="assetDescription"
+            id="assetDescription"
+            type="text"
+            class="validate"
+          />
+          <label for="assetDescription">Product Description</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.pricePerHour"
+            required
+            name="pricePerHour"
+            id="pricePerHour"
+            type="number"
+            class="validate"
+          />
+          <label for="pricePerHour">Price Per Hour</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.pricePerDay"
+            required
+            name="pricePerDay"
+            id="pricePerDay"
+            type="number"
+            class="validate"
+          />
+          <label for="pricePerDay">Price Per Day</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.pricePerWeek"
+            required
+            name="pricePerWeek"
+            id="pricePerWeek"
+            type="number"
+            class="validate"
+          />
+          <label for="pricePerWeek">Price Per Week</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.pricePerMonth"
+            required
+            name="pricePerMonth"
+            id="pricePerMonth"
+            type="number"
+            class="validate"
+          />
+          <label for="pricePerMonth">Price Per Month</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.pinCode"
+            required
+            name="pincode"
+            id="pincode"
+            type="number"
+            class="validate"
+          />
+          <label for="pincode">Pincode</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            [(ngModel)]="newProduct.units"
+            required
+            name="units"
+            id="units"
+            type="number"
+            class="validate"
+          />
+          <label for="units">Units</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m12">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Product Image</span>
+              <input
+                #file
+                type="file"
+                (change)="onChange($event, file)"
+                name="imageUrl"
+                id="imageUrl"
+              />
+            </div>
+
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col m12">
+          <button
+            class="btn waves-effect waves-light submit"
+            type="submit"
+            name="action"
+            style="background-color: #3f88df; font-weight: bold"
+          >
+            <span *ngIf="!productId">Register Product</span>
+            <span *ngIf="productId">Update Product</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

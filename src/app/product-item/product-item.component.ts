@@ -1,15 +1,15 @@
+/**
+ * @author Aditya Sahu
+ */
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css']
+  styleUrls: ['./product-item.component.css'],
 })
 export class ProductItemComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,21 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+/**
+ * @author Aditya Sahu
+ */
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginService } from '../services/loginService/login.service';
+import { UserInfoStoreService } from '../services/store/user-info-store.service';
+import { UserDetailService } from '../services/userDetail/user-detail.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   //creating a object which will have the username and password for making a post call to get token.
   credentials = {
     username: '',
     password: '',
   };
-  constructor(private loginService: LoginService, private router: Router) {}
 
-  ngOnInit(): void {}
+  private subscription1: Subscription;
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private userInfoStore: UserInfoStoreService,
+    private userDetailsService: UserDetailService
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription1 = new Subscription();
+  }
 
   onSubmit() {
     //console.log("Form is submited!!");
@@ -27,26 +44,51 @@ export class LoginComponent implements OnInit {
     ) {
       //we have to submit the form
 
-      console.log('Here form will be submited');
+      this.subscription1 = this.loginService
+        .generateToken(this.credentials)
+        .subscribe(
+          (response: any) => {
+            this.loginService.saveUser(
+              response.id,
+              response.username,
+              response.email,
+              response.roles,
+              response.accessToken,
+              response.tokenType
+            );
+            let loggedIn: any = true;
+            localStorage.setItem('loggedIn', loggedIn);
 
-      this.loginService.generateToken(this.credentials).subscribe(
-        (response: any) => {
-          //success
+            this.loginService.changeNavbar();
+            this.userInfoStore.emitUserInfo();
 
-          //settingup the token to local storage for loggin the user
-          this.loginService.loginUser(response);
+            this.userDetailsService.getUserDetailById(response.id).subscribe(
+              (data) => {
+                console.log(data);
+                this.router.navigate(['/categories/all']);
+                window.location.href = '/categories/all';
+              },
+              (error) => {
+                console.log(error);
+                this.router.navigate(['/user/my-profile/edit']);
+                window.location.href = '/user/my-profile/edit';
+              }
+            );
+          },
+          (error) => {
+            //error
 
-          //taking the user to categories page where they can buy or rent the product
-
-          this.router.navigate(['home']);
-        },
-        (error) => {
-          //error
-          console.log(error);
-        }
-      );
+            alert(
+              'Username or Password is incorrect. Please try again with valid credentials'
+            );
+          }
+        );
     } else {
       console.log('Fields are empty !!');
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
   }
 }

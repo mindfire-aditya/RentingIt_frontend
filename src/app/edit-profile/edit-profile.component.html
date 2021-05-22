@@ -1,1 +1,199 @@
-<p>edit-profile works!</p>
+<div class="row" style="padding-bottom: 30px">
+  <h4>Please update your profile info !!</h4>
+  <h4>
+    <i class="material-icons small">account_circle</i>
+    {{ userInfo.firstName + " " + userInfo.lastName }}
+  </h4>
+  <div style="padding-left: 40px">@{{ username }}</div>
+</div>
+<div class="row">
+  <form class="col s12" #editProfileForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input
+          placeholder="First Name"
+          id="firstName"
+          name="firstName"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.firstName"
+        />
+        <label>First Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input
+          placeholder="Placeholder"
+          id="lastName"
+          name="lastName"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.lastName"
+        />
+        <label for="phone">Last Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">local_phone</i>
+        <input
+          placeholder="Placeholder"
+          id="phone"
+          name="phone"
+          type="number"
+          class="validate"
+          [(ngModel)]="userInfo.phoneNo"
+        />
+        <label for="phone">Phone</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">home</i>
+        <input
+          placeholder="Placeholder"
+          id="house_number"
+          name="house_number"
+          type="number"
+          class="validate"
+          [(ngModel)]="userInfo.houseNo"
+        />
+        <label for="house_number">House No.</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">streetview</i>
+        <input
+          placeholder="Placeholder"
+          id="street"
+          name="number"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.streetNo"
+        />
+        <label for="street">Street</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">streetview</i>
+        <input
+          placeholder="Placeholder"
+          id="lane"
+          name="lane"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.lane"
+        />
+        <label for="phone">Lane</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">add_location</i>
+        <input
+          placeholder="Placeholder"
+          id="landmark"
+          name="landmark"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.landmark"
+        />
+        <label for="phone">Landmark</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">location_city</i>
+        <input
+          placeholder="Placeholder"
+          id="city"
+          name="city"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.city"
+        />
+        <label for="phone">City</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">map</i>
+        <input
+          placeholder="Placeholder"
+          id="district"
+          name="district"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.district"
+        />
+        <label for="phone">District</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">map</i>
+        <input
+          placeholder="Placeholder"
+          id="state"
+          name="state"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.state"
+        />
+        <label for="phone">State</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">fiber_pin</i>
+        <input
+          placeholder="Placeholder"
+          id="pincode"
+          name="pincode"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.pincode"
+        />
+        <label for="phone">Pin code</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">verified_user</i>
+        <input
+          placeholder="Placeholder"
+          id="idProofType"
+          name="idProofType"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.idProofType"
+        />
+        <label for="phone">ID Proof Type</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">verified_user</i>
+        <input
+          placeholder="Placeholder"
+          id="idNumber"
+          name="idNumber"
+          type="text"
+          class="validate"
+          [(ngModel)]="userInfo.idNumber"
+        />
+        <label for="phone">ID Proof Number</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <button type="submit" class="btn waves-effect">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
