@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +24,6 @@ import { OrderDetailsResolver } from './services/resolver/orderDetailsResolver/o
 import { OrderResolverResolver } from './services/resolver/orderResolver/order-resolver.resolver';
 import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
 import { UserDetailResolver } from './services/resolver/userDetailResolver/user-detail.resolver';
-import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {
@@ -41,10 +39,7 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
-  {
-    path: 'test',
-    component: TestComponent,
-  },
+
   {
     path: 'categories',
     children: [
@@ -200,7 +195,6 @@ const routes: Routes = [
       {
         path: 'place-order/:productId',
         component: PlaceOrderComponent,
-        children: [{ path: 'checkout', component: CheckoutComponent }],
       },
       {
         path: 'logout',

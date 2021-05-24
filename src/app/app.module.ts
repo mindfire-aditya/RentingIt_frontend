@@ -29,7 +29,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/interceptor/token-interceptor/token-interceptor.service';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { NavbarLoggedinComponent } from './navbar-loggedin/navbar-loggedin.component';
-import { TestComponent } from './test/test.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -39,7 +38,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-rent.component';
 
 @NgModule({
@@ -68,11 +66,9 @@ import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-
     OrderItemComponent,
     OrderDetailsComponent,
     NavbarLoggedinComponent,
-    TestComponent,
     PlaceOrderComponent,
     ProductSubCategoryComponent,
     LoadingSpinnerComponent,
-    CheckoutComponent,
     MyProductsOnRentComponent,
   ],
   imports: [
