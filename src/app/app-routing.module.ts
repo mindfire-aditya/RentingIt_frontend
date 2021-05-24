@@ -1,31 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-rent.component';
-import { MyProductsComponent } from './my-products/my-products.component';
-import { OrderDetailsComponent } from './order-details/order-details.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PlaceOrderComponent } from './place-order/place-order.component';
+import { AboutComponent } from './components/about/about.component';
+import { AddEditProductComponent } from './components/add-edit-product/add-edit-product.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { MyProductsOnRentComponent } from './components/my-products-on-rent/my-products-on-rent.component';
+import { MyProductsComponent } from './components/my-products/my-products.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductSubCategoryComponent } from './product-sub-category/product-sub-category.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { RegisterComponent } from './register/register.component';
-import { RentComponent } from './rent/rent.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductSubCategoryComponent } from './components/product-sub-category/product-sub-category.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RentComponent } from './components/rent/rent.component';
 import { AuthGuard } from './services/AuthGuard/auth.guard';
 import { AllCategoriesResolver } from './services/resolver/categoriesResolver/all-categories.resolver';
 import { OrderDetailsResolver } from './services/resolver/orderDetailsResolver/order-details.resolver';
 import { OrderResolverResolver } from './services/resolver/orderResolver/order-resolver.resolver';
 import { ProductsResolver } from './services/resolver/productsResolver/products.resolver';
 import { UserDetailResolver } from './services/resolver/userDetailResolver/user-detail.resolver';
-import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {
@@ -41,10 +39,7 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
-  {
-    path: 'test',
-    component: TestComponent,
-  },
+
   {
     path: 'categories',
     children: [
@@ -194,13 +189,12 @@ const routes: Routes = [
         component: AddEditProductComponent,
       },
       {
-        path: 'rent',
-        component: RentComponent,
-      },
-      {
         path: 'place-order/:productId',
         component: PlaceOrderComponent,
-        children: [{ path: 'checkout', component: CheckoutComponent }],
+      },
+      {
+        path: 'rent',
+        component: RentComponent,
       },
       {
         path: 'logout',
