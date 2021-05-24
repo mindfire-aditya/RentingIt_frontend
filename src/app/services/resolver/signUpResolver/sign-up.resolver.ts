@@ -14,6 +14,12 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class SignUpResolver implements Resolve<boolean> {
+  /**
+   *
+   * @param route
+   * @param state
+   * @returns
+   */
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

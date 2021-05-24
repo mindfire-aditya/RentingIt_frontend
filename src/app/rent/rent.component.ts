@@ -84,6 +84,11 @@ export class RentComponent implements OnInit {
     );
   }
 
+  /**
+   *
+   * @param data
+   * @returns
+   */
   parentCategoriesList(data: Category[]) {
     return [
       ...new Set(
@@ -92,6 +97,11 @@ export class RentComponent implements OnInit {
     ];
   }
 
+  /**
+   *
+   * @returns
+   *
+   */
   registerProduct() {
     if (this.newProduct.productName != '' && this.newProduct.actualName != '') {
       //image upload
@@ -132,6 +142,11 @@ export class RentComponent implements OnInit {
     console.log(this.newProduct);
   }
 
+  /**
+   *
+   * @param id
+   * @param payload
+   */
   updateProduct(id: number, payload: NewProduct) {
     if (this.imageFile?.name) {
       this.productService.upload(this.imageFile).subscribe((res) => {
@@ -175,6 +190,10 @@ export class RentComponent implements OnInit {
       );
   }
 
+  /**
+   *
+   * @param category
+   */
   onSelectCategory(category: any) {
     this.childCategories = [];
 
@@ -185,6 +204,11 @@ export class RentComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param category
+   * @param subcategory
+   */
   onSelectSubCategory(category: any, subcategory: any) {
     this.allCategories.filter((item) => {
       if (
@@ -201,6 +225,11 @@ export class RentComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param event
+   * @param file
+   */
   onChange(event: any, file: any) {
     this.imageFile = event.target.files[0];
   }

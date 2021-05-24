@@ -18,6 +18,12 @@ import { ProductService } from '../../products/product.service';
 export class ProductsResolver implements Resolve<Product[]> {
   constructor(private productService: ProductService) {}
 
+  /**
+   *
+   * @param route
+   * @param state
+   * @returns
+   */
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

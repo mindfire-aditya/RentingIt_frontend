@@ -3,9 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MyOrder } from '../models/my-order';
 import { Product } from '../models/product';
-import { DataTransferService } from '../services/DataTransfer/data-transfer.service';
 import { MyOrdersService } from '../services/my-orders/my-orders.service';
-import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 import { ProductService } from '../services/products/product.service';
 
 @Component({
@@ -15,12 +13,6 @@ import { ProductService } from '../services/products/product.service';
 })
 export class OrderDetailsComponent implements OnInit {
   name12!: string;
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private productService: ProductService,
-    private myOrdersService: MyOrdersService
-  ) {}
-
   order_item: MyOrder;
   orderedProduct: Product;
 
@@ -32,21 +24,37 @@ export class OrderDetailsComponent implements OnInit {
   private subscription1: Subscription;
   private subscription2: Subscription;
 
+  /**
+   *
+   * @param activatedRoute
+   * @param productService
+   * @param myOrdersService
+   */
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private myOrdersService: MyOrdersService
+  ) {}
+
   ngOnInit(): void {
     this.subscription1 = new Subscription();
     this.subscription2 = new Subscription();
 
     let orderId = Number(this.activatedRoute.snapshot.paramMap.get('orderId'));
 
-    this.myOrdersService.getOrderById(orderId).subscribe((data) => {
-      this.order_item = data;
+    this.subscription1 = this.myOrdersService
+      .getOrderById(orderId)
+      .subscribe((data) => {
+        this.order_item = data;
 
-      this.productService.getProductById(data.productId).subscribe((data) => {
-        this.orderedProduct = data;
-        this.orderedProduct.imageUrl =
-          this.imageBaseUrl + this.orderedProduct.imageUrl;
+        this.subscription2 = this.productService
+          .getProductById(data.productId)
+          .subscribe((data) => {
+            this.orderedProduct = data;
+            this.orderedProduct.imageUrl =
+              this.imageBaseUrl + this.orderedProduct.imageUrl;
+          });
       });
-    });
   }
 
   ngDestroy() {

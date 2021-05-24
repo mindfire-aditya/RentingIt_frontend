@@ -17,6 +17,12 @@ import { UserDetailService } from '../../userDetail/user-detail.service';
 export class UserDetailResolver implements Resolve<any> {
   constructor(private userDetailService: UserDetailService) {}
 
+  /**
+   *
+   * @param route
+   * @param state
+   * @returns
+   */
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

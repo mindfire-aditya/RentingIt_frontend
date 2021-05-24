@@ -10,10 +10,21 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   *
+   * @param path
+   * @returns
+   */
   getCategories(path: string) {
-    return this.http.get(`${this.baseUrl}/product/category/${path}`);
+    return this.http.get<Category[]>(
+      `${this.baseUrl}/product/category/${path}`
+    );
   }
 
+  /**
+   *
+   * @returns
+   */
   getAllCategories() {
     return this.http.get<Category[]>(`${this.baseUrl}/product/category/all`);
   }

@@ -12,26 +12,30 @@ import { Product } from '../models/product';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
+  product_item: Product;
+  pickup_address: any;
+  ownerId: any;
+  userId: number = Number(localStorage.getItem('id'));
+  imageBaseUrl =
+    'http://localhost:8080/rentingIt/product/resources/download-image/';
+
+  private subscription1: Subscription = new Subscription();
+  private subscription2: Subscription = new Subscription();
+  public image: any;
+
+  /**
+   *
+   * @param activatedRoute
+   * @param productService
+   * @param userDetailService
+   * @param router
+   */
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private userDetailService: UserDetailService,
     private router: Router
   ) {}
-
-  product_item: Product;
-  pickup_address: any;
-  ownerId: any;
-  userId: number = Number(localStorage.getItem('id'));
-
-  imageBaseUrl =
-    'http://localhost:8080/rentingIt/product/resources/download-image/';
-
-  private subscription1: Subscription = new Subscription();
-  private subscription2: Subscription = new Subscription();
-  private sanitizer!: DomSanitizer;
-  public image: any;
-  private readonly imageType: string = 'data:image/PNG;base64,';
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -54,6 +58,10 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param ownerId
+   */
   getOwnerInfo(ownerId: number) {
     if (ownerId) {
       this.subscription2 = this.userDetailService
@@ -69,6 +77,9 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   */
   onClickGoToPlaceOrder() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 

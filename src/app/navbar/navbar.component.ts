@@ -15,7 +15,12 @@ import { CategoryService } from '../services/category/category.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public allCategories: Category[];
-  public parentCategories: any;
+  public parentCategories: string[];
+
+  /**
+   *
+   * @param categoryService
+   */
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit() {
@@ -31,6 +36,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   *
+   * @param data
+   * @returns
+   */
   parentCategoriesList(data: Category[]) {
     return [
       ...new Set(

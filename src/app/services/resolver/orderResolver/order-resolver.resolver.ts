@@ -13,6 +13,12 @@ import { PlaceOrderService } from '../../placeOrder/place-order.service';
 export class OrderResolverResolver implements Resolve<any> {
   constructor(private placeOrderService: PlaceOrderService) {}
 
+  /**
+   *
+   * @param route
+   * @param state
+   * @returns
+   */
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

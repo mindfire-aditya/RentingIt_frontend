@@ -19,11 +19,20 @@ export class RegisterComponent implements OnInit {
     password: '',
     role: ['user'],
   };
+
   private subscription1: Subscription = new Subscription();
 
+  /**
+   *
+   * @param signup
+   * @param router
+   */
   constructor(private signup: SignupService, private router: Router) {}
   ngOnInit(): void {}
 
+  /**
+   *
+   */
   //function for registering the user
   registerUser() {
     if (

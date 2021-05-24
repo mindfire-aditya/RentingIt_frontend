@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Category } from '../models/category';
 import { CategoryService } from '../services/category/category.service';
 
 @Component({
@@ -13,15 +14,20 @@ import { CategoryService } from '../services/category/category.service';
   styleUrls: ['./product-categories.component.css'],
 })
 export class ProductCategoriesComponent implements OnInit {
+  parentCategories: string[];
+  public allCategories: Category[];
+  private subscription1: Subscription = new Subscription();
+  category: any = '';
+
+  /**
+   *
+   * @param router
+   * @param categoryService
+   */
   constructor(
     private router: Router,
     private categoryService: CategoryService
   ) {}
-
-  parentCategories: any;
-  public allCategories: any;
-  private subscription1: Subscription = new Subscription();
-  category: any = '';
 
   ngOnInit(): void {
     let url = this.router.url;
