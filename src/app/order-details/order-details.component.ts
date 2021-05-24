@@ -38,15 +38,19 @@ export class OrderDetailsComponent implements OnInit {
 
     let orderId = Number(this.activatedRoute.snapshot.paramMap.get('orderId'));
 
-    this.myOrdersService.getOrderById(orderId).subscribe((data) => {
-      this.order_item = data;
+    this.subscription1 = this.myOrdersService
+      .getOrderById(orderId)
+      .subscribe((data) => {
+        this.order_item = data;
 
-      this.productService.getProductById(data.productId).subscribe((data) => {
-        this.orderedProduct = data;
-        this.orderedProduct.imageUrl =
-          this.imageBaseUrl + this.orderedProduct.imageUrl;
+        this.subscription2 = this.productService
+          .getProductById(data.productId)
+          .subscribe((data) => {
+            this.orderedProduct = data;
+            this.orderedProduct.imageUrl =
+              this.imageBaseUrl + this.orderedProduct.imageUrl;
+          });
       });
-    });
   }
 
   ngDestroy() {

@@ -17,15 +17,6 @@ import { MyOrdersService } from '../services/my-orders/my-orders.service';
   styleUrls: ['./place-order.component.css'],
 })
 export class PlaceOrderComponent implements OnInit {
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private productService: ProductService,
-    private userDetailService: UserDetailService,
-    private placeOrderService: PlaceOrderService,
-    private myOrdersService: MyOrdersService,
-    private router: Router
-  ) {}
-
   ordersListByProductId: MyOrder[] = [];
   newOrder: Order;
   product_item: Product;
@@ -42,7 +33,17 @@ export class PlaceOrderComponent implements OnInit {
   showText: boolean = false;
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
+  private subscription3: Subscription = new Subscription();
+  private subscription4: Subscription = new Subscription();
 
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private userDetailService: UserDetailService,
+    private placeOrderService: PlaceOrderService,
+    private myOrdersService: MyOrdersService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.today = new Date().toISOString();
     let rem = this.today.split(':');
@@ -57,7 +58,7 @@ export class PlaceOrderComponent implements OnInit {
     this.newOrder.customerId = customerId;
 
     if (productId !== null) {
-      this.subscription1 = this.subscription1 = this.productService
+      this.subscription1 = this.productService
         .getProductById(parseInt(productId))
         .subscribe(
           (data) => {
@@ -78,7 +79,7 @@ export class PlaceOrderComponent implements OnInit {
     }
 
     //placed orders of the product to check availibilty
-    this.myOrdersService
+    this.subscription2 = this.myOrdersService
       .getOrdersByProductId(Number(productId))
       .subscribe((data) => {
         this.ordersListByProductId = data;
@@ -91,7 +92,7 @@ export class PlaceOrderComponent implements OnInit {
    */
   getOwnerInfo(ownerId: number) {
     if (ownerId) {
-      this.subscription2 = this.userDetailService
+      this.subscription3 = this.userDetailService
         .getOwnerDetail(this.ownerId)
         .subscribe(
           (data) => {
@@ -231,15 +232,17 @@ export class PlaceOrderComponent implements OnInit {
       this.newOrder.terms_and_conditions != false
     ) {
       if (this.isAvailable) {
-        this.placeOrderService.addOder(this.newOrder).subscribe(
-          (data) => {
-            console.log(data);
-            this.router.navigate(['user/my-orders']);
-          },
-          (error) => {
-            error(error);
-          }
-        );
+        this.subscription4 = this.placeOrderService
+          .addOder(this.newOrder)
+          .subscribe(
+            (data) => {
+              console.log(data);
+              this.router.navigate(['user/my-orders']);
+            },
+            (error) => {
+              error(error);
+            }
+          );
       } else {
         this.isAvailable = false;
       }
@@ -283,5 +286,7 @@ export class PlaceOrderComponent implements OnInit {
   ngOnDestroy() {
     this.subscription1.unsubscribe();
     this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
+    this.subscription4.unsubscribe();
   }
 }

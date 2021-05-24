@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   };
 
   private subscription1: Subscription;
+  private subscription2: Subscription;
 
   constructor(
     private loginService: LoginService,
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription1 = new Subscription();
+    this.subscription2 = new Subscription();
   }
 
   /**
@@ -65,18 +67,20 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.loginService.changeNavbar();
             this.userInfoStore.emitUserInfo();
 
-            this.userDetailsService.getUserDetailById(response.id).subscribe(
-              (data) => {
-                console.log(data);
-                this.router.navigate(['/categories/all']);
-                window.location.href = '/categories/all';
-              },
-              (error) => {
-                console.log(error);
-                this.router.navigate(['/user/my-profile/edit']);
-                window.location.href = '/user/my-profile/edit';
-              }
-            );
+            this.subscription2 = this.userDetailsService
+              .getUserDetailById(response.id)
+              .subscribe(
+                (data) => {
+                  console.log(data);
+                  this.router.navigate(['/categories/all']);
+                  window.location.href = '/categories/all';
+                },
+                (error) => {
+                  console.log(error);
+                  this.router.navigate(['/user/my-profile/edit']);
+                  window.location.href = '/user/my-profile/edit';
+                }
+              );
           },
           (error) => {
             //error
@@ -93,5 +97,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
   }
 }

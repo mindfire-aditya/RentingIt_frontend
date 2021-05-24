@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PlaceOrderService } from '../services/placeOrder/place-order.service';
 
 @Component({
@@ -11,12 +12,11 @@ export class OrderItemComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   orderedProducts: any;
-  productdetails : any;
-  private subscription1: any;
-  private subscription2: any;
-
+  productdetails: any;
+  private subscription1: Subscription;
 
   ngOnInit(): void {
+    this.subscription1 = new Subscription();
     this.subscription1 = this.activatedRoute.data.subscribe(
       (data) => {
         console.log(data);

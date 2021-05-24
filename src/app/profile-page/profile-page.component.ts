@@ -31,6 +31,11 @@ export class ProfilePageComponent implements OnInit {
   username = localStorage.getItem('username');
   private subscription1: any;
 
+  /**
+   *
+   * @param activatedRoute
+   * @param router
+   */
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   /**

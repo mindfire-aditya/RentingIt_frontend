@@ -16,7 +16,9 @@ export class CategoryService {
    * @returns
    */
   getCategories(path: string) {
-    return this.http.get(`${this.baseUrl}/product/category/${path}`);
+    return this.http.get<Category[]>(
+      `${this.baseUrl}/product/category/${path}`
+    );
   }
 
   /**

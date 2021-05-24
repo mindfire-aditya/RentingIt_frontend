@@ -17,13 +17,14 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   imageBaseUrl =
     'http://localhost:8080/rentingIt/product/resources/download-image/';
 
+  userProducts: Product[];
+  private subscription1: Subscription;
+  private subscription2: Subscription;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService
   ) {}
-
-  userProducts: Product[];
-  private subscription1: Subscription;
 
   ngOnInit(): void {
     this.subscription1 = this.activatedRoute.data.subscribe(
@@ -44,7 +45,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
    * @param id
    */
   onRemove(id: number) {
-    this.productService.removeProduct(id).subscribe(
+    this.subscription2 = this.productService.removeProduct(id).subscribe(
       (data) => {
         console.log(data);
         window.location.reload();
@@ -57,5 +58,6 @@ export class MyProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
   }
 }

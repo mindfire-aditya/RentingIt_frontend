@@ -12,13 +12,6 @@ import { Product } from '../models/product';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private productService: ProductService,
-    private userDetailService: UserDetailService,
-    private router: Router
-  ) {}
-
   product_item: Product;
   pickup_address: any;
   ownerId: any;
@@ -29,9 +22,22 @@ export class ProductDetailsComponent implements OnInit {
 
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
-  private sanitizer!: DomSanitizer;
+
   public image: any;
-  private readonly imageType: string = 'data:image/PNG;base64,';
+
+  /**
+   *
+   * @param activatedRoute
+   * @param productService
+   * @param userDetailService
+   * @param router
+   */
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private userDetailService: UserDetailService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
