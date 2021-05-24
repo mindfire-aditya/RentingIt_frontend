@@ -14,11 +14,6 @@ import { UserDetailService } from '../services/userDetail/user-detail.service';
   styleUrls: ['./edit-profile.component.css'],
 })
 export class EditProfileComponent implements OnInit, OnDestroy {
-  constructor(
-    private userDetailService: UserDetailService,
-    private router: Router
-  ) {}
-
   id: any = localStorage.getItem('id');
   username = localStorage.getItem('username');
   firstTimeLogin = true;
@@ -43,6 +38,16 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   private subscription3: Subscription = new Subscription();
 
   name = this.userInfo.firstName + ' ' + this.userInfo.lastName;
+
+  /**
+   *
+   * @param userDetailService
+   * @param router
+   */
+  constructor(
+    private userDetailService: UserDetailService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.subscription1 = this.userDetailService.getUserDetail().subscribe(

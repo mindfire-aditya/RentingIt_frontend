@@ -16,13 +16,11 @@ export class ProductDetailsComponent implements OnInit {
   pickup_address: any;
   ownerId: any;
   userId: number = Number(localStorage.getItem('id'));
-
   imageBaseUrl =
     'http://localhost:8080/rentingIt/product/resources/download-image/';
 
   private subscription1: Subscription = new Subscription();
   private subscription2: Subscription = new Subscription();
-
   public image: any;
 
   /**

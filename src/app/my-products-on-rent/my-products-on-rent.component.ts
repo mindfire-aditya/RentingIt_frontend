@@ -27,6 +27,13 @@ export class MyProductsOnRentComponent implements OnInit, OnDestroy {
   private subscription2: Subscription = new Subscription();
   private subscription3: Subscription = new Subscription();
 
+  /**
+   *
+   * @param myOrdersService
+   * @param router
+   * @param productService
+   * @param userDetailService
+   */
   constructor(
     private myOrdersService: MyOrdersService,
     private router: Router,

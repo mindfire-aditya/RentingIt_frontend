@@ -9,11 +9,15 @@ import { PlaceOrderService } from '../services/placeOrder/place-order.service';
   styleUrls: ['./order-item.component.css'],
 })
 export class OrderItemComponent implements OnInit, OnDestroy {
-  constructor(private activatedRoute: ActivatedRoute) {}
-
   orderedProducts: any;
   productdetails: any;
   private subscription1: Subscription;
+
+  /**
+   *
+   * @param activatedRoute
+   */
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.subscription1 = new Subscription();

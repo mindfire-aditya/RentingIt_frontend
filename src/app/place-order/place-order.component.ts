@@ -36,6 +36,15 @@ export class PlaceOrderComponent implements OnInit {
   private subscription3: Subscription = new Subscription();
   private subscription4: Subscription = new Subscription();
 
+  /**
+   *
+   * @param activatedRoute
+   * @param productService
+   * @param userDetailService
+   * @param placeOrderService
+   * @param myOrdersService
+   * @param router
+   */
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
@@ -44,6 +53,7 @@ export class PlaceOrderComponent implements OnInit {
     private myOrdersService: MyOrdersService,
     private router: Router
   ) {}
+
   ngOnInit(): void {
     this.today = new Date().toISOString();
     let rem = this.today.split(':');

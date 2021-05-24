@@ -21,6 +21,11 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   private subscription1: Subscription;
   private subscription2: Subscription;
 
+  /**
+   *
+   * @param activatedRoute
+   * @param productService
+   */
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService

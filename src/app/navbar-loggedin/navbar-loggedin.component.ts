@@ -32,13 +32,19 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
   public parentCategories: any;
   public username = localStorage.getItem('username');
 
+  /**
+   *
+   * @param loginService
+   * @param productDetailService
+   * @param router
+   * @param userInfoStore
+   * @param categoryService
+   */
   constructor(
     private loginService: LoginService,
-    private productservice: ProductService,
     private productDetailService: ProductDetailsService,
     private router: Router,
     private userInfoStore: UserInfoStoreService,
-    private placeOrderService: PlaceOrderService,
     private categoryService: CategoryService
   ) {}
 

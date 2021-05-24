@@ -24,6 +24,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   private subscription1: Subscription;
   private subscription2: Subscription;
 
+  /**
+   *
+   * @param loginService
+   * @param router
+   * @param userInfoStore
+   * @param userDetailsService
+   */
   constructor(
     private loginService: LoginService,
     private router: Router,
