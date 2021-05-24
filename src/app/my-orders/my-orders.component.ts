@@ -44,6 +44,10 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       );
   }
 
+  /**
+   *
+   * @param orders
+   */
   getProductDetailsFromOrder(orders: MyOrder[]) {
     orders.forEach((item) => {
       this.productService.getProductDetailById(item.productId).subscribe(
@@ -57,6 +61,10 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   *
+   * @param item
+   */
   sendDetails(item: MyOrder) {
     this.router.navigate(['user/my-orders/order-details', item.id]);
   }

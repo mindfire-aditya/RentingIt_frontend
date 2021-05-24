@@ -54,17 +54,29 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param data
+   */
   removeOwnerProducts(data: Product[]) {
     let userId = Number(localStorage.getItem('id'));
     let result = data.filter((item) => item.ownerId !== userId);
     this.products = result;
   }
 
+  /**
+   *
+   * @param data
+   */
   removeProductsWithZeroUnits(data: Product[]) {
     let result = data.filter((item) => item.units > 0);
     this.products = result;
   }
 
+  /**
+   *
+   * @param id
+   */
   onClick(id: number) {
     this.router.navigate(['user/my-products/product-details/', id]);
   }

@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
+  Router,
+  Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ProductService } from '../../products/product.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderDetailsResolver implements Resolve<any> {
   constructor(private productService: ProductService) {}
 
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+  /**
+   *
+   * @param route
+   * @param state
+   * @returns
+   */
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<any> {
     return this.productService.getProductById(2);
   }
 }

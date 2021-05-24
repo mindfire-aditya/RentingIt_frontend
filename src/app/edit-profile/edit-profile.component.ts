@@ -60,6 +60,9 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   *
+   */
   editUserDetail() {
     this.subscription2 = this.userDetailService
       .editUserDetail(this.id, this.userInfo)
@@ -68,12 +71,18 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   *
+   */
   addUserDetail() {
     this.subscription3 = this.userDetailService
       .addUserDetail(this.id, this.userInfo)
       .subscribe((res) => {});
   }
 
+  /**
+   *
+   */
   onSubmit() {
     if (this.firstTimeLogin == true) {
       this.addUserDetail();

@@ -47,6 +47,10 @@ export class MyProductsOnRentComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param orders
+   */
   getProductDetailsFromOrder(orders: MyOrder[]) {
     orders.forEach((item) => {
       this.productService.getProductDetailById(item.productId).subscribe(
@@ -61,6 +65,10 @@ export class MyProductsOnRentComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param orders
+   */
   getUserDetailsByOrders(orders: MyOrder[]) {
     orders.forEach((item) => {
       this.userDetailService

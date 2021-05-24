@@ -14,6 +14,9 @@ export class UserInfoStoreService {
 
   userInfo: Observable<any> = this.subject.asObservable();
 
+  /**
+   *
+   */
   emitUserInfo() {
     this.subject.next({
       id: localStorage.getItem('id'),
@@ -24,11 +27,18 @@ export class UserInfoStoreService {
     });
   }
 
+  /**
+   *
+   */
   removeUser() {
     this.userData = {};
     this.subject.next(this.userData);
   }
 
+  /**
+   *
+   * @returns
+   */
   getUserInfo() {
     this.userData = {
       id: localStorage.getItem('id'),

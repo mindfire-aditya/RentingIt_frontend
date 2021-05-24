@@ -78,6 +78,11 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   *
+   * @param data
+   * @returns
+   */
   parentCategoriesList(data: Category[]) {
     return [
       ...new Set(
@@ -86,6 +91,9 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
     ];
   }
 
+  /**
+   *
+   */
   getBikeProducts() {
     this.token = this.loginService.getToken();
     this.subscription3 = this.productDetailService
@@ -102,6 +110,9 @@ export class NavbarLoggedinComponent implements OnInit, OnDestroy {
       );
   }
 
+  /**
+   *
+   */
   logoutUser() {
     this.loginService.logout();
     //location.reload()

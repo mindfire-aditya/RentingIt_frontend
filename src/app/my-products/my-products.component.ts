@@ -39,6 +39,10 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   *
+   * @param id
+   */
   onRemove(id: number) {
     this.productService.removeProduct(id).subscribe(
       (data) => {

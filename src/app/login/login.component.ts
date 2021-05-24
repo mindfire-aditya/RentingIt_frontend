@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription1 = new Subscription();
   }
 
+  /**
+   *
+   */
   onSubmit() {
     //console.log("Form is submited!!");
     if (

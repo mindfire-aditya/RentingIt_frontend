@@ -16,6 +16,12 @@ import { Router } from '@angular/router';
 export class AuthGuard implements CanActivate {
   constructor(private loginService: LoginService, private route: Router) {}
 
+  /**
+   *
+   * @param route
+   * @param state
+   * @returns
+   */
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

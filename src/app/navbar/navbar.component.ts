@@ -31,6 +31,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   *
+   * @param data
+   * @returns
+   */
   parentCategoriesList(data: Category[]) {
     return [
       ...new Set(

@@ -54,6 +54,10 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param ownerId
+   */
   getOwnerInfo(ownerId: number) {
     if (ownerId) {
       this.subscription2 = this.userDetailService
@@ -69,6 +73,9 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   */
   onClickGoToPlaceOrder() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 

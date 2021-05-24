@@ -15,6 +15,9 @@ export class LoginService {
   userInfoSource = new Subject<any>();
   userInfo = this.userInfoSource.asObservable();
 
+  /**
+   *
+   */
   changeNavbar() {
     let loggedIn: any = localStorage.getItem('loggedIn');
     this.loginNavbarSource.next(loggedIn);
@@ -22,12 +25,27 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   *
+   * @param credentials
+   * @returns
+   */
   //calling the server for getting the token and store it in local sotrage
   generateToken(credentials: any) {
     //generate token
     return this.http.post(`${this.baseUrl}/user/signin`, credentials);
   }
 
+  /**
+   *
+   * @param id
+   * @param username
+   * @param email
+   * @param roles
+   * @param accessToken
+   * @param tokenType
+   * @returns
+   */
   //for login take the token and store it in localstorage
   saveUser(
     id: any,
@@ -56,6 +74,10 @@ export class LoginService {
     return true;
   }
 
+  /**
+   *
+   * @returns
+   */
   //to check whether a user is logged in or not
   isLogged() {
     let token = localStorage.getItem('accessToken');
@@ -66,6 +88,10 @@ export class LoginService {
     }
   }
 
+  /**
+   *
+   * @returns
+   */
   //for logout
   logout() {
     localStorage.removeItem('id');

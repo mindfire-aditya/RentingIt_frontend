@@ -11,11 +11,20 @@ export class ProductDetailsService {
   bike = 'Bike';
   constructor(private http: HttpClient) {}
 
+  /**
+   *
+   * @returns
+   */
   getProductsByName() {
     //sending the post request to add user
     return this.http.get(`${this.baseUrl}/product/search/${this.bike}`);
   }
 
+  /**
+   *
+   * @param productDetails
+   * @returns
+   */
   //for adding products for renting purpose
   addProducts(productDetails: any) {
     return this.http.post(
@@ -24,14 +33,27 @@ export class ProductDetailsService {
     );
   }
 
+  /**
+   *
+   * @returns
+   */
   getAllCategories() {
     return this.http.get(`${this.baseUrl}/product/category/all`);
   }
 
+  /**
+   *
+   * @returns
+   */
   getProductsByOwnerId() {
     return this.http.get(`${this.baseUrl}/product/currently-loggedin/`);
   }
 
+  /**
+   *
+   * @param productId
+   * @returns
+   */
   getProductDetailById(productId: number) {
     return this.http.get<Product>(`${this.baseUrl}/product/${productId}`);
   }

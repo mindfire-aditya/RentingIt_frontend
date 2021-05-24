@@ -85,6 +85,10 @@ export class PlaceOrderComponent implements OnInit {
       });
   }
 
+  /**
+   *
+   * @param ownerId
+   */
   getOwnerInfo(ownerId: number) {
     if (ownerId) {
       this.subscription2 = this.userDetailService
@@ -100,6 +104,11 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param start
+   * @param end
+   */
   calculateTotalPrice(start: Date, end: Date) {
     if (
       this.checkProductAvailibilty(
@@ -185,6 +194,12 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param start
+   * @param end
+   * @returns
+   */
   dateTimeDifference(start: Date, end: Date) {
     start = new Date(start);
     end = new Date(end);
@@ -206,6 +221,9 @@ export class PlaceOrderComponent implements OnInit {
     };
   }
 
+  /**
+   *
+   */
   onSubmit() {
     if (
       this.newOrder.rent_mode != '' &&
@@ -230,6 +248,12 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param start
+   * @param end
+   * @returns
+   */
   checkProductAvailibilty(start: Date, end: Date): boolean {
     start = new Date(start);
     end = new Date(end);
