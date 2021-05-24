@@ -16,17 +16,21 @@ export class LoginService {
   userInfo = this.userInfoSource.asObservable();
 
   /**
-   *
+   *  saves and emits loggedin state to navbar component
    */
   changeNavbar() {
     let loggedIn: any = localStorage.getItem('loggedIn');
     this.loginNavbarSource.next(loggedIn);
   }
 
+  /**
+   * injected Http
+   * @param http
+   */
   constructor(private http: HttpClient) {}
 
   /**
-   *
+   *  posts login credentials and return a token if exits.
    * @param credentials
    * @returns
    */
@@ -37,7 +41,7 @@ export class LoginService {
   }
 
   /**
-   *
+   * saves user information in local storage and emits user info
    * @param id
    * @param username
    * @param email
@@ -75,7 +79,7 @@ export class LoginService {
   }
 
   /**
-   *
+   * checks whether loggedin, if true then returns token
    * @returns
    */
   //to check whether a user is logged in or not
@@ -89,7 +93,7 @@ export class LoginService {
   }
 
   /**
-   *
+   * on logout removes user info from local storage
    * @returns
    */
   //for logout
@@ -107,22 +111,50 @@ export class LoginService {
     return true;
   }
 
-  //for getting user details
+  /**
+   * gets user id from local storage
+   * @returns
+   */
   getUserId() {
     return localStorage.getItem('id');
   }
+
+  /**
+   *
+   * @returns gets user name from local storage
+   */
   getUserName() {
     return localStorage.getItem('username');
   }
+
+  /**
+   * gets user email from local storage
+   * @returns
+   */
   getUserEmail() {
     return localStorage.getItem('email');
   }
+
+  /**
+   * gets user role from local storage
+   * @returns
+   */
   getRoles() {
     return localStorage.getItem('roles');
   }
+
+  /**
+   * gets token from local storage
+   * @returns
+   */
   getToken() {
     return localStorage.getItem('accessToken');
   }
+
+  /**
+   * gets token type from local storage
+   * @returns
+   */
   getTokenType() {
     return localStorage.getItem('tokenType');
   }

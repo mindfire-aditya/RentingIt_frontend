@@ -11,7 +11,7 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   /**
-   *
+   *  returns categories based on parent category
    * @param path
    * @returns
    */
@@ -22,7 +22,7 @@ export class CategoryService {
   }
 
   /**
-   *
+   *  returns all the categories
    * @returns
    */
   getAllCategories() {

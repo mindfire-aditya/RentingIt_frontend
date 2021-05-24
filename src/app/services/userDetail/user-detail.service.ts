@@ -15,7 +15,7 @@ export class UserDetailService {
   userId = localStorage.getItem('id');
 
   /**
-   *
+   * gets user detail of logged in user
    * @returns
    */
   getUserDetail() {
@@ -25,7 +25,7 @@ export class UserDetailService {
   }
 
   /**
-   *
+   * returns user details by user id
    * @param id
    * @returns
    */
@@ -34,7 +34,7 @@ export class UserDetailService {
   }
 
   /**
-   *
+   * returns owner's detail by ownerId
    * @param ownerId
    * @returns
    */
@@ -43,7 +43,7 @@ export class UserDetailService {
   }
 
   /**
-   *
+   * edits user detail in db
    * @param id
    * @param payload
    * @returns
@@ -53,7 +53,7 @@ export class UserDetailService {
   }
 
   /**
-   *
+   * posts user details into db
    * @param id
    * @param payload
    * @returns

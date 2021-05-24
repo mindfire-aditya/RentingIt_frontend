@@ -12,7 +12,7 @@ export class ProductDetailsService {
   constructor(private http: HttpClient) {}
 
   /**
-   *
+   * returns products by name string
    * @returns
    */
   getProductsByName() {
@@ -21,7 +21,7 @@ export class ProductDetailsService {
   }
 
   /**
-   *
+   * to register new product for rent
    * @param productDetails
    * @returns
    */
@@ -34,7 +34,7 @@ export class ProductDetailsService {
   }
 
   /**
-   *
+   * returns all categories
    * @returns
    */
   getAllCategories() {
@@ -42,7 +42,7 @@ export class ProductDetailsService {
   }
 
   /**
-   *
+   * returns products from by owner id
    * @returns
    */
   getProductsByOwnerId() {
@@ -50,7 +50,7 @@ export class ProductDetailsService {
   }
 
   /**
-   *
+   * returns product's detail by id
    * @param productId
    * @returns
    */

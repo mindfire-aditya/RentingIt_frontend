@@ -11,7 +11,7 @@ export class SignupService {
   constructor(private http: HttpClient) {}
 
   /**
-   *
+   * api to register new user
    * @param userDetails
    * @returns
    */

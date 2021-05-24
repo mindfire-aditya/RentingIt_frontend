@@ -47,7 +47,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * returns all products
    * @returns
    */
   getAllProducts() {
@@ -55,7 +55,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * returns product by id
    * @param id
    * @returns
    */
@@ -64,7 +64,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * delete product from db
    * @param id
    * @returns
    */
@@ -94,7 +94,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * returns image by name
    * @param name
    * @returns
    */
@@ -105,7 +105,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * uploads image
    * @param file
    * @returns
    */
@@ -122,7 +122,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * returns products by child category id
    * @param id
    * @returns
    */
@@ -133,7 +133,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * returns products by parent category id
    * @param id
    * @returns
    */
@@ -144,7 +144,7 @@ export class ProductService {
   }
 
   /**
-   *
+   * updates product details
    * @param id
    * @param payload
    * @returns

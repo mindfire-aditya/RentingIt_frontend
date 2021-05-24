@@ -11,18 +11,17 @@ export class PlaceOrderService {
   constructor(private http: HttpClient) {}
 
   /**
-   *
+   * setting up the order details as a post method to server for adding the data in DB
    * @param orderDetails
    * @returns
    */
-  //setting up the orderdetails as a post method to server for adding the data in DB
   addOder(orderDetails: any) {
     //sending the post request to add order
     return this.http.post(`${this.baseUrl}/order/new-order`, orderDetails);
   }
 
   /**
-   *
+   * get orders by customer id
    * @param userId
    * @returns
    */

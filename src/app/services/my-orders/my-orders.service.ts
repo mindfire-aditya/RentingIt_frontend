@@ -11,7 +11,7 @@ export class MyOrdersService {
   baseUrl = 'http://localhost:8080/rentingIt';
 
   /**
-   *
+   * returns order by id
    * @param id
    * @returns
    */
@@ -20,7 +20,7 @@ export class MyOrdersService {
   }
 
   /**
-   *
+   * returns user's product on rent from orders table
    * @param userId
    * @returns
    */
@@ -31,7 +31,7 @@ export class MyOrdersService {
   }
 
   /**
-   *
+   * returns all the orders of a product
    * @param productId
    * @returns
    */

@@ -11,7 +11,7 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(private injector: Injector) {}
 
   /**
-   *
+   *  intercepts http requests and adds an authorization token
    * @param req
    * @param next
    * @returns

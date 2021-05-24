@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
   constructor(private loginService: LoginService, private route: Router) {}
 
   /**
-   *
+   * route guard to protect route
    * @param route
    * @param state
    * @returns

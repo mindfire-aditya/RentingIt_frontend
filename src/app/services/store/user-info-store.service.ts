@@ -15,7 +15,7 @@ export class UserInfoStoreService {
   userInfo: Observable<any> = this.subject.asObservable();
 
   /**
-   *
+   * emits user info to all components
    */
   emitUserInfo() {
     this.subject.next({
@@ -28,7 +28,7 @@ export class UserInfoStoreService {
   }
 
   /**
-   *
+   * removes user info by emitting an empty object
    */
   removeUser() {
     this.userData = {};
@@ -36,7 +36,7 @@ export class UserInfoStoreService {
   }
 
   /**
-   *
+   * returns user info stored in local storage
    * @returns
    */
   getUserInfo() {
