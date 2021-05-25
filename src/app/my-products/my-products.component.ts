@@ -32,6 +32,8 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.subscription1 = new Subscription();
+    this.subscription2 = new Subscription();
     this.subscription1 = this.activatedRoute.data.subscribe(
       (data) => {
         this.userProducts = data.products;

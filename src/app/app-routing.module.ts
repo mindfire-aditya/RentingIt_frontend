@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
-import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -180,14 +179,7 @@ const routes: Routes = [
         path: 'edit-profile',
         component: EditProfileComponent,
       },
-      {
-        path: 'add-product',
-        component: AddEditProductComponent,
-      },
-      {
-        path: 'edit-product',
-        component: AddEditProductComponent,
-      },
+
       {
         path: 'rent',
         component: RentComponent,

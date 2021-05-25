@@ -19,7 +19,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyProductsComponent } from './my-products/my-products.component';
-import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { RentComponent } from './rent/rent.component';
@@ -59,7 +58,6 @@ import { MyProductsOnRentComponent } from './my-products-on-rent/my-products-on-
     ProfilePageComponent,
     MyOrdersComponent,
     MyProductsComponent,
-    AddEditProductComponent,
     EditProfileComponent,
     ErrorPageComponent,
     RentComponent,
